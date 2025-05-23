@@ -86,7 +86,7 @@ const AddCustomerForm = () => {
       console.log("Customer added:", response.data);
       setSubmissionStatus({ type: "success", message: "Customer added successfully!" });
       setTimeout(() => {
-        navigate("/ManageCustomers");
+        navigate("/manage-customers");
       }, 1000);
     } catch (error) {
       console.error("Error adding customer:", error);

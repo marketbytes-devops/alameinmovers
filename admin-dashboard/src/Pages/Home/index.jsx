@@ -16,7 +16,7 @@ const Home = () => {
     justifyContent: 'center',
     alignItems: 'center',
     color: 'white',
-  
+
   };
 
   const cardContainerStyle = {
@@ -33,28 +33,28 @@ const Home = () => {
   return (
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
       <div style={cardContainerStyle}>
-        <Link to="/AddJob" style={{ textDecoration: 'none' }}>
-          <div style={cardStyle} className="bg-primary">
+        <Link to="/add-job" style={{ textDecoration: 'none' }}>
+          <div style={cardStyle} className="bg-primary font-extrabold">
             <h3>Add Job</h3>
           </div>
         </Link>
-        <Link to="/AddCustomerForm" style={{ textDecoration: 'none' }}>
-          <div style={cardStyle} className="bg-primary">
+        <Link to="/add-customer-form" style={{ textDecoration: 'none' }}>
+          <div style={cardStyle} className="bg-primary font-extrabold">
             <h3>Add Customer</h3>
           </div>
         </Link>
-        <Link to="/ManageJobs" style={{ textDecoration: 'none' }}>
-          <div style={cardStyle} className="bg-primary">
+        <Link to="/manage-jobs" style={{ textDecoration: 'none' }}>
+          <div style={cardStyle} className="bg-primary font-extrabold">
             <h3>Manage Jobs</h3>
           </div>
         </Link>
-        <Link to="/ManageCustomers" style={{ textDecoration: 'none' }}>
-          <div style={cardStyle} className="bg-primary">
+        <Link to="/manage-customers" style={{ textDecoration: 'none' }}>
+          <div style={cardStyle} className="bg-primary font-extrabold">
             <h3>Manage Customers</h3>
           </div>
         </Link>
-        <Link to="/Enquiries" style={{ textDecoration: 'none' }}>
-          <div style={cardStyle} className="bg-primary">
+        <Link to="/enquiries" style={{ textDecoration: 'none' }}>
+          <div style={cardStyle} className="bg-primary font-extrabold">
             <h3>Enquiries</h3>
           </div>
         </Link>

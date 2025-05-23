@@ -90,13 +90,13 @@ function App() {
       children: [
         { path: "/", element: <PrivateRoute element={<Home />} /> },
         { path: "/home", element: <PrivateRoute element={<Home />} /> },
-        { path: "/AddCustomerForm", element: <PrivateRoute element={<AddCustomerForm />} /> },
+        { path: "/add-customer-form", element: <PrivateRoute element={<AddCustomerForm />} /> },
         { path: "/update-customer/:id", element: <PrivateRoute element={<UpdateCustomer />} /> },
-        { path: "/AddJob", element: <PrivateRoute element={<AddJob />} /> },
-        { path: "/ManageJobs", element: <PrivateRoute element={<ManageJobs />} /> },
-        { path: "/ManageCustomers", element: <PrivateRoute element={<ManageCustomers />} /> },
-        { path: "/update-job/:id", element: <PrivateRoute element={<UpdateJob />} /> }, // Fixed route
-        { path: "/Enquiries", element: <PrivateRoute element={<Enquiries />} /> },
+        { path: "/add-job", element: <PrivateRoute element={<AddJob />} /> },
+        { path: "/manage-jobs", element: <PrivateRoute element={<ManageJobs />} /> },
+        { path: "/manage-customers", element: <PrivateRoute element={<ManageCustomers />} /> },
+        { path: "/update-job/:id", element: <PrivateRoute element={<UpdateJob />} /> }, 
+        { path: "/enquiries", element: <PrivateRoute element={<Enquiries />} /> },
       ],
     },
     {
@@ -104,7 +104,7 @@ function App() {
       element: <Login onLogin={handleLogin} />,
     },
     {
-      path: "/forget-password",
+      path: "/forgot-password",
       element: <ForgetPassword />,
     },
     {

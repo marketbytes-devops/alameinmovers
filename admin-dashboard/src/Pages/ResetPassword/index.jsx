@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate, useLocation } from "react-router-dom";
 import apiClient from "../../api/apiClient";
 import FormField from "../../Components/FormField";
+import AlmasImage from "../../assets/Almas.webp";
 
 const ResetPassword = () => {
   const { register, handleSubmit, formState: { errors }, watch } = useForm();
@@ -30,9 +31,11 @@ const ResetPassword = () => {
   return (
     <div className="h-screen flex items-center justify-center bg-gray-50">
       <div className="w-full max-w-4xl flex shadow-lg rounded-lg overflow-hidden">
-        <div className="hidden md:block w-1/2 bg-cover bg-center" style={{ backgroundImage: `url(${loginImage})` }}>
+        <div
+          className="hidden md:block w-1/2 bg-cover bg-center"
+          style={{ backgroundImage: `url(${AlmasImage})` }}
+        >
         </div>
-
         <div className="w-full md:w-1/2 p-8 bg-white">
           <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">Reset Password</h2>
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">

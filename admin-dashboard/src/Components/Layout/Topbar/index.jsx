@@ -185,7 +185,7 @@ const Topbar = () => {
               <button
                 onClick={toggleCustomersDropdown}
                 className={`flex items-center transition-colors duration-200 text-md ${
-                  isActive('/AddCustomerForm') || isActive('/ManageCustomers')
+                  isActive('/add-customer-form') || isActive('/manage-customers')
                     ? 'text-primary'
                     : 'hover:text-primary'
                 }`}
@@ -209,18 +209,18 @@ const Topbar = () => {
               {isCustomersOpen && (
                 <div className="absolute left-0 mt-2 w-48 bg-white text-black rounded-md shadow-lg z-10">
                   <Link
-                    to="/AddCustomerForm"
+                    to="/add-customer-form"
                     className={`block px-4 py-2 hover:bg-gray-100 ${
-                      isActive('/AddCustomerForm') ? 'bg-gray-200 font-bold' : ''
+                      isActive('/add-customer-form') ? 'bg-gray-200 font-bold' : ''
                     }`}
                     onClick={() => setIsCustomersOpen(false)}
                   >
                     Add Customer
                   </Link>
                   <Link
-                    to="/ManageCustomers"
+                    to="/manage-customers"
                     className={`block px-4 py-2 hover:bg-gray-100 ${
-                      isActive('/ManageCustomers') ? 'bg-gray-200 font-bold' : ''
+                      isActive('/manage-customers') ? 'bg-gray-200 font-bold' : ''
                     }`}
                     onClick={() => setIsCustomersOpen(false)}
                   >
@@ -233,7 +233,7 @@ const Topbar = () => {
               <button
                 onClick={toggleJobsDropdown}
                 className={`flex items-center transition-colors duration-200 text-md ${
-                  isActive('/AddJob') || isActive('/ManageJobs')
+                  isActive('/add-job') || isActive('/manage-jobs')
                     ? 'text-primary'
                     : 'hover:text-primary'
                 }`}
@@ -257,18 +257,18 @@ const Topbar = () => {
               {isJobsOpen && (
                 <div className="absolute left-0 mt-2 w-48 bg-white text-black rounded-md shadow-lg z-10">
                   <Link
-                    to="/AddJob"
+                    to="/add-job"
                     className={`block px-4 py-2 hover:bg-gray-100 ${
-                      isActive('/AddJob') ? 'bg-gray-200 font-bold' : ''
+                      isActive('/add-job') ? 'bg-gray-200 font-bold' : ''
                     }`}
                     onClick={() => setIsJobsOpen(false)}
                   >
                     Add Job
                   </Link>
                   <Link
-                    to="/ManageJobs"
+                    to="/manage-jobs"
                     className={`block px-4 py-2 hover:bg-gray-100 ${
-                      isActive('/ManageJobs') ? 'bg-gray-200 font-bold' : ''
+                      isActive('/manage-jobs') ? 'bg-gray-200 font-bold' : ''
                     }`}
                     onClick={() => setIsJobsOpen(false)}
                   >
@@ -278,7 +278,7 @@ const Topbar = () => {
               )}
             </div>
             <Link
-              to="/Enquiries"
+              to="/enquiries"
               className={`flex items-center transition-colors duration-200 text-md ${
                 isActive('/Enquiries') ? 'text-primary' : 'hover:text-primary'
               }`}
@@ -340,7 +340,7 @@ const Topbar = () => {
             <button
               onClick={toggleCustomersDropdown}
               className={`block px-4 py-2 w-full text-left hover:bg-gray-100 ${
-                isActive('/AddCustomerForm') || isActive('/ManageCustomers')
+                isActive('/add-customer-form') || isActive('/manage-customers')
                   ? 'bg-gray-200 font-bold'
                   : ''
               }`}
@@ -350,18 +350,18 @@ const Topbar = () => {
             {isCustomersOpen && (
               <div>
                 <Link
-                  to="/AddCustomerForm"
+                  to="/add-customer-form"
                   className={`block px-4 py-2 pl-8 hover:bg-gray-100 ${
-                    isActive('/AddCustomerForm') ? 'bg-gray-200 font-bold' : ''
+                    isActive('/add-customer-form') ? 'bg-gray-200 font-bold' : ''
                   }`}
                   onClick={toggleMenu}
                 >
                   Add Customer
                 </Link>
                 <Link
-                  to="/ManageCustomers"
+                  to="/manage-customers"
                   className={`block px-4 py-2 pl-8 hover:bg-gray-100 ${
-                    isActive('/ManageCustomers') ? 'bg-gray-200 font-bold' : ''
+                    isActive('/manage-customers') ? 'bg-gray-200 font-bold' : ''
                   }`}
                   onClick={toggleMenu}
                 >
@@ -372,7 +372,7 @@ const Topbar = () => {
             <button
               onClick={toggleJobsDropdown}
               className={`block px-4 py-2 w-full text-left hover:bg-gray-100 ${
-                isActive('/AddJob') || isActive('/ManageJobs')
+                isActive('/add-job') || isActive('/manage-jobs')
                   ? 'bg-gray-200 font-bold'
                   : ''
               }`}
@@ -382,18 +382,18 @@ const Topbar = () => {
             {isJobsOpen && (
               <div>
                 <Link
-                  to="/AddJob"
+                  to="/add-job"
                   className={`block px-4 py-2 pl-8 hover:bg-gray-100 ${
-                    isActive('/AddJob') ? 'bg-gray-200 font-bold' : ''
+                    isActive('/add-job') ? 'bg-gray-200 font-bold' : ''
                   }`}
                   onClick={toggleMenu}
                 >
                   Add Job
                 </Link>
                 <Link
-                  to="/ManageJobs"
+                  to="/manage-jobs"
                   className={`block px-4 py-2 pl-8 hover:bg-gray-100 ${
-                    isActive('/ManageJobs') ? 'bg-gray-200 font-bold' : ''
+                    isActive('/manage-jobs') ? 'bg-gray-200 font-bold' : ''
                   }`}
                   onClick={toggleMenu}
                 >
@@ -402,7 +402,7 @@ const Topbar = () => {
               </div>
             )}
             <Link
-              to="/Enquiries"
+              to="/enquiries"
               className={`block px-4 py-2 hover:bg-gray-100 ${
                 isActive('/Enquiries') ? 'bg-gray-200 font-bold' : ''
               }`}

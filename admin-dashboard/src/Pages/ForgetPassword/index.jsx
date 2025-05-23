@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate, Link } from "react-router-dom";
 import apiClient from "../../api/apiClient";
 import FormField from "../../Components/FormField";
+import AlmasImage from "../../assets/Almas.webp";
 
 const ForgetPassword = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
@@ -24,7 +25,10 @@ const ForgetPassword = () => {
   return (
     <div className="h-screen flex items-center justify-center bg-gray-50">
       <div className="w-full max-w-4xl flex shadow-lg rounded-lg overflow-hidden">
-        <div className="hidden md:block w-1/2 bg-cover bg-center" style={{ backgroundImage: `url(${loginImage})` }}>
+        <div
+          className="hidden md:block w-1/2 bg-cover bg-center"
+          style={{ backgroundImage: `url(${AlmasImage})` }}
+        >
         </div>
 
         <div className="w-full md:w-1/2 p-8 bg-white">
@@ -56,7 +60,7 @@ const ForgetPassword = () => {
           </form>
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 

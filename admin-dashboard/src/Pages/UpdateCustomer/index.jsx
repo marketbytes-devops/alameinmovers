@@ -101,7 +101,7 @@ const UpdateCustomer = () => {
       });
       console.log("Customer updated:", response.data);
       setSubmissionStatus({ type: "success", message: "Customer updated successfully!" });
-      setTimeout(() => navigate("/ManageCustomers"), 1000);
+      setTimeout(() => navigate("/manage-customers"), 1000);
     } catch (error) {
       const errorMessage =
         error.response?.status === 404

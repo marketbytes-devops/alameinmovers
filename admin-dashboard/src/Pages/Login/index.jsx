@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate, Link, useLocation } from "react-router-dom";
 import apiClient from "../../api/apiClient";
 import FormField from "../../Components/FormField";
-import AlmasImage from "../../assets/Almas.webp"; // Adjust the path as necessary
+import AlmasImage from "../../assets/Almas.webp"; 
 
 const Login = ({ onLogin }) => {
   const { register, handleSubmit, formState: { errors } } = useForm();
@@ -12,12 +12,12 @@ const Login = ({ onLogin }) => {
 
   const onSubmit = async (data) => {
     try {
-      console.log("Sending login request:", data); // Debug request
+      console.log("Sending login request:", data); 
       const response = await apiClient.post("/auth/login/", {
         email: data.email,
         password: data.password,
       });
-      console.log("Login response:", response); // Debug response
+      console.log("Login response:", response); 
       const { access, refresh } = response.data;
       if (!access || !refresh) {
         throw new Error("Response missing access or refresh token");
@@ -25,17 +25,17 @@ const Login = ({ onLogin }) => {
       if (typeof onLogin !== "function") {
         throw new Error("onLogin is not a function");
       }
-      console.log("Calling onLogin with tokens:", { access, refresh }); // Debug onLogin
+      console.log("Calling onLogin with tokens:", { access, refresh }); 
       onLogin(access, refresh);
       const from = location.state?.from?.pathname || "/";
-      console.log("Navigating to:", from); // Debug navigation
+      console.log("Navigating to:", from);
       navigate(from, { replace: true });
     } catch (error) {
       console.error("Login error:", {
         message: error.message,
         response: error.response?.data,
         status: error.response?.status,
-      }); // Detailed error logging
+      }); 
       alert(error.response?.data?.error || error.message || "Login failed. Please check your credentials.");
     }
   };

@@ -147,7 +147,7 @@ const AddJobs = () => {
         type: "success",
         message: `Job created successfully! Tracking ID: ${tracking_id}, Cargo Ref: ${cargo_ref_number}`,
       });
-      setTimeout(() => navigate("/ManageJobs"), 2000);
+      setTimeout(() => navigate("/manage-jobs"), 2000);
     } catch (err) {
       const errorMessage =
         err.response?.status === 401

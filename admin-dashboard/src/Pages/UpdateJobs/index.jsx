@@ -566,7 +566,7 @@ const UpdateJobs = () => {
       {/* Back Button */}
       <div className="flex justify-center mt-6">
         <button
-          onClick={() => navigate("/ManageJobs")}
+          onClick={() => navigate("/manage-jobs")}
           className="bg-gray-600 text-white px-6 py-2 rounded hover:bg-gray-700 font-medium"
         >
           Back to Manage Jobs
