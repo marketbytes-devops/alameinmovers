@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Layout from "./Components/Layout";
 import Home from "./Pages/Home";
 import AddCustomerForm from "./Pages/AddCustomer";
-import UpdateCustomer from "./Pages/UpdateCustomer"; // Removed duplicate import
+import UpdateCustomer from "./Pages/UpdateCustomer";
 import AddJob from "./Pages/AddJob";
 import ManageJobs from "./Pages/ManageJobs";
 import Enquiries from "./Pages/Enquiries";
@@ -14,7 +14,7 @@ import ResetPassword from "./Pages/ResetPassword";
 import Login from "./Pages/Login";
 import apiClient from "./api/apiClient";
 import ManageCustomers from "./Pages/ManageCustomers";
-import UpdateJob from "./Pages/UpdateJobs"; // Corrected import name (singular)
+import UpdateJob from "./Pages/UpdateJobs";
 
 const PrivateRoute = ({ element }) => {
   const location = useLocation();
@@ -22,7 +22,7 @@ const PrivateRoute = ({ element }) => {
 
   useEffect(() => {
     const token = localStorage.getItem("access_token") || sessionStorage.getItem("access_token");
-    console.log("PrivateRoute checking token:", !!token); // Debug
+    console.log("PrivateRoute checking token:", !!token); 
     setIsAuthenticated(!!token);
   }, []);
 
@@ -44,7 +44,7 @@ function App() {
   useEffect(() => {
     const accessToken = localStorage.getItem("access_token");
     const savedPath = localStorage.getItem("currentPath");
-    console.log("App init, token:", !!accessToken, "savedPath:", savedPath); // Debug
+    console.log("App init, token:", !!accessToken, "savedPath:", savedPath); 
     setIsLoggedIn(!!accessToken);
     if (savedPath) {
       setCurrentPath(savedPath);
@@ -52,7 +52,7 @@ function App() {
   }, []);
 
   const handleLogin = (accessToken, refreshToken) => {
-    console.log("Storing tokens:", { accessToken, refreshToken }); // Debug
+    console.log("Storing tokens:", { accessToken, refreshToken }); 
     localStorage.setItem("access_token", accessToken);
     localStorage.setItem("refresh_token", refreshToken);
     setIsLoggedIn(true);
@@ -64,7 +64,7 @@ function App() {
         refresh: localStorage.getItem("refresh_token") || sessionStorage.getItem("refresh_token"),
       })
       .then(() => {
-        console.log("Logout successful"); // Debug
+        console.log("Logout successful"); 
         localStorage.removeItem("access_token");
         localStorage.removeItem("refresh_token");
         sessionStorage.removeItem("access_token");
@@ -73,7 +73,7 @@ function App() {
         window.location.href = "/login";
       })
       .catch((error) => {
-        console.error("Logout error:", error); // Debug
+        console.error("Logout error:", error); 
         localStorage.removeItem("access_token");
         localStorage.removeItem("refresh_token");
         sessionStorage.removeItem("access_token");
