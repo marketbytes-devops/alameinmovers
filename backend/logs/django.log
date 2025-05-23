@@ -1,0 +1,6 @@
+INFO 2025-05-22 22:00:22,905 autoreload Watching for file changes with StatReloader
+INFO 2025-05-22 22:07:39,488 autoreload D:\MarketBytes\web-works\almas-app\backend\backend\settings.py changed, reloading.
+INFO 2025-05-22 22:07:41,016 autoreload Watching for file changes with StatReloader
+INFO 2025-05-22 22:07:55,278 autoreload D:\MarketBytes\web-works\almas-app\backend\backend\settings.py changed, reloading.
+INFO 2025-05-22 22:07:55,966 autoreload Watching for file changes with StatReloader
+INFO 2025-05-22 22:10:16,390 views Enquiry email sent successfully for Ajay Renjith
