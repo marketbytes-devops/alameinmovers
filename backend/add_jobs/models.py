@@ -41,6 +41,20 @@ class Job(models.Model):
 
     def __str__(self):
         return f"{self.cargo_ref_number} - {self.tracking_id}"
+    def get_tracking_link(self):
+        return f"https://www.almasintl.com/track-your-cargo/"
+
+    def save(self, *args, **kwargs):
+        if not self.tracking_id:
+            while True:
+                tracking_id = 'allm' + ''.join(random.choices(string.digits, k=6))
+                if not Job.objects.filter(tracking_id=tracking_id).exists():
+                    self.tracking_id = tracking_id
+                    break
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f"{self.cargo_ref_number} - {self.tracking_id}"
 
 class StatusUpdate(models.Model):
     job = models.ForeignKey(Job, on_delete=models.CASCADE, related_name='status_updates')

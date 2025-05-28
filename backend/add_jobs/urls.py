@@ -4,7 +4,7 @@ from .views import JobViewSet, StatusUpdateViewSet
 
 router = DefaultRouter()
 router.register(r'jobs', JobViewSet, basename='job')
-router.register(r'status-updates', StatusUpdateViewSet, basename='status-update')
+router.register(r'status-updates', StatusUpdateViewSet, basename='status-update') 
 
 urlpatterns = [
     path('', include(router.urls)),

@@ -4,3 +4,53 @@ INFO 2025-05-22 22:07:41,016 autoreload Watching for file changes with StatReloa
 INFO 2025-05-22 22:07:55,278 autoreload D:\MarketBytes\web-works\almas-app\backend\backend\settings.py changed, reloading.
 INFO 2025-05-22 22:07:55,966 autoreload Watching for file changes with StatReloader
 INFO 2025-05-22 22:10:16,390 views Enquiry email sent successfully for Ajay Renjith
+INFO 2025-05-23 12:23:33,818 autoreload Watching for file changes with StatReloader
+WARNING 2025-05-23 12:28:54,644 log Unauthorized: /api/customers/add-customers/
+WARNING 2025-05-23 12:28:54,648 log Unauthorized: /api/customers/add-customers/
+WARNING 2025-05-23 12:28:57,032 log Unauthorized: /api/customers/add-customers/
+WARNING 2025-05-23 12:28:57,034 log Unauthorized: /api/customers/add-customers/
+WARNING 2025-05-23 12:28:57,830 log Unauthorized: /api/customers/add-customers/
+WARNING 2025-05-23 12:28:57,836 log Unauthorized: /api/customers/add-customers/
+WARNING 2025-05-23 12:28:58,364 log Unauthorized: /api/customers/add-customers/
+WARNING 2025-05-23 12:28:58,379 log Unauthorized: /api/customers/add-customers/
+WARNING 2025-05-23 12:28:58,758 log Unauthorized: /api/customers/add-customers/
+WARNING 2025-05-23 12:28:58,762 log Unauthorized: /api/customers/add-customers/
+WARNING 2025-05-23 12:28:58,963 log Unauthorized: /api/customers/add-customers/
+WARNING 2025-05-23 12:28:58,967 log Unauthorized: /api/customers/add-customers/
+WARNING 2025-05-23 12:28:59,140 log Unauthorized: /api/customers/add-customers/
+WARNING 2025-05-23 12:28:59,144 log Unauthorized: /api/customers/add-customers/
+WARNING 2025-05-23 12:28:59,436 log Unauthorized: /api/customers/add-customers/
+WARNING 2025-05-23 12:28:59,458 log Unauthorized: /api/customers/add-customers/
+WARNING 2025-05-23 12:28:59,634 log Unauthorized: /api/customers/add-customers/
+WARNING 2025-05-23 12:28:59,637 log Unauthorized: /api/customers/add-customers/
+WARNING 2025-05-23 12:28:59,881 log Unauthorized: /api/customers/add-customers/
+WARNING 2025-05-23 12:28:59,886 log Unauthorized: /api/customers/add-customers/
+WARNING 2025-05-23 12:29:00,068 log Unauthorized: /api/customers/add-customers/
+WARNING 2025-05-23 12:29:00,072 log Unauthorized: /api/customers/add-customers/
+WARNING 2025-05-23 12:29:00,230 log Unauthorized: /api/customers/add-customers/
+WARNING 2025-05-23 12:29:00,234 log Unauthorized: /api/customers/add-customers/
+WARNING 2025-05-23 12:29:00,415 log Unauthorized: /api/customers/add-customers/
+WARNING 2025-05-23 12:29:00,417 log Unauthorized: /api/customers/add-customers/
+WARNING 2025-05-23 12:29:00,596 log Unauthorized: /api/customers/add-customers/
+WARNING 2025-05-23 12:29:00,600 log Unauthorized: /api/customers/add-customers/
+WARNING 2025-05-23 12:29:00,772 log Unauthorized: /api/customers/add-customers/
+WARNING 2025-05-23 12:29:00,775 log Unauthorized: /api/customers/add-customers/
+WARNING 2025-05-23 12:29:00,920 log Unauthorized: /api/customers/add-customers/
+WARNING 2025-05-23 12:29:00,941 log Unauthorized: /api/customers/add-customers/
+WARNING 2025-05-23 12:29:01,129 log Unauthorized: /api/customers/add-customers/
+WARNING 2025-05-23 12:29:01,131 log Unauthorized: /api/customers/add-customers/
+WARNING 2025-05-23 12:29:01,311 log Unauthorized: /api/customers/add-customers/
+WARNING 2025-05-23 12:29:01,342 log Unauthorized: /api/customers/add-customers/
+WARNING 2025-05-23 12:29:01,524 log Unauthorized: /api/customers/add-customers/
+WARNING 2025-05-23 12:29:01,526 log Unauthorized: /api/customers/add-customers/
+WARNING 2025-05-23 12:29:01,670 log Unauthorized: /api/customers/add-customers/
+WARNING 2025-05-23 12:29:01,674 log Unauthorized: /api/customers/add-customers/
+WARNING 2025-05-23 12:29:02,488 log Unauthorized: /api/auth/logout/
+WARNING 2025-05-23 12:35:51,476 log Bad Request: /api/jobs/jobs/
+INFO 2025-05-23 12:37:55,404 views Enquiry email sent successfully for Ajay Renjith
+WARNING 2025-05-23 14:16:56,853 log Unauthorized: /api/contacts/enquiries/
+WARNING 2025-05-23 14:16:56,888 log Unauthorized: /api/contacts/enquiries/
+WARNING 2025-05-23 15:19:03,605 log Unauthorized: /api/contacts/enquiries/
+WARNING 2025-05-23 15:19:03,610 log Unauthorized: /api/contacts/enquiries/
+INFO 2025-05-23 19:28:30,683 autoreload Watching for file changes with StatReloader
+WARNING 2025-05-23 21:20:05,971 log Not Found: /
