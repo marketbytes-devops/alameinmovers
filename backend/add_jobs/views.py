@@ -28,13 +28,33 @@ class JobViewSet(viewsets.ModelViewSet):
         tracking_id = job.tracking_id
         tracking_link = job.get_tracking_link()
 
-        subject = 'Track Your Order'
+        subject = 'Shipment Confirmed with Almas Movers International : Track Your Cargo with Ease'
         message = (
             f"Dear {customer.name},\n\n"
-            f"A new job has been created for you.\n"
-            f"Tracking ID: {tracking_id}\n"
-            f"Track your order here: {tracking_link}\n\n"
-            f"Thank you for choosing Almaz Movers International!"
+            f"Thank you for choosing Almas Movers International for your moving and logistics needs.\n"
+            f"We are pleased to inform you that your cargo has been successfully booked and is now on its way.\n\n"
+            f"To help you stay updated every step of the journey, we’ve assigned a unique tracking ID to your shipment.\n"
+            f"📦 Tracking ID: {tracking_id}\n\n"
+            f"You can view the real-time status of your cargo by clicking the link below:\n"
+            f"👉 {tracking_link}\n\n"
+            f"If you have any questions or require assistance, feel free to reach out to us anytime through one of the following contact points:\n\n"
+            f"📧 Email Contacts\n"
+            f"movers@almasintl.com\n"
+            f"freight@almasintl.com\n"
+            f"sales@almasintl.com\n"
+            f"info@almasintl.com\n\n"
+            f"📞 Phone Numbers\n"
+            f"+974 44355663\n"
+            f"+974 40172179\n"
+            f"+974 66404688\n"
+            f"+974 50136999\n"
+            f"+974 50826999\n"
+            f"+974 50276999\n\n"
+            f"Thank you once again for trusting Almas Movers International. We’re committed to delivering your cargo safely, securely, and on time.\n\n"
+            f"Warm regards,\n"
+            f"Customer Support Team\n"
+            f"Almas Movers International\n"
+            f"www.almasintl.com"
         )
         recipient_email = customer.email
 

@@ -54,3 +54,10 @@ WARNING 2025-05-23 15:19:03,605 log Unauthorized: /api/contacts/enquiries/
 WARNING 2025-05-23 15:19:03,610 log Unauthorized: /api/contacts/enquiries/
 INFO 2025-05-23 19:28:30,683 autoreload Watching for file changes with StatReloader
 WARNING 2025-05-23 21:20:05,971 log Not Found: /
+INFO 2025-05-29 11:44:27,216 autoreload Watching for file changes with StatReloader
+INFO 2025-05-29 11:45:10,266 autoreload D:\MarketBytes\web-works\almas-app\backend\add_jobs\views.py changed, reloading.
+INFO 2025-05-29 11:45:11,211 autoreload Watching for file changes with StatReloader
+INFO 2025-05-29 11:54:37,068 autoreload D:\MarketBytes\web-works\almas-app\backend\add_jobs\views.py changed, reloading.
+INFO 2025-05-29 11:54:38,995 autoreload Watching for file changes with StatReloader
+INFO 2025-05-29 11:55:32,367 autoreload D:\MarketBytes\web-works\almas-app\backend\add_jobs\views.py changed, reloading.
+INFO 2025-05-29 11:55:33,717 autoreload Watching for file changes with StatReloader
