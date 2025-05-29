@@ -76,7 +76,6 @@ const AddJobs = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validate customer_id
     if (!formData.customer_id) {
       setSubmissionStatus({
         type: "error",
@@ -121,7 +120,7 @@ const AddJobs = () => {
 
     const submissionData = {
       cargo_type: formData.cargo_type,
-      customer_id: customerId, // Use customer_id instead of customer
+      customer_id: customerId, 
       receiver_name: formData.receiver_name,
       contact_number: formData.contact_number,
       email: formData.email,
@@ -140,7 +139,7 @@ const AddJobs = () => {
     };
 
     try {
-      console.log("Submitting payload:", submissionData); // Debug log
+      console.log("Submitting payload:", submissionData);
       const response = await apiClient.post("jobs/jobs/", submissionData);
       const { tracking_id, cargo_ref_number } = response.data;
       setSubmissionStatus({
