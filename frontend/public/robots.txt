@@ -1,0 +1,29 @@
+User-agent: *
+Allow: /
+Allow: /about-us
+Allow: /services
+Allow: /services/*
+Allow: /moving-services
+Allow: /logistics-services
+Allow: /track-your-cargo
+Allow: /contact-us
+Allow: /blog
+Allow: /blog/*
+Allow: /terms-and-conditions
+Allow: /privacy-policy
+Allow: /gallery
+Allow: /thank-you
+
+# Disallow sensitive or non-public areas
+Disallow: /api/
+Disallow: /*?* # Disallow URLs with query parameters to avoid duplicate content
+
+# Block specific file types that shouldn't be indexed
+Disallow: /*.pdf$
+Disallow: /*.doc$
+Disallow: /*.docx$
+Disallow: /*.zip$
+Disallow: /*.exe$
+
+# Sitemap
+Sitemap: https://www.almasintl.com/sitemap.xml
