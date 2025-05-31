@@ -159,7 +159,7 @@ CORS_ORIGIN_ALLOW_ALL = True
 
 CORS_ALLOWED_ORIGINS = os.getenv('ALLOWED_CORS', '*').split(',')
 
-# CSRF_TRUSTED_ORIGINS = os.getenv('CSRF_TRUSTED_ORIGINS', '*').split(',')
+CSRF_TRUSTED_ORIGINS = os.getenv('CSRF_TRUSTED_ORIGINS', '*').split(',')
 
 CORS_ALLOW_METHODS = (
     "DELETE",
