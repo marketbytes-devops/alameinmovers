@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import whowearePic from "../../../../assets/about/whowearePic.webp";
+import whowearePic from "../../../../assets/about/whowearepic.webp";
 import yellowTick from "../../../../assets/about/yellowtick.svg";
 import TitleDescription from "../../../../components/TitleDescription";
 
@@ -20,7 +20,8 @@ const whoWeAreData = {
     {
       id: "seamless",
       title: "Smooth Moves, Every Time",
-      description: "We set the bar high with uncompromised service, ensuring a seamless journey to your new destination.",
+      description:
+        "We set the bar high with uncompromised service, ensuring a seamless journey to your new destination.",
       icon: yellowTick,
     },
     {
@@ -48,13 +49,16 @@ const WhoweAre = () => {
       <div className="mx-auto">
         <div className="flex flex-col md:flex-row space-x-0 sm:space-x-0 md:space-x-0 lg:space-x-20 xl:space-x-20">
           <div className="w-full md:w-1/2">
-            <TitleDescription title={whoWeAreData.title} description={whoWeAreData.description} titleClass="text-secondary pb-2" descriptionClass="text-gray-100 pb-2"/>
+            <TitleDescription
+              title={whoWeAreData.title}
+              description={whoWeAreData.description}
+              titleClass="text-secondary pb-2"
+              descriptionClass="text-gray-100 pb-2"
+            />
             <div className="space-y-4 sm:space-y-6 pt-6">
               {whoWeAreData.sections.map((section, index) => (
                 <div key={section.id}>
-                  <div
-                    className="flex items-center justify-between p-3 sm:p-4 bg-gradient-to-r from-white/10 to-white/5"
-                  >
+                  <div className="flex items-center justify-between p-3 sm:p-4 bg-gradient-to-r from-white/10 to-white/5">
                     <motion.h3
                       className="text-base sm:text-lg md:text-xl text-white flex items-center pl-4 sm:pl-6"
                       initial={{ opacity: 0 }}

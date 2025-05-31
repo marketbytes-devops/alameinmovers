@@ -61,3 +61,25 @@ INFO 2025-05-29 11:54:37,068 autoreload D:\MarketBytes\web-works\almas-app\backe
 INFO 2025-05-29 11:54:38,995 autoreload Watching for file changes with StatReloader
 INFO 2025-05-29 11:55:32,367 autoreload D:\MarketBytes\web-works\almas-app\backend\add_jobs\views.py changed, reloading.
 INFO 2025-05-29 11:55:33,717 autoreload Watching for file changes with StatReloader
+WARNING 2025-05-31 06:32:27,189 log Not Found: /
+WARNING 2025-05-31 06:32:27,418 log Not Found: /favicon.ico
+WARNING 2025-05-31 06:32:31,763 log Not Found: /static/admin/css/base.css
+WARNING 2025-05-31 06:32:31,769 log Not Found: /static/admin/css/dark_mode.css
+WARNING 2025-05-31 06:32:31,774 log Not Found: /static/admin/css/nav_sidebar.css
+WARNING 2025-05-31 06:32:31,785 log Not Found: /static/admin/css/login.css
+WARNING 2025-05-31 06:32:31,794 log Not Found: /static/admin/js/theme.js
+WARNING 2025-05-31 06:32:31,811 log Not Found: /static/admin/css/responsive.css
+WARNING 2025-05-31 06:32:31,839 log Not Found: /static/admin/js/nav_sidebar.js
+WARNING 2025-05-31 06:32:31,855 log Not Found: /static/admin/css/nav_sidebar.css
+WARNING 2025-05-31 06:32:31,871 log Not Found: /static/admin/css/login.css
+WARNING 2025-05-31 06:32:33,187 log Not Found: /static/admin/css/base.css
+WARNING 2025-05-31 06:32:33,196 log Not Found: /static/admin/css/dark_mode.css
+WARNING 2025-05-31 06:32:33,206 log Not Found: /static/admin/css/nav_sidebar.css
+WARNING 2025-05-31 06:32:33,220 log Not Found: /static/admin/css/login.css
+WARNING 2025-05-31 06:32:33,228 log Not Found: /static/admin/css/responsive.css
+WARNING 2025-05-31 06:32:33,244 log Not Found: /static/admin/js/theme.js
+WARNING 2025-05-31 06:32:33,262 log Not Found: /static/admin/js/nav_sidebar.js
+WARNING 2025-05-31 06:32:33,277 log Not Found: /static/admin/css/nav_sidebar.css
+WARNING 2025-05-31 06:32:33,287 log Not Found: /static/admin/css/login.css
+WARNING 2025-05-31 06:32:33,301 log Not Found: /static/admin/css/responsive.css
+WARNING 2025-05-31 06:37:37,936 log Not Found: /
