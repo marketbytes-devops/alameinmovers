@@ -1,15 +1,13 @@
-import React from 'react';
-import connectimage from '../../../../assets/contact/Connectwithus.webp';
-import TitleDescription from '../../../../components/TitleDescription';
-import { Link } from 'react-router-dom';
+import React from "react";
+import connectimage from "../../../../assets/contact/connectwithus.webp";
+import TitleDescription from "../../../../components/TitleDescription";
+import { Link } from "react-router-dom";
 
 const Connectwithus = () => {
   return (
     <div className="flex flex-col lg:flex-row bg-white">
-    
       <div className="w-full lg:w-1/2 bg-gray-100 px-4 sm:px-6 py-6 sm:py-8">
         <div className="flex flex-col justify-center mx-auto max-w-full ml-4 lg:ml-[130px] lg:m-14 lg:py-0">
-      
           <div className="ml-0 lg:ml-0">
             <TitleDescription
               title="Connect With Us Anytime"
@@ -19,7 +17,6 @@ const Connectwithus = () => {
             />
           </div>
 
-          
           <div className="w-full mb-4 sm:mb-6">
             <div className="flex items-center gap-3 mb-2 sm:mb-3">
               <svg
@@ -44,16 +41,23 @@ const Connectwithus = () => {
                   strokeLinejoin="round"
                 />
               </svg>
-              <h3 className="text-lg sm:text-xl lg:text-2xl  text-black">Location</h3>
+              <h3 className="text-lg sm:text-xl lg:text-2xl  text-black">
+                Location
+              </h3>
             </div>
             <div className="w-full pl-8 sm:pl-10 lg:pl-10">
-              <p className="text-sm sm:text-base lg:text-base">Near Hilal Government Complex</p>
-              <p className="text-sm sm:text-base lg:text-base">Building No: 242, Zone 25, Office #09</p>
-              <p className="text-sm sm:text-base lg:text-base">C-Ring Road, Doha-Qatar</p>
+              <p className="text-sm sm:text-base lg:text-base">
+                Near Hilal Government Complex
+              </p>
+              <p className="text-sm sm:text-base lg:text-base">
+                Building No: 242, Zone 25, Office #09
+              </p>
+              <p className="text-sm sm:text-base lg:text-base">
+                C-Ring Road, Doha-Qatar
+              </p>
             </div>
           </div>
 
-    
           <div className="w-full mb-4 sm:mb-6">
             <div className="flex items-center gap-3 mb-2 sm:mb-3">
               <svg
@@ -69,15 +73,16 @@ const Connectwithus = () => {
                   fill="black"
                 />
               </svg>
-              <h3 className="text-lg sm:text-xl lg:text-2xl text-black">Email</h3>
+              <h3 className="text-lg sm:text-xl lg:text-2xl text-black">
+                Email
+              </h3>
             </div>
-            
+
             <div className="w-full pl-8 sm:pl-10 lg:pl-10">
               <p className="text-sm sm:text-base lg:text-base">
                 <a href="mailto:movers@almasintl.com">movers@almasintl.com</a>
               </p>
             </div>
-            
           </div>
 
           {/* Phone Number */}
@@ -97,7 +102,9 @@ const Connectwithus = () => {
                   fill="black"
                 />
               </svg>
-              <h3 className="text-lg sm:text-xl lg:text-2xl text-black">Phone Number</h3>
+              <h3 className="text-lg sm:text-xl lg:text-2xl text-black">
+                Phone Number
+              </h3>
             </div>
             <div className="w-full pl-8 sm:pl-10 lg:pl-10 pb-4 sm:pb-4 md:pb-0 lg:pb-0 xl:pb-0">
               <p className="text-sm sm:text-base lg:text-base">
@@ -111,7 +118,6 @@ const Connectwithus = () => {
         </div>
       </div>
 
-      
       <div className="w-full lg:w-1/2 bg-white overflow-hidden">
         <img
           src={connectimage}

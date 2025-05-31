@@ -9,7 +9,9 @@ const Blogs = () => {
   return (
     <>
       <Helmet>
-        <title>Moving & Logistics Blog | Tips, Trends & Insights from Almas Movers</title>
+        <title>
+          Moving & Logistics Blog | Tips, Trends & Insights from Almas Movers
+        </title>
         <meta
           name="description"
           content="Stay updated with the latest in moving, logistics, and international relocation. Expert tips and industry insights from Almas Movers International, Qatar."
