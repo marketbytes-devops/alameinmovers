@@ -107,13 +107,18 @@ class EnquiryListCreate(generics.ListCreateAPIView):
                 Received At: {serializer.instance.created_at}
                 """,
                 from_email=settings.DEFAULT_FROM_EMAIL,
-                recipient_list=[settings.CONTACT_EMAIL],
+                recipient_list=[settings.CONTACT_EMAIL],  # marketbytesdevops@gmail.com
                 bcc=['ajay@marketbytes.in'],
-                fail_silently=True,
+                fail_silently=False,  # Set to False to catch errors
             )
             logger.info("Enquiry email sent successfully for %s", serializer.validated_data["fullName"])
         except Exception as e:
             logger.error("Failed to send enquiry email: %s", str(e))
+            # Optionally, you can return a response to indicate email failure
+            # return Response(
+            #     {'error': 'Form submitted, but failed to send admin email.'},
+            #     status=status.HTTP_201_CREATED
+            # )
 
         # Send confirmation email to user
         try:
@@ -137,11 +142,16 @@ class EnquiryListCreate(generics.ListCreateAPIView):
                 """,
                 from_email=settings.DEFAULT_FROM_EMAIL,
                 recipient_list=[serializer.validated_data["email"]],
-                fail_silently=True,
+                fail_silently=False,  # Set to False to catch errors
             )
             logger.info("Confirmation email sent to %s", serializer.validated_data["email"])
         except Exception as e:
             logger.error("Failed to send confirmation email to %s: %s", serializer.validated_data["email"], str(e))
+            # Optionally, you can return a response to indicate email failure
+            # return Response(
+            #     {'error': 'Form submitted, but failed to send confirmation email.'},
+            #     status=status.HTTP_201_CREATED
+            # )
 
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
