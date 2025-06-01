@@ -15,7 +15,7 @@ class EnquirySerializer(serializers.ModelSerializer):
         """
         Validate that serviceType is one of the allowed values.
         """
-        allowed_services = ['moving', 'logistics', 'relocation', 'other']
+        allowed_services = ['localMove', 'internationalMove', 'carExport', 'storageServices', 'logistics']
         if value not in allowed_services:
             raise serializers.ValidationError("Invalid service type.")
         return value
