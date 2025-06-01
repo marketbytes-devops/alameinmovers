@@ -7,21 +7,10 @@ import requests
 from django.conf import settings
 from django.core.mail import send_mail
 import logging
+from django.utils import timezone
 
 # Configure logging
 logger = logging.getLogger(__name__)
-
-
-from rest_framework import generics, status
-from rest_framework.permissions import AllowAny
-from rest_framework.response import Response
-from .models import Enquiry
-from .serializers import EnquirySerializer
-import requests
-from django.conf import settings
-from django.core.mail import send_mail
-import logging
-from django.utils import timezone
 
 # Configure logging
 logger = logging.getLogger(__name__)
@@ -92,16 +81,12 @@ class EnquiryListCreate(generics.ListCreateAPIView):
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
 
-        # Format submission time
         submission_time = timezone.localtime(serializer.instance.created_at).strftime('%Y-%m-%d %H:%M:%S %Z')
-        
-        # Get human-readable service type
+
         service_type_display = EnquirySerializer.SERVICE_TYPE_CHOICES.get(
             serializer.validated_data["serviceType"],
             serializer.validated_data["serviceType"]
         )
-
-        # Send admin notification email with BCC
         try:
             send_mail(
                 subject=f'New Enquiry from {serializer.validated_data["fullName"]}',
@@ -117,7 +102,7 @@ class EnquiryListCreate(generics.ListCreateAPIView):
                 Submission Time: {submission_time}
                 """,
                 from_email=settings.DEFAULT_FROM_EMAIL,
-                recipient_list=[settings.CONTACT_EMAIL],
+                recipient_list=[settings.CONTACT_EMAIL, settings.DEFAULT_FROM_EMAIL],  
                 bcc=[settings.BCC_EMAIL],
                 fail_silently=True,
             )
