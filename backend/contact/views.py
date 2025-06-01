@@ -11,13 +11,6 @@ import logging
 # Configure logging
 logger = logging.getLogger(__name__)
 
-SERVICE_TYPE_DISPLAY = {
-    'localMove': 'Local Move',
-    'internationalMove': 'International Move',
-    'carExport': 'Car Export',
-    'storageServices': 'Storage Services',
-    'logistics': 'Logistics'
-}
 
 class EnquiryListCreate(generics.ListCreateAPIView):
     """
@@ -85,65 +78,27 @@ class EnquiryListCreate(generics.ListCreateAPIView):
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
 
-        # Get the display name for service type
-        service_type_display = SERVICE_TYPE_DISPLAY.get(
-            serializer.validated_data["serviceType"],
-            serializer.validated_data["serviceType"]
-        )
-
-        # Get current timestamp
-        received_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-
-        # Send email notification to admin
+        # Send email notification
         try:
             send_mail(
-                subject=f'Almas Movers International Enquiry from {serializer.validated_data["fullName"]}',
+                subject=f'New Enquiry from {serializer.validated_data["fullName"]}',
                 message=f"""
-                Almas Movers International enquiry received at {received_time}:
+                New enquiry received:
                 Name: {serializer.validated_data["fullName"]}
                 Phone: {serializer.validated_data["phoneNumber"]}
                 Email: {serializer.validated_data["email"]}
-                Service Type: {service_type_display}
+                Service Type: {serializer.validated_data["serviceType"]}
                 Message: {serializer.validated_data["message"]}
                 Referer URL: {serializer.validated_data["refererUrl"]}
                 Submitted URL: {serializer.validated_data["submittedUrl"]}
                 """,
                 from_email=settings.DEFAULT_FROM_EMAIL,
                 recipient_list=[settings.CONTACT_EMAIL],
-                bcc=[settings.BCC_EMAIL],
                 fail_silently=True,
             )
             logger.info("Enquiry email sent successfully for %s", serializer.validated_data["fullName"])
         except Exception as e:
             logger.error("Failed to send enquiry email: %s", str(e))
-
-        # Send confirmation email to user
-        try:
-            send_mail(
-                subject='Thank You for Your Enquiry',
-                message=f"""
-                Dear {serializer.validated_data["fullName"]},
-
-                Thank you for submitting your enquiry with Almas International. We have received your request and will get back to you soon.
-
-                Your Enquiry Details:
-                Received at: {received_time}
-                Name: {serializer.validated_data["fullName"]}
-                Phone: {serializer.validated_data["phoneNumber"]}
-                Email: {serializer.validated_data["email"]}
-                Service Type: {service_type_display}
-                Message: {serializer.validated_data["message"]}
-
-                Best regards,
-                Almas International Team
-                """,
-                from_email=settings.DEFAULT_FROM_EMAIL,
-                recipient_list=[serializer.validated_data["email"]],
-                fail_silently=True,
-            )
-            logger.info("Confirmation email sent successfully to %s", serializer.validated_data["email"])
-        except Exception as e:
-            logger.error("Failed to send confirmation email: %s", str(e))
 
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
