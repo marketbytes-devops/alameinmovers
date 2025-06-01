@@ -45,7 +45,7 @@ class EnquiryListCreate(generics.ListCreateAPIView):
 
     def create(self, request, *args, **kwargs):
         """
-        Handle enquiry form submission with reCAPTCHA verification and email notifications.
+        Handle enquiry form submission with reCAPTCHA verification and email notification.
         """
         recaptcha_token = request.data.get('recaptchaToken')
         if not recaptcha_token:
@@ -84,14 +84,13 @@ class EnquiryListCreate(generics.ListCreateAPIView):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
-
-        # Get display name for service type
+        
         service_type_display = SERVICE_TYPE_DISPLAY.get(
             serializer.validated_data["serviceType"],
             serializer.validated_data["serviceType"]
         )
 
-        # Send email notification to admin with BCC
+        # Send email notification
         try:
             send_mail(
                 subject=f'New Enquiry from {serializer.validated_data["fullName"]}',
@@ -104,57 +103,18 @@ class EnquiryListCreate(generics.ListCreateAPIView):
                 Message: {serializer.validated_data["message"]}
                 Referer URL: {serializer.validated_data["refererUrl"]}
                 Submitted URL: {serializer.validated_data["submittedUrl"]}
-                Received At: {serializer.instance.created_at}
                 """,
                 from_email=settings.DEFAULT_FROM_EMAIL,
-                recipient_list=[settings.CONTACT_EMAIL],  # marketbytesdevops@gmail.com
-                bcc=['ajay@marketbytes.in'],
-                fail_silently=False,  # Set to False to catch errors
+                recipient_list=[settings.CONTACT_EMAIL],
+                fail_silently=True,
             )
             logger.info("Enquiry email sent successfully for %s", serializer.validated_data["fullName"])
         except Exception as e:
             logger.error("Failed to send enquiry email: %s", str(e))
-            # Optionally, you can return a response to indicate email failure
-            # return Response(
-            #     {'error': 'Form submitted, but failed to send admin email.'},
-            #     status=status.HTTP_201_CREATED
-            # )
-
-        # Send confirmation email to user
-        try:
-            send_mail(
-                subject='Thank You for Your Enquiry',
-                message=f"""
-                Dear {serializer.validated_data["fullName"]},
-
-                Thank you for submitting your enquiry with Almas International. We have received your request and will get back to you soon.
-
-                Enquiry Details:
-                Name: {serializer.validated_data["fullName"]}
-                Phone: {serializer.validated_data["phoneNumber"]}
-                Email: {serializer.validated_data["email"]}
-                Service Type: {service_type_display}
-                Message: {serializer.validated_data["message"]}
-                Received At: {serializer.instance.created_at}
-
-                Best regards,
-                Almas International Team
-                """,
-                from_email=settings.DEFAULT_FROM_EMAIL,
-                recipient_list=[serializer.validated_data["email"]],
-                fail_silently=False,  # Set to False to catch errors
-            )
-            logger.info("Confirmation email sent to %s", serializer.validated_data["email"])
-        except Exception as e:
-            logger.error("Failed to send confirmation email to %s: %s", serializer.validated_data["email"], str(e))
-            # Optionally, you can return a response to indicate email failure
-            # return Response(
-            #     {'error': 'Form submitted, but failed to send confirmation email.'},
-            #     status=status.HTTP_201_CREATED
-            # )
 
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+
 
 class EnquiryDelete(generics.DestroyAPIView):
     """
