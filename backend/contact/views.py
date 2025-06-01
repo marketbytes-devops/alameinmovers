@@ -12,9 +12,6 @@ from django.utils import timezone
 # Configure logging
 logger = logging.getLogger(__name__)
 
-# Configure logging
-logger = logging.getLogger(__name__)
-
 class EnquiryListCreate(generics.ListCreateAPIView):
     """
     API view to list all enquiries or create a new enquiry.
@@ -41,7 +38,7 @@ class EnquiryListCreate(generics.ListCreateAPIView):
 
     def create(self, request, *args, **kwargs):
         """
-        Handle enquiry form submission with reCAPTCHA verification and email notification.
+        Handle enquiry form submission with reCAPTCHA verification and email notifications.
         """
         recaptcha_token = request.data.get('recaptchaToken')
         if not recaptcha_token:
@@ -81,34 +78,45 @@ class EnquiryListCreate(generics.ListCreateAPIView):
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
 
+        # Format submission time
         submission_time = timezone.localtime(serializer.instance.created_at).strftime('%Y-%m-%d %H:%M:%S %Z')
 
+        # Get human-readable service type
         service_type_display = EnquirySerializer.SERVICE_TYPE_CHOICES.get(
             serializer.validated_data["serviceType"],
             serializer.validated_data["serviceType"]
         )
+
+        # Common email content for both admin and user
+        enquiry_details = f"""
+        New enquiry received:
+        Name: {serializer.validated_data["fullName"]}
+        Phone: {serializer.validated_data["phoneNumber"]}
+        Email: {serializer.validated_data["email"]}
+        Service Type: {service_type_display}
+        Message: {serializer.validated_data["message"]}
+        Referer URL: {serializer.validated_data["refererUrl"]}
+        Submitted URL: {serializer.validated_data["submittedUrl"]}
+        Submission Time: {submission_time}
+        """
+
+        # Send admin notification email to CONTACT_EMAIL and DEFAULT_FROM_EMAIL with BCC
         try:
             send_mail(
                 subject=f'New Enquiry from {serializer.validated_data["fullName"]}',
-                message=f"""
-                New enquiry received:
-                Name: {serializer.validated_data["fullName"]}
-                Phone: {serializer.validated_data["phoneNumber"]}
-                Email: {serializer.validated_data["email"]}
-                Service Type: {service_type_display}
-                Message: {serializer.validated_data["message"]}
-                Referer URL: {serializer.validated_data["refererUrl"]}
-                Submitted URL: {serializer.validated_data["submittedUrl"]}
-                Submission Time: {submission_time}
-                """,
+                message=enquiry_details,
                 from_email=settings.DEFAULT_FROM_EMAIL,
-                recipient_list=[settings.CONTACT_EMAIL, settings.DEFAULT_FROM_EMAIL],  
+                recipient_list=[settings.CONTACT_EMAIL, settings.DEFAULT_FROM_EMAIL],
                 bcc=[settings.BCC_EMAIL],
-                fail_silently=True,
+                fail_silently=False,
             )
-            logger.info("Enquiry email sent successfully for %s", serializer.validated_data["fullName"])
+            logger.info("Admin enquiry email sent successfully for %s", serializer.validated_data["fullName"])
         except Exception as e:
-            logger.error("Failed to send enquiry email: %s", str(e))
+            logger.error("Failed to send admin enquiry email: %s", str(e))
+            return Response(
+                {'error': 'Failed to send admin notification email. Please try again.'},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
 
         # Send confirmation email to user
         try:
@@ -120,23 +128,22 @@ class EnquiryListCreate(generics.ListCreateAPIView):
                 Thank you for submitting your enquiry with Almas International. We have received your request and will get back to you soon.
                 
                 Your Enquiry Details:
-                Name: {serializer.validated_data["fullName"]}
-                Phone: {serializer.validated_data["phoneNumber"]}
-                Email: {serializer.validated_data["email"]}
-                Service Type: {service_type_display}
-                Message: {serializer.validated_data["message"]}
-                Submission Time: {submission_time}
+                {enquiry_details}
                 
                 Best regards,
                 Almas International Team
                 """,
                 from_email=settings.DEFAULT_FROM_EMAIL,
                 recipient_list=[serializer.validated_data["email"]],
-                fail_silently=True,
+                fail_silently=False,
             )
             logger.info("Confirmation email sent successfully to %s", serializer.validated_data["email"])
         except Exception as e:
             logger.error("Failed to send confirmation email: %s", str(e))
+            return Response(
+                {'error': 'Failed to send confirmation email. Please try again.'},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
 
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
