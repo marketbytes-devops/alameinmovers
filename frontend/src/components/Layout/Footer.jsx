@@ -140,13 +140,13 @@ const Footer = () => {
             Location
           </h3>
           <p className="text-sm sm:text-base md:text-lg">
-            Near Hilal Government
+            Office 01, Building 317,
           </p>
           <p className="text-sm sm:text-base md:text-lg">
-            Complex, Building No:
+            Street 250, Zone 43,
           </p>
-          <p className="text-sm sm:text-base md:text-lg">242, Zone 25, Office 09,</p>
-          <p className="text-sm sm:text-base md:text-lg">C-Ring Road, Doha-Qatar</p>
+          <p className="text-sm sm:text-base md:text-lg">Fareej Al Ali,</p>
+          <p className="text-sm sm:text-base md:text-lg">Doha- Qatar</p>
         </div>
 
         {/* Quick Links */}

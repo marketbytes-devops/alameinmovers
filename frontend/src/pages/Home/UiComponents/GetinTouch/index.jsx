@@ -80,10 +80,11 @@ const GetInTouchSection = () => {
   };
 
   const serviceOptions = [
-    { value: "moving", label: "Moving" },
+    { value: "localMove", label: "Local Move" },
+    { value: "internationalMove", label: "International Move" },
+    { value: "carExport", label: "Car Export" },
+    { value: "storageServices", label: "Storage Services" },
     { value: "logistics", label: "Logistics" },
-    { value: "relocation", label: "Relocation" },
-    { value: "other", label: "Other" },
   ];
 
   return (

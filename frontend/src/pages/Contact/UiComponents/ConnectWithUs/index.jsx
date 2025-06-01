@@ -46,15 +46,14 @@ const Connectwithus = () => {
               </h3>
             </div>
             <div className="w-full pl-8 sm:pl-10 lg:pl-10">
-              <p className="text-sm sm:text-base lg:text-base">
-                Near Hilal Government Complex
+              <p className="text-sm sm:text-base md:text-lg">
+                Office 01, Building 317,
               </p>
-              <p className="text-sm sm:text-base lg:text-base">
-                Building No: 242, Zone 25, Office #09
+              <p className="text-sm sm:text-base md:text-lg">
+                Street 250, Zone 43,
               </p>
-              <p className="text-sm sm:text-base lg:text-base">
-                C-Ring Road, Doha-Qatar
-              </p>
+              <p className="text-sm sm:text-base md:text-lg">Fareej Al Ali,</p>
+              <p className="text-sm sm:text-base md:text-lg">Doha- Qatar</p>
             </div>
           </div>
 
