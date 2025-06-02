@@ -113,9 +113,9 @@ const [activeTab, setActiveTab] = useState("booking");
     { value: "logistics", label: "Logistics" },
   ];
   return (
-      <div className="container-primary w-full pt-12 sm:pt-16">
+      <div className="container-primary w-full">
         <div
-          className="relative w-full min-h-[500px] sm:min-h-[600px] md:min-h-[700px] bg-cover bg-center flex flex-col justify-center items-center text-center text-white mx-0 px-0 sm:px-6 md:px-8 rounded-b-3xl rounded-t-none"
+          className="relative w-full min-h-[500px] sm:min-h-[600px] md:min-h-[800px] bg-cover bg-center flex flex-col justify-center items-center text-center text-white mx-0 px-0 sm:px-6 md:px-8 rounded-b-3xl rounded-t-none"
           style={{
             backgroundImage: `url(${backgroundImage})`,
             backgroundSize: "cover",

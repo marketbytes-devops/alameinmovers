@@ -63,7 +63,7 @@ const Navbar = () => {
       <motion.nav
         className="bg-primary shadow-lg fixed z-50 w-full lg:w-[93.5%]"
         animate={{
-          top: isScrolled ? 0 : 50,
+          top: isScrolled ? 0 : 4,
           borderTopRightRadius: isScrolled ? 0 : [0, 12, 16, 16],
           borderTopLeftRadius: isScrolled ? 0 : [0, 12, 16, 16],
           borderBottomRightRadius: isScrolled ? [0, 12, 16, 16] : 0,
@@ -79,12 +79,12 @@ const Navbar = () => {
                 <img
                   src={Logo}
                   alt="Company Logo"
-                  className="block xs:block sm:block md:block lg:hidden xl:hidden h-12 w-auto sm:h-12 md:h-10 px-4 sm:px-4 md:px-0 lg:px-0 xl:px-0"
+                  className=" h-12 w-auto sm:h-12 md:h-[70px] px-4 sm:px-4 md:px-0 lg:px-0 xl:px-0"
                 />
                 <img
                   src={LogoDesktop}
                   alt="Company Logo"
-                  className="hidden xs:hidden sm:hidden md:hidden lg:block xl:block h-12 w-auto sm:h-12 md:h-10 px-4 sm:px-4 md:px-0 lg:px-0 xl:px-0"
+                  className="hidden h-12 w-auto sm:h-12 md:h-10 px-4 sm:px-4 md:px-0 lg:px-0 xl:px-0"
                 />
               </Link>
             </div>
