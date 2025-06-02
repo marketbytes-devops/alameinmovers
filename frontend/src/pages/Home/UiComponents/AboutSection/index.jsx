@@ -119,8 +119,8 @@ const AboutSection = () => {
               />
               <br />
               <p className="text-md text-gray-700">
-  Since 2011, Almas Movers International, based in Doha, Qatar, has provided ISO-certified, stress-free international move and relocation services. As members of IAM, BAR, and FIATA, we ensure expert international moving tips and seamless moving abroad experiences.
-</p>
+                Since 2011, Almas Movers International, based in Doha, Qatar, has provided ISO-certified, stress-free international move and relocation services. As members of IAM, BAR, and FIATA, we ensure expert international moving tips and seamless moving abroad experiences.
+              </p>
             </div>
             <div className="flex flex-col gap-10 -mt-2 sm:-mt-2 lg:-mt-0">
               <Button
@@ -135,7 +135,7 @@ const AboutSection = () => {
                     {formatNumber(monthlyServices, "K")}
                   </p>
                   <p className="text-sm sm:text-base lg:text-lg text-gray-700">
-                    Years of <br /> Experience 
+                    Years of <br /> Experience
                   </p>
                 </div>
                 <div className="text-center">
@@ -143,7 +143,7 @@ const AboutSection = () => {
                     {formatNumber(deliveriesCompleted, "K")}
                   </p>
                   <p className="text-sm sm:text-base lg:text-lg text-gray-700">
-               Corporate  <br /> Relocations
+                    Corporate  <br /> Relocations
                   </p>
                 </div>
                 <div className="text-center">
@@ -151,7 +151,7 @@ const AboutSection = () => {
                     {formatNumber(globalPartners, "+")}
                   </p>
                   <p className="text-sm sm:text-base lg:text-lg text-gray-700">
-                  Countries <br /> Covered
+                    Countries <br /> Covered
                   </p>
                 </div>
                 <div className="text-center">
@@ -159,7 +159,7 @@ const AboutSection = () => {
                     {formatNumber(onTimeDelivery, "%")}
                   </p>
                   <p className="text-sm sm:text-base lg:text-lg text-gray-700">
-                   Customer <br />Satisfaction
+                    Customer <br />Satisfaction
                   </p>
                 </div>
               </div>
