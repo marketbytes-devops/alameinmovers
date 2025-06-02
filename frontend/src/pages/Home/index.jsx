@@ -24,6 +24,7 @@ const Home = () => {
         <link rel="canonical" href="https://www.almasmovers.com/" />
       </Helmet>
       <section className="">
+        <Hero />
       </section>
       <section className="container-secondary about-us mt-8 sm:mt-10 lg:mt-16">
         <AboutSection />

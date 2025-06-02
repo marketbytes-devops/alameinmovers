@@ -5,27 +5,26 @@ import Button from "../Button";
 import Logo from "../../assets/logo.webp";
 import LogoDesktop from "../../assets/logo-desktop.webp";
 import ModalForm from "../ModalForm";
-import Hero from "../../pages/Home/UiComponents/Hero";
-
+ 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const location = useLocation();
-
+ 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
-
+ 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 100);
     };
-
+ 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
+ 
   const navLinks = [
     { to: "/", label: "Home" },
     { to: "/about-us", label: "About Us" },
@@ -35,7 +34,7 @@ const Navbar = () => {
     { to: "/blog", label: "Blogs" },
     { to: "/contact-us", label: "Contact Us" },
   ];
-
+ 
   const menuVariants = {
     hidden: { y: "-100%", opacity: 0 },
     visible: {
@@ -49,7 +48,7 @@ const Navbar = () => {
       transition: { duration: 0.2, ease: "easeIn" },
     },
   };
-
+ 
   const itemVariants = {
     hidden: { opacity: 0, y: 10 },
     visible: {
@@ -58,7 +57,7 @@ const Navbar = () => {
       transition: { duration: 0.2, ease: "easeOut" },
     },
   };
-
+ 
   return (
     <div className="flex items-center justify-center">
       <motion.nav
@@ -89,7 +88,7 @@ const Navbar = () => {
                 />
               </Link>
             </div>
-
+ 
             <div className="hidden lg:flex items-center space-x-6 lg:space-x-8 py-2.5 px-8 mx-2 lg:px-10 rounded-[20px] border-2 border-gray-300 bg-white/20">
               <ul className="flex space-x-4 lg:space-x-6">
                 {navLinks.map((link) => (
@@ -100,10 +99,11 @@ const Navbar = () => {
                   >
                     <Link
                       to={link.to}
-                      className={`px-0 md:px-0 lg:px-2 text-base sm:text-base md:text-sm font-medium transition-colors duration-300 ${location.pathname === link.to
+                      className={`px-0 md:px-0 lg:px-2 text-base sm:text-base md:text-sm font-medium transition-colors duration-300 ${
+                        location.pathname === link.to
                           ? "text-secondary"
                           : "text-gray-50 hover:text-secondary"
-                        }`}
+                      }`}
                       aria-label={`Navigate to ${link.label}`}
                     >
                       {link.label}
@@ -112,7 +112,7 @@ const Navbar = () => {
                 ))}
               </ul>
             </div>
-
+ 
             <div className="hidden lg:flex pr-6 lg:pr-8">
               <Button
                 label="Get a quote"
@@ -121,7 +121,7 @@ const Navbar = () => {
                 onClick={() => setIsModalOpen(true)}
               />
             </div>
-
+ 
             <div className="lg:hidden">
               <button
                 onClick={toggleMenu}
@@ -155,7 +155,7 @@ const Navbar = () => {
             </div>
           </div>
         </div>
-
+ 
         <AnimatePresence>
           {isMenuOpen && (
             <motion.div
@@ -196,10 +196,11 @@ const Navbar = () => {
                   >
                     <Link
                       to={link.to}
-                      className={`text-base font-medium transition-colors duration-300 rounded-md hover:bg-white/10 block px-3 py-1.5 ${location.pathname === link.to
+                      className={`text-base font-medium transition-colors duration-300 rounded-md hover:bg-white/10 block px-3 py-1.5 ${
+                        location.pathname === link.to
                           ? "text-secondary"
                           : "text-gray-50 hover:text-secondary"
-                        }`}
+                      }`}
                       onClick={() => setIsMenuOpen(false)}
                       aria-label={`Navigate to ${link.label}`}
                     >
@@ -225,9 +226,9 @@ const Navbar = () => {
           )}
         </AnimatePresence>
       </motion.nav>
-
+ 
       <ModalForm isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
-
+ 
       <style>
         {`
           .ripple-button {
@@ -287,10 +288,8 @@ const Navbar = () => {
           }
         `}
       </style>
-
-      <Hero />
     </div>
   );
 };
-
+ 
 export default Navbar;
