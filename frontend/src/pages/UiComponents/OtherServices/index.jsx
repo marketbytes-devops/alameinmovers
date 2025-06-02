@@ -1,6 +1,6 @@
 import { useNavigate, Link } from 'react-router-dom';
-import houseMovingImage from '../../../assets/moving/houseMoving.webp';
-import officeRelocationImage from '../../../assets/moving/officeRelocation.webp';
+import houseMovingImage from '../../../assets/moving/housemoving.webp';
+import officeRelocationImage from '../../../assets/moving/officerelocation.webp';
 import internationalRelocationImage from '../../../assets/moving/internationalreloc.webp';
 import insuranceImage from '../../../assets/moving/insurance.webp';
 import storageServicesImage from '../../../assets/logistics/storage.webp';
