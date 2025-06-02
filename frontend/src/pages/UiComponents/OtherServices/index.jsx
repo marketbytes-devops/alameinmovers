@@ -4,9 +4,9 @@ import officeRelocationImage from '../../../assets/moving/officerelocation.webp'
 import internationalRelocationImage from '../../../assets/moving/internationalreloc.webp';
 import insuranceImage from '../../../assets/moving/insurance.webp';
 import storageServicesImage from '../../../assets/logistics/storage.webp';
-import vehicleImportExportImage from '../../../assets/logistics/carShipping.webp';
-import airFreightImage from '../../../assets/logistics/airFreight.webp';
-import seaFreightImage from '../../../assets/logistics/seaFreight.webp';
+import vehicleImportExportImage from '../../../assets/logistics/carshipping.webp';
+import airFreightImage from '../../../assets/logistics/airfreight.webp';
+import seaFreightImage from '../../../assets/logistics/seafreight.webp';
 import furnitureInstallationImage from '../../../assets/moving/furniture-installation.webp';
 
 import petRelocationImage from '../../../assets/moving/furniture-installation.webp';
