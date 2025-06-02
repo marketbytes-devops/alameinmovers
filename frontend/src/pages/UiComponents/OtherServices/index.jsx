@@ -1,67 +1,103 @@
-import React from 'react';
-import { useLocation, useNavigate, Link } from 'react-router-dom';
-import pic1 from '../../../assets/moving/housemoving.webp';
-import pic2 from '../../../assets/moving/officerelocation.webp';
-import pic3 from '../../../assets/moving/internationalreloc.webp';
-import pic4 from '../../../assets/moving/insurance.webp';
-import pic5 from '../../../assets/logistics/storage.webp';
-import pic6 from '../../../assets/logistics/carshipping.webp';
-import pic7 from '../../../assets/logistics/Airfreight.webp';
-import pic8 from '../../../assets/logistics/seafreight.webp';
+import { useNavigate, Link } from 'react-router-dom';
+import houseMovingImage from '../../../assets/moving/houseMoving.webp';
+import officeRelocationImage from '../../../assets/moving/officeRelocation.webp';
+import internationalRelocationImage from '../../../assets/moving/internationalreloc.webp';
+import insuranceImage from '../../../assets/moving/insurance.webp';
+import storageServicesImage from '../../../assets/logistics/storage.webp';
+import vehicleImportExportImage from '../../../assets/logistics/carShipping.webp';
+import airFreightImage from '../../../assets/logistics/airFreight.webp';
+import seaFreightImage from '../../../assets/logistics/seaFreight.webp';
+import furnitureInstallationImage from '../../../assets/moving/furniture-installation.webp';
+
+import petRelocationImage from '../../../assets/moving/furniture-installation.webp';
+import eventExhibitionImage from '../../../assets/moving/furniture-installation.webp';
+import storageSolutionsHouseholdImage from '../../../assets/moving/furniture-installation.webp';
+
+import landFreightImage from '../../../assets/moving/land-relocation.webp';
 import Button from '../../../components/Button';
 
 const servicesData = {
   Movers: [
     {
-      image: pic1,
+      image: houseMovingImage,
       title: 'House Moving',
       description: 'Our house moving service guarantees the safe and timely relocation of your belongings across Qatar. We take care of every step, ensuring a smooth and efficient move into your new home.',
       link: '/services/house-moving',
     },
     {
-      image: pic2,
+      image: officeRelocationImage,
       title: 'Office Relocation',
       description: 'Efficient office and commercial moving solutions with minimal disruption to your business. We handle furniture, equipment, and all logistics, ensuring a smooth transition to your new office space.',
-      link: '/services/office-relocation', 
+      link: '/services/office-relocation',
     },
     {
-      image: pic3,
+      image: vehicleImportExportImage,
+      title: 'Vehicle Import and Export',
+      description: 'Need to ship your car overseas? Our reliable Vehicle Import and Export services offer pre-inspection, safe transport, and insurance to ensure your vehicle reaches its destination in perfect condition.',
+      link: '/services/vehicle-import-and-export',
+    },
+    {
+      image: internationalRelocationImage,
       title: 'International Relocation',
       description: 'We offer seamless international relocation services, managing everything from packing to delivery, ensuring a stress-free transition to your new home or office, no matter the destination',
-      link: '/services/international-relocation', 
+      link: '/services/international-relocation',
     },
     {
-      image: pic4,
+      image: insuranceImage,
       title: 'Insurance',
       description: 'Comprehensive insurance coverage for all your belongings during a move, offering peace of mind. Whether moving locally or internationally, our tailored insurance plans protect your goods throughout the process.',
-      link: '/services/insurance-coverage', 
+      link: '/services/insurance-coverage',
+    },
+    {
+      image: furnitureInstallationImage,
+      title: 'Furniture installation on Contract',
+      description: '',
+      link: '/services/furniture-installation-on-contract',
+    },
+    {
+      image: petRelocationImage,
+      title: 'Pet Relocations',
+      description: '',
+      link: '/services/pet-relocations',
+    },
+    {
+      image: eventExhibitionImage,
+      title: 'Event and Exhibition Relocation',
+      description: '',
+      link: '/services/event-and-exhibition-relocation',
+    },
+    {
+      image: storageSolutionsHouseholdImage,
+      title: 'Storage Solutions for Household Goods',
+      description: '',
+      link: '/services/storage-solutions-for-household-goods',
     },
   ],
   Logistics: [
     {
-      image: pic5,
+      image: storageServicesImage,
       title: 'Storage Services',
       description: 'Secure, clean, and spacious storage facilities for your personal or commercial needs. Our well-equipped storage units ensure your items are safely stored and easily accessible when needed.',
       link: '/services/storage-solutions',
     },
     {
-      image: pic6,
-      title: 'Car Shipping Service',
-      description: 'Need to ship your car overseas? Our reliable car shipping services offer pre-inspection, safe transport, and insurance to ensure your vehicle reaches its destination in perfect condition.',
-      link: '/services/vehicle-relocation', 
-    },
-    {
-      image: pic7,
+      image: airFreightImage,
       title: 'Air Freight',
       description: 'Our air freight service ensures your goods are delivered swiftly to international destinations. We handle everything from booking to customs clearance, ensuring timely arrivals.',
-      link: '/services/air-freight', 
+      link: '/services/air-freight-services',
     },
     {
-      image: pic8,
+      image: seaFreightImage,
       title: 'Sea Freight',
       description: 'We offer comprehensive sea freight solutions for both large and small shipments. Our team manages everything from loading to customs clearance, ensuring smooth transit.',
-      link: '/services/sea-freight',
+      link: '/services/sea-freight-services',
     },
+    {
+      image: landFreightImage,
+      title: 'Land Freight',
+      description: '',
+      link: '/services/land-freight-services',
+    }
   ],
 };
 
@@ -82,22 +118,18 @@ const OtherServices = ({ serviceType }) => {
         <Button
           label="Movers"
           onClick={() => handleTabClick('Movers')}
-          className={`px-16 py-2 mb-6 rounded-full text-xl ${
-            serviceType === 'Movers'
-              ? 'bg-secondary text-black'
-              : 'border-2 border-primary text-black'
-          }`}
+          className={`px-16 py-2 mb-6 rounded-full text-xl ${serviceType === 'Movers'
+            ? 'bg-secondary text-black'
+            : 'border-2 border-primary text-black'
+            }`}
         />
         <Button
           label="Logistics"
           onClick={() => handleTabClick('Logistics')}
-          className={`px-16 py-2
-
- mb-6 rounded-full text-xl ${
-            serviceType === 'Logistics'
-              ? 'bg-secondary text-black'
-              : 'border-2 border-primary text-black'
-          }`}
+          className={`px-16 py-2 mb-6 rounded-full text-xl ${serviceType === 'Logistics'
+            ? 'bg-secondary text-black'
+            : 'border-2 border-primary text-black'
+            }`}
         />
       </div>
 

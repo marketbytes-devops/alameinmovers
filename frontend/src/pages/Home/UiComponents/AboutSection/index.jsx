@@ -15,7 +15,7 @@ const AboutSection = () => {
 
   const targets = {
     monthlyServices: 14,
-    deliveriesCompleted: 1000,
+    deliveriesCompleted: 20000,
     globalPartners: 120,
     onTimeDelivery: 99,
   };
@@ -94,14 +94,15 @@ const AboutSection = () => {
   }, []);
 
   const formatNumber = (value, suffix) => {
+    const roundedValue = Math.round(value);
     if (suffix === "K") {
-      return `${Math.round(value)}+`;
+      return `${roundedValue.toLocaleString()}+`; 
     } else if (suffix === "+") {
-      return `${Math.round(value)}+`;
+      return `${roundedValue.toLocaleString()}+`;
     } else if (suffix === "%") {
-      return `${Math.round(value)}%`;
+      return `${roundedValue}%`;
     }
-    return Math.round(value);
+    return roundedValue.toLocaleString();
   };
 
   return (
@@ -118,9 +119,14 @@ const AboutSection = () => {
                 titleClass="text-3xl text-black"
               />
               <br />
-              <p className="text-md text-gray-700">
-                Since 2011, Almas Movers International, based in Doha, Qatar, has provided ISO-certified, stress-free international move and relocation services. As members of IAM, BAR, and FIATA, we ensure expert international moving tips and seamless moving abroad experiences.
-              </p>
+              <div className="space-y-6">
+                <p className="text-md text-gray-700">
+                  Since 2011, Almas Movers International, based in Doha, Qatar, has been providing ISO-certified, stress-free international moving and relocation services. With a commitment to excellence, we are proud members of renowned industry organizations such as IAM, BAR, and FIATA. As a certified "Trusted Moving Company" by IAM, we are dedicated to offering expert advice and seamless relocation experiences both locally and internationally.
+                </p>
+                <p className="text-md text-gray-700">
+                  Our team ensures every move, whether within Qatar or abroad, is handled with precision, care, and professionalism, making us the trusted choice for all your moving needs.
+                </p>
+              </div>
             </div>
             <div className="flex flex-col gap-10 -mt-2 sm:-mt-2 lg:-mt-0">
               <Button
@@ -143,7 +149,7 @@ const AboutSection = () => {
                     {formatNumber(deliveriesCompleted, "K")}
                   </p>
                   <p className="text-sm sm:text-base lg:text-lg text-gray-700">
-                    Corporate  <br /> Relocations
+                    Successful <br /> Moves
                   </p>
                 </div>
                 <div className="text-center">

@@ -12,7 +12,7 @@ const OurServices = ({ currentSlug }) => {
   const navigate = useNavigate();
   const gridRef = useRef(null);
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [slidesToShow, setSlidesToShow] = useState(4); 
+  const [slidesToShow, setSlidesToShow] = useState(4);
 
   const cards = serviceData
     .filter((service) => !currentSlug || service.slug !== `/services/${currentSlug}`)
@@ -38,7 +38,6 @@ const OurServices = ({ currentSlug }) => {
   useEffect(() => {
     const handleResize = () => {
       setDimensions(getCardDimensions());
-      // Update slidesToShow based on window width
       setSlidesToShow(window.innerWidth < 640 ? 1 : window.innerWidth < 1024 ? 3 : 4);
     };
 
@@ -51,18 +50,16 @@ const OurServices = ({ currentSlug }) => {
     return "w-16 h-16";
   };
 
-  // Calculate total number of slides based on cards and slidesToShow
   const getTotalSlides = () => {
     return Math.ceil(cards.length / slidesToShow);
   };
 
-  
   const settings = {
     dots: true,
     infinite: true,
     speed: 300,
-    slidesToShow: 4,
-    slidesToScroll: 4,
+    slidesToShow: slidesToShow, 
+    slidesToScroll: slidesToShow, 
     autoplay: true,
     autoplaySpeed: 3000,
     dotsClass: "slick-dots flex justify-center items-center p-0 m-0 list-none",
@@ -75,12 +72,11 @@ const OurServices = ({ currentSlug }) => {
       </div>
     ),
     customPaging: (i) => {
-
-      const currentSet = Math.floor(currentSlide / slidesToShow);
+      const isActive = Math.floor(currentSlide / slidesToShow) === i;
       return (
         <div
-          className={`mt-4 w-2 h-2 lg:w-3 lg:h-3 rounded-full bg-gray-300 cursor-pointer transition-all duration-600 ${
-            i === currentSet ? "bg-yellow-400 w-3 h-3" : ""
+          className={`mt-4 w-2 h-2 lg:w-3 lg:h-3 rounded-full bg-gray-300 cursor-pointer transition-all duration-300 ${
+            isActive ? "bg-yellow-400 w-3 h-3 lg:w-4 lg:h-4" : ""
           }`}
         />
       );

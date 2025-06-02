@@ -16,6 +16,27 @@ import AirfreightBanner from "../../assets/international_relocation.webp";
 import SeafrieghtBanner from "../../assets/international_relocation.webp";
 import InternationalFeatureImage from "../../assets/moving/pic2.webp";
 
+
+import storageSolutionsforHouseholdIcon from "../../assets/moving/land-relocation.webp";
+import storageSolutionsforHouseholdBanner from "../../assets/moving/pic2.webp";
+import storageSolutionsforHouseholdFeatureImage from "../../assets/moving/pic2.webp";
+
+import eventandExhibitionBanner from "../../assets/moving/pic2.webp";
+import eventandExhibitionIcon from "../../assets/moving/land-relocation.webp";
+import eventandExhibitionFeatureImage from "../../assets/moving/pic2.webp";
+
+import petRelocationsBanner from "../../assets/moving/pic2.webp";
+import petRelocationsIcon from "../../assets/moving/land-relocation.webp";
+import petRelocationsFeatureImage from "../../assets/moving/pic2.webp";
+
+import furnitureInstallationBanner from "../../assets/moving/pic2.webp";
+import furnitureInstallationIcon from "../../assets/moving/furniture-installation.webp";
+import furnitureInstallationFeatureImage from "../../assets/moving/pic2.webp";
+
+import landFreightBanner from "../../assets/moving/pic2.webp";
+import landFreightIcon from "../../assets/moving/land-relocation.webp";
+import landFreightFeatureImage from "../../assets/moving/pic2.webp";
+
 const serviceData = [
   {
     id: 0,
@@ -67,26 +88,26 @@ const serviceData = [
   },
   {
     id: 2,
-    title: "Vehicle Relocation",
-    slug: "/services/vehicle-relocation",
+    title: "Vehicle Import and Export",
+    slug: "/services/vehicle-import-and-export",
     cardImage: VehicleMovingIcon,
     bannerImage: VehicleMovingBanner,
     bannerDescription:
       "Dubai, London, Tokyo, wherever life takes you next, we ensure you and your loved ones arrive with ease and feel at home from the very start",
-    shortDescription: "Safe and reliable vehicle relocation services.",
+    shortDescription: "Safe and reliable Vehicle Import and Export services.",
     featureImage: InternationalFeatureImage,
     featureTitle: "",
     featureDescription:
-      "Your vehicle is one of your most valuable assets, and we treat it as such. Our vehicle relocation services ensure your car, motorcycle, or other vehicles are transported securely to your destination. We offer both open and enclosed transport options to suit your needs.",
+      "Your vehicle is one of your most valuable assets, and we treat it as such. Our Vehicle Import and Export services ensure your car, motorcycle, or other vehicles are transported securely to your destination. We offer both open and enclosed transport options to suit your needs.",
     features: [
       "Door-to-door vehicle transport",
       "Open and enclosed carrier options",
       "Regular updates on transport status",
       "Fully insured transportation",
     ],
-    metaTitle: "Vehicle Relocation in Qatar | Ship Your Car Safely with Almas Movers",
-    metaDescription: "Move your car or vehicle anywhere, safely and on time. Almas Movers provides secure international and domestic vehicle relocation services in Qatar.",
-    keywords: "vehicle relocation, car shipping, Qatar vehicle movers, Almas Movers, secure car transport"
+    metaTitle: "Vehicle Import and Export in Qatar | Ship Your Car Safely with Almas Movers",
+    metaDescription: "Move your car or vehicle anywhere, safely and on time. Almas Movers provides secure international and domestic Vehicle Import and Export services in Qatar.",
+    keywords: "Vehicle Import and Export, car shipping, Qatar vehicle movers, Almas Movers, secure car transport"
   },
   {
     id: 3,
@@ -202,6 +223,126 @@ const serviceData = [
     metaTitle: "Sea Freight Shipping in Qatar | Global Ocean Cargo by Almas Movers",
     metaDescription: "Affordable sea freight solutions for large shipments from Qatar to the world. Almas Movers ensures timely, secure, and cost-effective ocean freight services.",
     keywords: "sea freight, Qatar shipping, Almas Movers, ocean cargo, cost-effective shipping"
+  },
+    {
+    id: 8,
+    title: "Land Freight",
+    slug: "/services/land-freight-services",
+    cardImage: landFreightIcon,
+    bannerImage: landFreightBanner,
+    bannerDescription:
+      "",
+    shortDescription:
+      "",
+    featureImage: landFreightFeatureImage,
+    featureTitle: "",
+    featureDescription:
+      "",
+    features: [
+      "",
+      "",
+      "",
+      "",
+    ],
+    metaTitle: "",
+    metaDescription: "",
+    keywords: ""
+  },
+  {
+    id: 9,
+    title: "Furniture Installation on Contract",
+    slug: "/services/furniture-installation-on-contract",
+    cardImage: furnitureInstallationIcon,
+    bannerImage: furnitureInstallationBanner,
+    bannerDescription:
+      "",
+    shortDescription:
+      "",
+    featureImage: furnitureInstallationFeatureImage,
+    featureTitle: "",
+    featureDescription:
+      "",
+    features: [
+      "",
+      "",
+      "",
+      "",
+    ],
+    metaTitle: "",
+    metaDescription: "",
+    keywords: ""
+  },
+  {
+    id: 10,
+    title: "Pet Relocations",
+    slug: "/services/pet-relocations",
+    cardImage: petRelocationsIcon,
+    bannerImage: petRelocationsBanner,
+    bannerDescription:
+      "",
+    shortDescription:
+      "",
+    featureImage: petRelocationsFeatureImage,
+    featureTitle: "",
+    featureDescription:
+      "",
+    features: [
+      "",
+      "",
+      "",
+      "",
+    ],
+    metaTitle: "",
+    metaDescription: "",
+    keywords: ""
+  },
+  {
+    id: 11,
+    title: "Event and Exhibition Relocation",
+    slug: "/services/event-and-exhibition-relocation",
+    cardImage: eventandExhibitionIcon,
+    bannerImage: eventandExhibitionBanner,
+    bannerDescription:
+      "",
+    shortDescription:
+      "",
+    featureImage: eventandExhibitionFeatureImage,
+    featureTitle: "",
+    featureDescription:
+      "",
+    features: [
+      "",
+      "",
+      "",
+      "",
+    ],
+    metaTitle: "",
+    metaDescription: "",
+    keywords: ""
+  },
+  {
+    id: 12,
+    title: "Storage Solutions for Household Goods",
+    slug: "/services/storage-solutions-for-household-goods",
+    cardImage: storageSolutionsforHouseholdIcon,
+    bannerImage: storageSolutionsforHouseholdBanner,
+    bannerDescription:
+      "",
+    shortDescription:
+      "",
+    featureImage: storageSolutionsforHouseholdFeatureImage,
+    featureTitle: "",
+    featureDescription:
+      "",
+    features: [
+      "",
+      "",
+      "",
+      "",
+    ],
+    metaTitle: "",
+    metaDescription: "",
+    keywords: ""
   },
 ];
 
