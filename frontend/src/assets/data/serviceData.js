@@ -16,7 +16,6 @@ import AirfreightBanner from "../../assets/international_relocation.webp";
 import SeafrieghtBanner from "../../assets/international_relocation.webp";
 import InternationalFeatureImage from "../../assets/moving/pic2.webp";
 
-
 import storageSolutionsforHouseholdIcon from "../../assets/moving/land-relocation.webp";
 import storageSolutionsforHouseholdBanner from "../../assets/moving/pic2.webp";
 import storageSolutionsforHouseholdFeatureImage from "../../assets/moving/pic2.webp";
@@ -45,7 +44,7 @@ const serviceData = [
     cardImage: InternationalRelocationIcon,
     bannerImage: InternationalRelocationBanner,
     bannerDescription:
-      "Dubai, London, Tokyo, wherever life takes you next, we ensure you and your loved ones arrive with ease and feel at home from the very start",
+      "Expert international relocation services, ensuring a smooth and hassle-free move with comprehensive support for all your relocation needs, no matter the destination.",
     shortDescription:
       "Seamless international moving services tailored to your needs.",
     featureImage: InternationalFeatureImage,
@@ -58,9 +57,12 @@ const serviceData = [
       "Global network of trusted partners",
       "Real-time shipment tracking",
     ],
-    metaTitle: "International Relocation Services from Doha, Qatar | Almas Movers",
-    metaDescription: "Move anywhere in the world with confidence. Almas Movers International offers seamless international relocation services from Qatar with expert handling and global reach.",
-    keywords: "international relocation, moving abroad, international moving services, Qatar movers, Almas Movers, global relocation, international shipping"
+    metaTitle:
+      "International Relocation Services from Doha, Qatar | Almas Movers",
+    metaDescription:
+      "Move anywhere in the world with confidence. Almas Movers International offers seamless international relocation services from Qatar with expert handling and global reach.",
+    keywords:
+      "international relocation, moving abroad, international moving services, Qatar movers, Almas Movers, global relocation, international shipping",
   },
   {
     id: 1,
@@ -69,11 +71,11 @@ const serviceData = [
     cardImage: HouseMovingIcon,
     bannerImage: HouseMovingBanner,
     bannerDescription:
-      "Dubai, London, Tokyo, wherever life takes you next, we ensure you and your loved ones arrive with ease and feel at home from the very start",
+      "Efficient and reliable house moving services, ensuring safe packing, transport, and timely delivery of your belongings to your new home with minimal stress.",
     shortDescription:
       "Stress-free house moving services for a hassle-free experience.",
     featureImage: InternationalFeatureImage,
-    featureTitle: "",
+    featureTitle: "House Moving Made Easy",
     featureDescription:
       "Moving to a new home can be overwhelming, but our house moving services make it easy. We provide comprehensive solutions, including packing, loading, transportation, and unpacking. Our team ensures your belongings are handled with care, delivering them safely to your new home.",
     features: [
@@ -83,43 +85,23 @@ const serviceData = [
       "Affordable pricing with no hidden fees",
     ],
     metaTitle: "House Moving Services in Doha, Qatar | Safe & Affordable Moves",
-    metaDescription: "Make your home relocation easy with Almas Movers. We offer trusted house moving services in Qatar with careful packing, transport, and setup.",
-    keywords: "house moving, home relocation, Qatar movers, Almas Movers, safe moving services, affordable movers"
+    metaDescription:
+      "Make your home relocation easy with Almas Movers. We offer trusted house moving services in Qatar with careful packing, transport, and setup.",
+    keywords:
+      "house moving, home relocation, Qatar movers, Almas Movers, safe moving services, affordable movers",
   },
+
   {
     id: 2,
-    title: "Vehicle Import and Export",
-    slug: "/services/vehicle-import-and-export",
-    cardImage: VehicleMovingIcon,
-    bannerImage: VehicleMovingBanner,
-    bannerDescription:
-      "Dubai, London, Tokyo, wherever life takes you next, we ensure you and your loved ones arrive with ease and feel at home from the very start",
-    shortDescription: "Safe and reliable Vehicle Import and Export services.",
-    featureImage: InternationalFeatureImage,
-    featureTitle: "",
-    featureDescription:
-      "Your vehicle is one of your most valuable assets, and we treat it as such. Our Vehicle Import and Export services ensure your car, motorcycle, or other vehicles are transported securely to your destination. We offer both open and enclosed transport options to suit your needs.",
-    features: [
-      "Door-to-door vehicle transport",
-      "Open and enclosed carrier options",
-      "Regular updates on transport status",
-      "Fully insured transportation",
-    ],
-    metaTitle: "Vehicle Import and Export in Qatar | Ship Your Car Safely with Almas Movers",
-    metaDescription: "Move your car or vehicle anywhere, safely and on time. Almas Movers provides secure international and domestic Vehicle Import and Export services in Qatar.",
-    keywords: "Vehicle Import and Export, car shipping, Qatar vehicle movers, Almas Movers, secure car transport"
-  },
-  {
-    id: 3,
     title: "Office Relocation",
     slug: "/services/office-relocation",
     cardImage: OfficeRelocationIcon,
     bannerImage: OfficeRelocationBanner,
     bannerDescription:
-      "Dubai, London, Tokyo, wherever life takes you next, we ensure you and your loved ones arrive with ease and feel at home from the very start",
+      "Seamless office relocation services, ensuring secure packing, efficient transport, and quick setup to minimize downtime and keep your business running smoothly.",
     shortDescription: "Efficient office moving with minimal downtime.",
     featureImage: InternationalFeatureImage,
-    featureTitle: "",
+    featureTitle: "Comprehensive Office Relocation Solutions",
     featureDescription:
       "Relocating your office requires precision and efficiency to minimize disruptions. Our office relocation services are designed to get your business up and running quickly. We handle everything from packing office equipment to setting up at the new location, ensuring a seamless transition.",
     features: [
@@ -128,21 +110,24 @@ const serviceData = [
       "Furniture disassembly and reassembly",
       "Dedicated project manager for coordination",
     ],
-    metaTitle: "Office Relocation in Doha | Professional Business Moving Services",
-    metaDescription: "Relocate your office without disruption. Almas Movers offers expert office relocation in Qatar with efficient planning, packing, and reinstallation.",
-    keywords: "office relocation, business moving, Qatar office movers, Almas Movers, professional moving services"
+    metaTitle:
+      "Office Relocation in Doha | Professional Business Moving Services",
+    metaDescription:
+      "Relocate your office without disruption. Almas Movers offers expert office relocation in Qatar with efficient planning, packing, and reinstallation.",
+    keywords:
+      "office relocation, business moving, Qatar office movers, Almas Movers, professional moving services",
   },
   {
-    id: 4,
-    title: "Storage Solutions",
-    slug: "/services/storage-solutions",
+    id: 3,
+    title: "Commercial Storage Solutions",
+    slug: "/services/commercial-storage-solutions",
     cardImage: StorageIcon,
     bannerImage: StorageBanner,
     bannerDescription:
-      "Dubai, London, Tokyo, wherever life takes you next, we ensure you and your loved ones arrive with ease and feel at home from the very start",
+      "Almas Movers International offers secure, climate-controlled commercial storage in Qatar, ideal for inventory, equipment, or documents with flexible plans, 24/7 access, and professional management.",
     shortDescription: "Secure storage options for your belongings.",
     featureImage: InternationalFeatureImage,
-    featureTitle: "",
+    featureTitle: "Reliable and Cost-Effective Commercial Storage Solutions",
     featureDescription:
       "Whether you need short-term or long-term storage, our secure storage solutions provide a safe place for your belongings. Our facilities are climate-controlled and monitored 24/7, ensuring your items are protected until you're ready to retrieve them.",
     features: [
@@ -151,21 +136,24 @@ const serviceData = [
       "Flexible storage durations",
       "Easy access to your belongings",
     ],
-    metaTitle: "Storage Solutions in Doha, Qatar | Secure Short & Long-Term Storage",
-    metaDescription: "Looking for safe and flexible storage? Almas Movers offers climate-controlled storage units in Doha for homes, offices, and international clients.",
-    keywords: "storage solutions, Qatar storage, secure storage, Almas Movers, climate-controlled storage"
+    metaTitle:
+      "Storage Solutions in Doha, Qatar | Secure Short & Long-Term Storage",
+    metaDescription:
+      "Looking for safe and flexible storage? Almas Movers offers climate-controlled storage units in Doha for homes, offices, and international clients.",
+    keywords:
+      "storage solutions, Qatar storage, secure storage, Almas Movers, climate-controlled storage",
   },
   {
-    id: 5,
+    id: 4,
     title: "Insurance Coverage",
     slug: "/services/insurance-coverage",
     cardImage: InsuranceIcon,
     bannerImage: InsuranceBanner,
     bannerDescription:
-      "Dubai, London, Tokyo, wherever life takes you next, we ensure you and your loved ones arrive with ease and feel at home from the very start",
+      "Comprehensive insurance coverage for your belongings, providing peace of mind and protection during the moving process, ensuring your items are safe and secure.",
     shortDescription: "Comprehensive insurance for all your moving needs.",
     featureImage: InternationalFeatureImage,
-    featureTitle: "",
+    featureTitle: "Secure Your Belongings with Insurance Coverage",
     featureDescription:
       "Protect your belongings during the move with our comprehensive insurance coverage. We offer various insurance plans to suit your needs, ensuring peace of mind in case of unexpected events. Our team will guide you through the options to find the best coverage for your move.",
     features: [
@@ -174,21 +162,24 @@ const serviceData = [
       "Quick and hassle-free claims process",
       "Expert guidance on policy selection",
     ],
-    metaTitle: "Moving Insurance in Qatar | Protect Your Shipment with Almas Movers",
-    metaDescription: "Ensure peace of mind with our comprehensive moving insurance coverage. Almas Movers protects your belongings during transit locally and internationally.",
-    keywords: "moving insurance, Qatar moving coverage, Almas Movers, shipment protection"
+    metaTitle:
+      "Moving Insurance in Qatar | Protect Your Shipment with Almas Movers",
+    metaDescription:
+      "Ensure peace of mind with our comprehensive moving insurance coverage. Almas Movers protects your belongings during transit locally and internationally.",
+    keywords:
+      "moving insurance, Qatar moving coverage, Almas Movers, shipment protection",
   },
   {
-    id: 6,
+    id: 5,
     title: "Air Freight",
     slug: "/services/air-freight-services",
     cardImage: AirfreightIcon,
     bannerImage: AirfreightBanner,
     bannerDescription:
-      "Dubai, London, Tokyo, wherever life takes you next, we ensure you and your loved ones arrive with ease and feel at home from the very start",
+      "Almas Movers International provides fast and reliable air freight services worldwide, ensuring priority handling, customs clearance, and real-time tracking for urgent and high-value shipments.",
     shortDescription: "Fast and reliable air freight services for your cargo.",
     featureImage: InternationalFeatureImage,
-    featureTitle: "",
+    featureTitle: "Dependable and Swift Air Freight Solutions",
     featureDescription:
       "When time is of the essence, our air freight services provide a fast and reliable solution for transporting your cargo. We work with trusted airlines to ensure your goods are delivered on time, with full tracking and support throughout the process.",
     features: [
@@ -197,21 +188,24 @@ const serviceData = [
       "Full shipment tracking",
       "Customs clearance support",
     ],
-    metaTitle: "Air Freight Services in Qatar | Fast Global Shipping with Almas Movers",
-    metaDescription: "Need express delivery? Almas Movers offers reliable air freight services in Qatar with fast, secure, and worldwide cargo handling.",
-    keywords: "air freight, Qatar shipping, Almas Movers, global cargo services, express shipping"
+    metaTitle:
+      "Air Freight Services in Qatar | Fast Global Shipping with Almas Movers",
+    metaDescription:
+      "Need express delivery? Almas Movers offers reliable air freight services in Qatar with fast, secure, and worldwide cargo handling.",
+    keywords:
+      "air freight, Qatar shipping, Almas Movers, global cargo services, express shipping",
   },
   {
-    id: 7,
+    id: 6,
     title: "Sea Freight",
     slug: "/services/sea-freight-services",
     cardImage: SeafrieghtIcon,
     bannerImage: SeafrieghtBanner,
     bannerDescription:
-      "Dubai, London, Tokyo, wherever life takes you next, we ensure you and your loved ones arrive with ease and feel at home from the very start",
+      "Almas Movers International offers cost-effective and secure sea freight services for global shipments, including full container loads, customs support, and dependable port-to-door delivery solutions.",
     shortDescription: "Cost-effective and secure sea freight solutions.",
     featureImage: InternationalFeatureImage,
-    featureTitle: "",
+    featureTitle: "Efficient and Tailored Sea Freight Solutions",
     featureDescription:
       "Our sea freight services offer a cost-effective way to transport large or heavy items across the globe. We provide both full container load (FCL) and less-than-container load (LCL) options, ensuring your cargo is delivered securely and on schedule.",
     features: [
@@ -220,81 +214,92 @@ const serviceData = [
       "Global port network",
       "Transparent pricing and schedules",
     ],
-    metaTitle: "Sea Freight Shipping in Qatar | Global Ocean Cargo by Almas Movers",
-    metaDescription: "Affordable sea freight solutions for large shipments from Qatar to the world. Almas Movers ensures timely, secure, and cost-effective ocean freight services.",
-    keywords: "sea freight, Qatar shipping, Almas Movers, ocean cargo, cost-effective shipping"
+    metaTitle:
+      "Sea Freight Shipping in Qatar | Global Ocean Cargo by Almas Movers",
+    metaDescription:
+      "Affordable sea freight solutions for large shipments from Qatar to the world. Almas Movers ensures timely, secure, and cost-effective ocean freight services.",
+    keywords:
+      "sea freight, Qatar shipping, Almas Movers, ocean cargo, cost-effective shipping",
   },
-    {
-    id: 8,
+
+  {
+    id: 7,
     title: "Land Freight",
     slug: "/services/land-freight-services",
     cardImage: landFreightIcon,
     bannerImage: landFreightBanner,
-    bannerDescription:
-      "",
+    bannerDescription: "Almas Movers International delivers efficient land freight services across Qatar and the GCC, offering secure transport, route optimization, customs assistance, and real-time shipment tracking",
     shortDescription:
-      "",
+      "Efficient land freight solutions for the safe and timely delivery of your goods.",
     featureImage: landFreightFeatureImage,
-    featureTitle: "",
-    featureDescription:
-      "",
-    features: [
-      "",
-      "",
-      "",
-      "",
-    ],
+    featureTitle: "Smart Land Transport Solutions for Every Shipment",
+    featureDescription: "At Almas Movers International, we offer tailored land freight services that combine efficiency, flexibility, and safety. From scheduled deliveries to urgent shipments, our ground logistics solutions are designed to move your goods with precision. No delays, no confusion—just smooth, reliable transport you can count on.",
+    features: ["Custom transport plans for varied cargo sizes", "Compliance with all transport regulations and road laws", "Modern fleet equipped for long-distance hauls", "Constant communication and delivery status tracking"],
     metaTitle: "",
     metaDescription: "",
-    keywords: ""
+    keywords: "",
   },
+
   {
-    id: 9,
-    title: "Furniture Installation on Contract",
-    slug: "/services/furniture-installation-on-contract",
-    cardImage: furnitureInstallationIcon,
-    bannerImage: furnitureInstallationBanner,
-    bannerDescription:
-      "",
-    shortDescription:
-      "",
-    featureImage: furnitureInstallationFeatureImage,
-    featureTitle: "",
-    featureDescription:
-      "",
-    features: [
-      "",
-      "",
-      "",
-      "",
-    ],
-    metaTitle: "",
-    metaDescription: "",
-    keywords: ""
-  },
-  {
-    id: 10,
+    id: 8,
     title: "Pet Relocations",
     slug: "/services/pet-relocations",
     cardImage: petRelocationsIcon,
     bannerImage: petRelocationsBanner,
-    bannerDescription:
-      "",
+    bannerDescription: "Safe and reliable pet relocation services, ensuring a smooth and stress-free journey for your furry friends to their new home.",
     shortDescription:
-      "",
+      "Safe and reliable pet relocation services for a smooth journey for your pets.",
     featureImage: petRelocationsFeatureImage,
-    featureTitle: "",
-    featureDescription:
-      "",
-    features: [
-      "",
-      "",
-      "",
-      "",
-    ],
+    featureTitle: "Safe and Smooth Transitions for Your Pets",
+    featureDescription: "Relocating with your pets doesn’t have to be stressful. Our pet relocation services provide comprehensive solutions to ensure your pets are transported safely and comfortably to their new home. Whether you're moving locally or internationally, we handle all aspects of the journey, so your pets feel secure and cared for.",
+    features: ["Expert Handling of Pets", "Customized Travel Arrangements", "Comprehensive Health and Documentation Support", "Affordable Pricing with No Hidden Fees"],
     metaTitle: "",
     metaDescription: "",
-    keywords: ""
+    keywords: "",
+  },
+
+  {
+    id: 9,
+    title: "Vehicle Import and Export",
+    slug: "/services/vehicle-import-and-export",
+    cardImage: VehicleMovingIcon,
+    bannerImage: VehicleMovingBanner,
+    bannerDescription:
+      "Reliable vehicle import and export services, handling all logistics for safe and timely transportation of your vehicle across borders with full compliance.",
+    shortDescription: "Safe and reliable Vehicle Import and Export services.",
+    featureImage: InternationalFeatureImage,
+    featureTitle: "Secure and Timely Vehicle Import and Export",
+    featureDescription:
+      "Your vehicle is one of your most valuable assets, and we treat it as such. Our Vehicle Import and Export services ensure your car, motorcycle, or other vehicles are transported securely to your destination. We offer both open and enclosed transport options to suit your needs.",
+    features: [
+      "Door-to-door vehicle transport",
+      "Open and enclosed carrier options",
+      "Regular updates on transport status",
+      "Fully insured transportation",
+    ],
+    metaTitle:
+      "Vehicle Import and Export in Qatar | Ship Your Car Safely with Almas Movers",
+    metaDescription:
+      "Move your car or vehicle anywhere, safely and on time. Almas Movers provides secure international and domestic Vehicle Import and Export services in Qatar.",
+    keywords:
+      "Vehicle Import and Export, car shipping, Qatar vehicle movers, Almas Movers, secure car transport",
+  },
+  {
+    id: 10,
+    title: "Furniture Installation on Contract",
+    slug: "/services/furniture-installation-on-contract",
+    cardImage: furnitureInstallationIcon,
+    bannerImage: furnitureInstallationBanner,
+    bannerDescription: "Professional furniture installation on contract, offering efficient assembly and seamless setup tailored to your space’s needs.",
+    shortDescription:
+      "Expert installation on contract, ensuring perfect setup.",
+    featureImage: furnitureInstallationFeatureImage,
+    featureTitle: "Professional Setup for Your Space",
+    featureDescription: "When it comes to installing furniture, it’s essential to get it done right. Our professional furniture installation service ensures that your pieces are correctly assembled and installed, making your space functional and stylish. We offer flexible contracts to fit your needs, whether it’s for a one-time service or long-term partnership.",
+    features: ["Skilled and Experienced Installers", "Customizable Contract Terms", "Precise and Safe Installation", "Clear, Upfront Pricing"],
+    metaTitle: "",
+    metaDescription: "",
+    keywords: "",
   },
   {
     id: 11,
@@ -302,23 +307,15 @@ const serviceData = [
     slug: "/services/event-and-exhibition-relocation",
     cardImage: eventandExhibitionIcon,
     bannerImage: eventandExhibitionBanner,
-    bannerDescription:
-      "",
-    shortDescription:
-      "",
+    bannerDescription: "Expert event and exhibition relocation services, ensuring secure transport and timely setup of your displays and equipment for a successful event.",
+    shortDescription: "Ensuring safe transport and on-time setup.",
     featureImage: eventandExhibitionFeatureImage,
-    featureTitle: "",
-    featureDescription:
-      "",
-    features: [
-      "",
-      "",
-      "",
-      "",
-    ],
+    featureTitle: "Complete Event and Exhibition Relocation Services",
+    featureDescription: "We provide end-to-end event and exhibition relocation, ensuring that your equipment, displays, and materials are securely transported and professionally set up, so your event runs smoothly.",
+    features: ["Safe and secure transportation of event items", "Timely, efficient setup and breakdown", "Tailored scheduling to meet your event deadlines", "Transparent pricing with no hidden charges"],
     metaTitle: "",
     metaDescription: "",
-    keywords: ""
+    keywords: "",
   },
   {
     id: 12,
@@ -326,23 +323,15 @@ const serviceData = [
     slug: "/services/storage-solutions-for-household-goods",
     cardImage: storageSolutionsforHouseholdIcon,
     bannerImage: storageSolutionsforHouseholdBanner,
-    bannerDescription:
-      "",
-    shortDescription:
-      "",
+    bannerDescription: "Secure and flexible storage solutions for household goods, offering safe, accessible, and convenient spaces for short or long-term storage needs.",
+    shortDescription: "Flexible storage solutions for your household goods.",
     featureImage: storageSolutionsforHouseholdFeatureImage,
-    featureTitle: "",
-    featureDescription:
-      "",
-    features: [
-      "",
-      "",
-      "",
-      "",
-    ],
+    featureTitle: "Convenient and Secure Storage for Household Goods",
+    featureDescription: "Moving or decluttering? Our storage solutions for household goods provide a safe and convenient place for your items. Whether you need short-term or long-term storage, we offer flexible options tailored to your needs. Our secure facilities ensure that your belongings remain protected, giving you peace of mind.",
+    features: ["Secure and climate-controlled storage options", "Flexible rental terms to suit your needs", "24/7 access to your stored items", "Affordable pricing with no hidden fees"],
     metaTitle: "",
     metaDescription: "",
-    keywords: ""
+    keywords: "",
   },
 ];
 

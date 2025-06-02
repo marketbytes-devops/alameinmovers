@@ -31,6 +31,7 @@ const Blogs = () => {
           mainRoute="Home"
           subRoute="Blogs"
           subRoutePath="/blog"
+          smallText="Explore expert tips, industry insights, and moving guides on the Almas Movers International blog—your trusted source for relocation advice and logistics trends in Qatar."
         />
       </div>
 

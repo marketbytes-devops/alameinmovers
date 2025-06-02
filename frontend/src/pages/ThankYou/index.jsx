@@ -1,4 +1,4 @@
-import ThankYouBg from "../../assets/main/thank-you.webp";
+import ThankYouBg from "../../assets/img-5.webp";
 import { Link } from 'react-router-dom';
 
 const ThankYou = () => {

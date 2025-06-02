@@ -31,20 +31,13 @@ const AboutUs = () => {
         mainRoute="Home"
         subRoute="About Us"
         subRoutePath="/about-us"
+        smallText="Almas Movers International is a trusted Qatar-based logistics company offering professional moving, packing, and freight solutions with a commitment to reliability, safety, and customer satisfaction."
       />
 
       <section className="w-full mt-10 sm:mt-10 lg:mt-16">
         <div className="w-full container-secondary">
           <p className="text-gray-700 text-center">
-            With over a decade of trusted service, Almas Movers International,
-            headquartered in Doha, Qatar, specializes in providing a stress-free
-            international move. Our expertise in international relocation and
-            moving abroad ensures a seamless experience, combining global reach
-            with local expertise. As proud members of the International
-            Association of Movers (IAM), the British Association of Movers
-            (BAR), and the International Federation of Freight Forwarders
-            Associations (FIATA), we uphold the highest standards of
-            professionalism and commitment to excellence in relocation services.
+            With over a decade of trusted service, Almas Movers International, based in Doha, Qatar, specializes in making international moves stress-free. Our expertise in relocation ensures a seamless experience, combining global reach with local knowledge. As proud members of the International Association of Movers (IAM), the British Association of Movers (BAR), and the International Federation of Freight Forwarders Associations (FIATA), and certified as a Trusted Moving Company by IAM, we uphold the highest standards of professionalism and excellence in both local and international moving services."
           </p>
         </div>
       </section>

@@ -26,7 +26,7 @@ const Layout = () => {
 
   return (
     <>
-      <div className="">
+      <div className="fixed top-2 left-0 w-full z-50">
         <Navbar />
       </div>
       <div className="main-content mt-16">

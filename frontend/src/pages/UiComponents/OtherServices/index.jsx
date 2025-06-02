@@ -44,41 +44,41 @@ const servicesData = {
     },
     {
       image: insuranceImage,
-      title: 'Insurance',
-      description: 'Comprehensive insurance coverage for all your belongings during a move, offering peace of mind. Whether moving locally or internationally, our tailored insurance plans protect your goods throughout the process.',
+      title: 'Insurance Coverage',
+      description: 'Comprehensive insurance coverage for all your moving needs, ensuring the protection of your belongings during transit. Enjoy peace of mind knowing your items are safeguarded throughout the journey.',
       link: '/services/insurance-coverage',
     },
     {
       image: furnitureInstallationImage,
       title: 'Furniture installation on Contract',
-      description: '',
+      description: 'Professional furniture installation on contract, providing efficient assembly and seamless setup tailored to your space, ensuring a hassle-free experience and high-quality results.',
       link: '/services/furniture-installation-on-contract',
     },
     {
       image: petRelocationImage,
       title: 'Pet Relocations',
-      description: '',
+      description: 'Safe and reliable pet relocation services, ensuring a smooth and stress-free journey for your pets, with careful handling and timely transport to their new home.',
       link: '/services/pet-relocations',
     },
     {
       image: eventExhibitionImage,
       title: 'Event and Exhibition Relocation',
-      description: '',
+      description: 'Efficient event and exhibition relocation services, ensuring the secure transport, timely delivery, and professional setup of your displays and equipment for a seamless event experience.',
       link: '/services/event-and-exhibition-relocation',
     },
     {
       image: storageSolutionsHouseholdImage,
       title: 'Storage Solutions for Household Goods',
-      description: '',
+      description: 'Secure and flexible storage solutions for household goods, offering safe, accessible, and affordable spaces for short or long-term storage needs, ensuring your items are well-protected.',
       link: '/services/storage-solutions-for-household-goods',
     },
   ],
   Logistics: [
     {
       image: storageServicesImage,
-      title: 'Storage Services',
+      title: 'Commercial Storage Solutions',
       description: 'Secure, clean, and spacious storage facilities for your personal or commercial needs. Our well-equipped storage units ensure your items are safely stored and easily accessible when needed.',
-      link: '/services/storage-solutions',
+      link: '/services/commercial-storage-solutions',
     },
     {
       image: airFreightImage,
@@ -95,7 +95,7 @@ const servicesData = {
     {
       image: landFreightImage,
       title: 'Land Freight',
-      description: '',
+      description: 'Reliable land freight services, providing safe and timely transport of your goods, whether locally or internationally, with efficient and cost-effective logistics solutions.',
       link: '/services/land-freight-services',
     }
   ],

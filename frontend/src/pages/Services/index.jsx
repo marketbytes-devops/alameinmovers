@@ -34,22 +34,21 @@ const Services = () => {
       <Banner
         bannerImage={service.bannerImage}
         titleFirst={service.title}
-        mainRoute="Home"
+        mainRoute="Home" 
         smallText={service.bannerDescription}
         subRoute={service.title}
         subRoutePath={`/services/${slug}`}
         onError={() => console.log(`Failed to load banner image: ${service.title}`)}
       />
-
       <div className="container-secondary pl-4 sm:pl-8 md:pl-16 lg:pl-40 mt-8 lg:mt-16">
         <div className="mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-20">
             <div className="w-full">
               <img
                 src={service.featureImage}
-                alt={service.title}
+                alt={service.featureTitle}
                 className="w-full h-auto rounded-lg object-cover max-h-[500px]"
-                onError={() => console.log(`Failed to load feature image: ${service.title}`)}
+                onError={() => console.log(`Failed to load feature image: ${service.featureTitle}`)}
               />
             </div>
             <div className="w-full self-start">
