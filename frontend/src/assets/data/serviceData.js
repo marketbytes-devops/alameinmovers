@@ -1,20 +1,30 @@
 import InternationalRelocationIcon from "../../assets/Icon_InternationalRelocation.webp";
-import HouseMovingIcon from "../../assets/Icon_HouseMoving.webp";
-import VehicleMovingIcon from "../../assets/Icon_vechiclemoving.webp";
-import OfficeRelocationIcon from "../../assets/Icon_OfficeRelocation.webp";
-import StorageIcon from "../../assets/Icon_StorageandWarehouse.webp";
-import InsuranceIcon from "../../assets/Icon_Insurance.webp";
-import AirfreightIcon from "../../assets/Air-freight.webp";
-import SeafrieghtIcon from "../../assets/Sea-frieght.webp";
 import InternationalRelocationBanner from "../../assets/international_relocation.webp";
-import HouseMovingBanner from "../../assets/international_relocation.webp";
-import VehicleMovingBanner from "../../assets/international_relocation.webp";
-import OfficeRelocationBanner from "../../assets/international_relocation.webp";
-import StorageBanner from "../../assets/international_relocation.webp";
-import InsuranceBanner from "../../assets/international_relocation.webp";
-import AirfreightBanner from "../../assets/international_relocation.webp";
-import SeafrieghtBanner from "../../assets/international_relocation.webp";
 import InternationalFeatureImage from "../../assets/moving/pic2.webp";
+
+import HouseMovingBanner from "../../assets/international_relocation.webp";
+import HouseMovingIcon from "../../assets/Icon_HouseMoving.webp";
+
+import VehicleMovingIcon from "../../assets/Icon_vechiclemoving.webp";
+import VehicleMovingBanner from "../../assets/international_relocation.webp";
+
+import OfficeRelocationIcon from "../../assets/Icon_OfficeRelocation.webp";
+import OfficeRelocationBanner from "../../assets/international_relocation.webp";
+
+import StorageIcon from "../../assets/Icon_StorageandWarehouse.webp";
+import StorageBanner from "../../assets/international_relocation.webp";
+
+import AirfreightIcon from "../../assets/Air-freight.webp";
+import AirfreightBanner from "../../assets/international_relocation.webp";
+import AirfreightFeatureImage from "../../assets/services/air-feature.webp";
+
+import SeafrieghtBanner from "../../assets/international_relocation.webp";
+import SeafrieghtIcon from "../../assets/Sea-frieght.webp";
+import SeafrieghtFeatureImage from "../../assets/services/sea-feature.webp";
+
+import InsuranceBanner from "../../assets/services/Insurance-Banner.webp";
+import InsuranceIcon from "../../assets/Icon_Insurance.webp";
+import InsuranceFeatureImage from "../../assets/services/insurance-feature.webp";
 
 import storageSolutionsforHouseholdIcon from "../../assets/moving/land-relocation.webp";
 import storageSolutionsforHouseholdBanner from "../../assets/moving/pic2.webp";
@@ -34,7 +44,7 @@ import furnitureInstallationFeatureImage from "../../assets/moving/pic2.webp";
 
 import landFreightBanner from "../../assets/moving/pic2.webp";
 import landFreightIcon from "../../assets/moving/land-relocation.webp";
-import landFreightFeatureImage from "../../assets/moving/pic2.webp";
+import landFreightFeatureImage from "../../assets/services/land-feature.webp";
 
 const serviceData = [
   {
@@ -152,7 +162,7 @@ const serviceData = [
     bannerDescription:
       "Comprehensive insurance coverage for your belongings, providing peace of mind and protection during the moving process, ensuring your items are safe and secure.",
     shortDescription: "Comprehensive insurance for all your moving needs.",
-    featureImage: InternationalFeatureImage,
+    featureImage: InsuranceFeatureImage,
     featureTitle: "Secure Your Belongings with Insurance Coverage",
     featureDescription:
       "Protect your belongings during the move with our comprehensive insurance coverage. We offer various insurance plans to suit your needs, ensuring peace of mind in case of unexpected events. Our team will guide you through the options to find the best coverage for your move.",
@@ -178,7 +188,7 @@ const serviceData = [
     bannerDescription:
       "Almas Movers International provides fast and reliable air freight services worldwide, ensuring priority handling, customs clearance, and real-time tracking for urgent and high-value shipments.",
     shortDescription: "Fast and reliable air freight services for your cargo.",
-    featureImage: InternationalFeatureImage,
+    featureImage: AirfreightFeatureImage,
     featureTitle: "Dependable and Swift Air Freight Solutions",
     featureDescription:
       "When time is of the essence, our air freight services provide a fast and reliable solution for transporting your cargo. We work with trusted airlines to ensure your goods are delivered on time, with full tracking and support throughout the process.",
@@ -204,7 +214,7 @@ const serviceData = [
     bannerDescription:
       "Almas Movers International offers cost-effective and secure sea freight services for global shipments, including full container loads, customs support, and dependable port-to-door delivery solutions.",
     shortDescription: "Cost-effective and secure sea freight solutions.",
-    featureImage: InternationalFeatureImage,
+    featureImage: SeafrieghtFeatureImage,
     featureTitle: "Efficient and Tailored Sea Freight Solutions",
     featureDescription:
       "Our sea freight services offer a cost-effective way to transport large or heavy items across the globe. We provide both full container load (FCL) and less-than-container load (LCL) options, ensuring your cargo is delivered securely and on schedule.",

@@ -130,11 +130,10 @@ const Navbar = () => {
         transition={{ duration: 0.3, ease: "easeInOut" }}
       >
         <div
-          className={`bg-primary shadow-lg w-full flex items-center justify-between pr-4 sm:pr-6 md:pr-8 lg:pr-16 xl:pr-16 pl-4 sm:pl-6 md:pl-8 lg:pl-24 xl:pl-24 py-2 ${
-            isScrolled
+          className={`bg-primary shadow-lg w-full flex items-center justify-between pr-4 sm:pr-6 md:pr-8 lg:pr-16 xl:pr-16 pl-4 sm:pl-6 md:pl-8 lg:pl-24 xl:pl-24 py-2 ${isScrolled
               ? "rounded-t-none rounded-b-none md:rounded-b-3xl md:rounded-t-none"
               : "rounded-t-none rounded-b-none md:rounded-b-none md:rounded-t-3xl"
-          }`}
+            }`}
         >
           <div className="flex-shrink-0">
             <Link to="/">
@@ -156,11 +155,10 @@ const Navbar = () => {
                 >
                   <Link
                     to={link.to}
-                    className={`px-0 md:px-0 lg:px-2 text-base sm:text-base md:text-sm font-medium transition-colors duration-300 ${
-                      link.isActive || location.pathname === link.to
+                    className={`px-0 md:px-0 lg:px-2 text-base sm:text-base md:text-sm font-medium transition-colors duration-300 ${link.isActive || location.pathname === link.to
                         ? "text-secondary"
                         : "text-gray-50 hover:text-secondary"
-                    }`}
+                      }`}
                     aria-label={`Navigate to ${link.label}`}
                   >
                     {link.label}
@@ -181,12 +179,17 @@ const Navbar = () => {
 
           <div className="lg:hidden flex items-center justify-center space-x-4">
             <div className="relative">
-              <Button
-                label="Call to action"
-                icon="ArrowUpRight"
-                className="bg-secondary text-black rounded-2xl px-4 py-2 text-sm hover:bg-white hover:text-gray-900 transition-colors duration-300 ripple-button"
+              <button className="bg-secondary text-black rounded-2xl px-4 py-2 text-sm hover:bg-white hover:text-gray-900 transition-colors duration-300 ripple-button flex space-x-2"
                 onClick={handleCallToActionClick}
-              />
+              >
+                <span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-phone-icon lucide-phone"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384" /></svg>
+                </span>
+                <span>
+                  Talk to us
+                </span>
+              </button>
+
               <AnimatePresence>
                 {showPhoneNumber && (
                   <motion.div
@@ -279,11 +282,10 @@ const Navbar = () => {
                   >
                     <Link
                       to={link.to}
-                      className={`text-base font-medium transition-colors duration-300 rounded-md hover:bg-white/10 block px-3 py-1.5 ${
-                        link.isActive || location.pathname === link.to
+                      className={`text-base font-medium transition-colors duration-300 rounded-md hover:bg-white/10 block px-3 py-1.5 ${link.isActive || location.pathname === link.to
                           ? "text-secondary"
                           : "text-gray-50 hover:text-secondary"
-                      }`}
+                        }`}
                       onClick={() => setIsMenuOpen(false)}
                       aria-label={`Navigate to ${link.label}`}
                     >

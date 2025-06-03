@@ -8,13 +8,12 @@ from django.conf import settings
 from django.core.mail import send_mail
 import logging
 
-# Configure logging
 logger = logging.getLogger(__name__)
 
 SERVICE_TYPE_DISPLAY = {
     'localMove': 'Local Move',
     'internationalMove': 'International Move',
-    'carExport': 'Car Export',
+    'carExport': 'Car Import and Export',
     'storageServices': 'Storage Services',
     'logistics': 'Logistics',
 }
@@ -55,7 +54,6 @@ class EnquiryListCreate(generics.ListCreateAPIView):
                 status=status.HTTP_400_BAD_REQUEST
             )
 
-        # Verify reCAPTCHA
         try:
             recaptcha_response = requests.post(
                 'https://www.google.com/recaptcha/api/siteverify',
@@ -90,7 +88,6 @@ class EnquiryListCreate(generics.ListCreateAPIView):
             serializer.validated_data["serviceType"]
         )
 
-        # Send email notification
         try:
             send_mail(
                 subject=f'New Enquiry from {serializer.validated_data["fullName"]}',

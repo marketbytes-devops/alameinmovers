@@ -27,7 +27,7 @@ const  MakeAnEnquiry= () => {
   const serviceOptions = [
     { value: "localMove", label: "Local Move" },
     { value: "internationalMove", label: "International Move" },
-    { value: "carExport", label: "Car Export" },
+    { value: "carExport", label: "Car Import and Export" },
     { value: "storageServices", label: "Storage Services" },
     { value: "logistics", label: "Logistics" },
   ];

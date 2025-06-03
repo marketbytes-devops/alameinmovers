@@ -1,14 +1,7 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faFacebookF,
-  faTwitter,
-  faLinkedinIn,
-  faInstagram,
-  faYoutube,
-} from "@fortawesome/free-brands-svg-icons";
+import { ExternalLink } from "lucide-react";
 
 const Banner = ({
   bannerImage,
@@ -24,6 +17,17 @@ const Banner = ({
   showSocialIcons = false,
 }) => {
   const location = useLocation();
+
+  const handleShare = () => {
+    const currentUrl = window.location.href;
+    if (navigator.share) {
+      navigator.share({ title: document.title, url: currentUrl })
+        .then(() => console.log("Share successful"))
+        .catch(err => console.error("Share failed: ", err));
+    } else {
+      alert("Sharing is not supported on this browser.");
+    }
+  };
 
   return (
     <div className="container-primary w-full">
@@ -75,7 +79,29 @@ const Banner = ({
           }}
           animate={{ opacity: 1, y: 0 }}
         >
-          <div className="flex flex-wrap justify-center gap-2 sm:gap-3 banner-breadcrumbs text-sm sm:text-base">
+          <div className="flex md:hidden lg:hidden xl:hidden flex-wrap justify-center gap-2 sm:gap-3 banner-breadcrumbs text-xs">
+            <Link
+              to="/"
+              className="text-gray-100 hover:text-secondary transition-colors duration-300 uppercase"
+              aria-label={`Navigate to ${mainRoute}`}
+            >
+              {mainRoute}
+            </Link>
+            <span className="mx-1 text-secondary">/</span>
+            <Link
+              to={subRoutePath}
+              className={`transition-colors duration-300 uppercase ${
+                location.pathname === subRoutePath
+                  ? "text-secondary"
+                  : "text-gray-100 hover:text-secondary"
+              }`}
+              aria-label={`Navigate to ${subRoute}`}
+            >
+              {subRoute}
+            </Link>
+          </div>
+
+          <div className="hidden md:flex lg:flex xl:flex flex-wrap justify-center gap-2 sm:gap-3 banner-breadcrumbs text-sm sm:text-base">
             <Link
               to="/"
               className="text-gray-100 hover:text-secondary transition-colors duration-300 uppercase"
@@ -104,114 +130,48 @@ const Banner = ({
         >
           {author && <span>By {author}</span>}
           <div className="-ml-3 hidden lg:block">
-          {author && (date || time) && <span> | </span>}
-          {date && <span>{date}</span>}
-          {date && time && <span> | </span>}
-          {time && <span>{time}</span>}
+            {author && (date || time) && <span> | </span>}
+            {date && <span>{date}</span>}
+            {date && time && <span> | </span>}
+            {time && <span>{time}</span>}
           </div>
         </motion.div>
         <div className="absolute text-[10px] bottom-[18px] left-2 block lg:hidden">
           {date && <span>{date}</span>}
           {date && time && <span> | </span>}
           {time && <span>{time}</span>}
-          </div>
+        </div>
         {showSocialIcons && (
           <>
-          <motion.div
-            className="hidden md:flex lg:flex xl:flex absolute bottom-14 lg:bottom-4 right-2 lg:right-8 gap-4 z-20"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.6 }}
-          >
-            <a
-              href="https://facebook.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-white hover:text-secondary transition-colors duration-300"
+            <motion.div
+              className="hidden md:flex lg:flex xl:flex absolute bottom-14 lg:bottom-4 right-2 lg:right-4 gap-4 z-20"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.6 }}
             >
-              <FontAwesomeIcon icon={faFacebookF} size="md" />
-            </a>
-            <a
-              href="https://twitter.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-white hover:text-secondary transition-colors duration-300"
-            >
-              <FontAwesomeIcon icon={faTwitter} size="md" />
-            </a>
-            <a
-              href="https://linkedin.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-white hover:text-secondary transition-colors duration-300"
-            >
-              <FontAwesomeIcon icon={faLinkedinIn} size="md" />
-            </a>
-            <a
-              href="https://instagram.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-white hover:text-secondary transition-colors duration-300"
-            >
-              <FontAwesomeIcon icon={faInstagram} size="md" />
-            </a>
-            <a
-              href="https://youtube.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-white hover:text-secondary transition-colors duration-300"
-            >
-              <FontAwesomeIcon icon={faYoutube} size="md" />
-            </a>
-          </motion.div>
+              <button
+                onClick={handleShare}
+                className="text-white hover:text-secondary transition-colors duration-300"
+                aria-label="Share this page"
+              >
+                <ExternalLink size={20} />
+              </button>
+            </motion.div>
 
-          <motion.div
-            className="flex md:hidden lg:hidden xl:hidden absolute bottom-4 lg:bottom-4 right-2 lg:right-8 gap-4 z-20"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.6 }}
-          >
-            <a
-              href="https://facebook.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-white hover:text-secondary transition-colors duration-300"
+            <motion.div
+              className="flex md:hidden lg:hidden xl:hidden absolute bottom-4 lg:bottom-4 right-2 lg:right-8 gap-4 z-20"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.6 }}
             >
-              <FontAwesomeIcon icon={faFacebookF} size="xs" />
-            </a>
-            <a
-              href="https://twitter.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-white hover:text-secondary transition-colors duration-300"
-            >
-              <FontAwesomeIcon icon={faTwitter} size="xs" />
-            </a>
-            <a
-              href="https://linkedin.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-white hover:text-secondary transition-colors duration-300"
-            >
-              <FontAwesomeIcon icon={faLinkedinIn} size="xs" />
-            </a>
-            <a
-              href="https://instagram.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-white hover:text-secondary transition-colors duration-300"
-            >
-              <FontAwesomeIcon icon={faInstagram} size="xs" />
-            </a>
-            <a
-              href="https://youtube.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-white hover:text-secondary transition-colors duration-300"
-            >
-              <FontAwesomeIcon icon={faYoutube} size="xs" />
-            </a>
-          </motion.div>
+              <button
+                onClick={handleShare}
+                className="text-white hover:text-secondary transition-colors duration-300"
+                aria-label="Share this page"
+              >
+                <ExternalLink size={16} />
+              </button>
+            </motion.div>
           </>
         )}
       </div>

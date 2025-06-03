@@ -47,7 +47,7 @@ const Services = () => {
               <img
                 src={service.featureImage}
                 alt={service.featureTitle}
-                className="w-full h-auto rounded-lg object-cover max-h-[500px]"
+                className="w-full h-full rounded-lg object-cover max-h-[500px]"
                 onError={() => console.log(`Failed to load feature image: ${service.featureTitle}`)}
               />
             </div>
