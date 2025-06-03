@@ -12,7 +12,6 @@ Allow: /blog/*
 Allow: /terms-and-conditions
 Allow: /privacy-policy
 Allow: /gallery
-Allow: /thank-you
 
 # Disallow sensitive or non-public areas
 Disallow: /api/

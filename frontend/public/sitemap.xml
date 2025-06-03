@@ -67,12 +67,12 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  <url>
+  <!-- <url>
     <loc>https://www.almasintl.com/thank-you</loc>
     <lastmod>2025-05-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
-  </url>
+  </url> -->
 
   <!-- Service Pages -->
   <url>

@@ -28,7 +28,7 @@ const Banner = ({
   return (
     <div className="container-primary w-full">
       <div
-        className="relative w-full min-h-[300px] lg:min-h-[500px] bg-cover bg-center flex flex-col justify-center items-center text-center text-white px-2 sm:px-3"
+        className="relative w-full min-h-[380px] lg:min-h-[500px] bg-cover bg-center flex flex-col justify-center items-center text-center text-white px-2 sm:px-3"
         style={{
           backgroundImage: `url(${bannerImage})`,
           backgroundSize: "cover",
@@ -78,7 +78,7 @@ const Banner = ({
           <div className="flex flex-wrap justify-center gap-2 sm:gap-3 banner-breadcrumbs text-sm sm:text-base">
             <Link
               to="/"
-              className="text-gray-100 hover:text-secondary transition-colors duration-300"
+              className="text-gray-100 hover:text-secondary transition-colors duration-300 uppercase"
               aria-label={`Navigate to ${mainRoute}`}
             >
               {mainRoute}
@@ -86,7 +86,7 @@ const Banner = ({
             <span className="mx-1 text-secondary">/</span>
             <Link
               to={subRoutePath}
-              className={`transition-colors duration-300 ${
+              className={`transition-colors duration-300 uppercase ${
                 location.pathname === subRoutePath
                   ? "text-secondary"
                   : "text-gray-100 hover:text-secondary"

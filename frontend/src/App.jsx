@@ -16,7 +16,7 @@ import BlogDetail from "./pages/Blogs/BlogDetail";
 import Gallery from "./pages/Gallery";
 import Services from "./pages/Services";
 import NotFound from "./pages/NotFound"; 
-import ThankYou from "./pages/ThankYou";
+// import ThankYou from "./pages/ThankYou";
 
 const router = createBrowserRouter([
   {
@@ -38,7 +38,7 @@ const router = createBrowserRouter([
       { path: "/services/:slug", element: <Services /> },
     ],
   },
-  { path: "/thank-you", element: <ThankYou /> },
+  // { path: "/thank-you", element: <ThankYou /> },
   {
     path: "*", 
     element: <NotFound />,

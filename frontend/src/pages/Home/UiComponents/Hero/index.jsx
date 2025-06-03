@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
 import backgroundImage from "../../../../assets/img-6.webp";
 import apiClient from "../../../../api/apiClient";
 import Button from "../../../../components/Button";
 import FormField from "../../../../components/FormField";
 import Captcha from "../../../../components/Captcha";
+import ThankYouModal from "../../../../components/ThankYouModal";
 
 const Hero = () => {
   const [activeTab, setActiveTab] = useState("booking");
@@ -24,7 +24,7 @@ const Hero = () => {
   const [recaptchaToken, setRecaptchaToken] = useState("");
   const [error, setError] = useState("");
   const [trackingResult, setTrackingResult] = useState(null);
-  const navigate = useNavigate();
+  const [showThankYouModal, setShowThankYouModal] = useState(false);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -62,7 +62,7 @@ const Hero = () => {
         setError("");
         setIsExpanded(false);
         setAreFieldsEnabled(false);
-        navigate("/thank-you");
+        setShowThankYouModal(true);
       })
       .catch((error) => {
         setError("Enquiry submission failed. Please try again.");
@@ -112,6 +112,7 @@ const Hero = () => {
     { value: "storageServices", label: "Storage Services" },
     { value: "logistics", label: "Logistics" },
   ];
+
   return (
     <div className="container-primary w-full">
       <div
@@ -142,7 +143,7 @@ const Hero = () => {
             transition={{ duration: 1, delay: 0.2 }}
           >
             <div>
-              <span className="text-white">Moving In or Out of </span>
+              <span className="text-white">ISO Certified Moving Company in </span>
               <span className="text-yellow-400">Qatar? </span>
             </div>
             <div>
@@ -424,8 +425,13 @@ const Hero = () => {
           </motion.div>
         </motion.div>
       </div>
+      <ThankYouModal
+        isOpen={showThankYouModal}
+        onClose={() => setShowThankYouModal(false)}
+        from="enquiry"
+      />
     </div>
-  )
-}
+  );
+};
 
-export default Hero
+export default Hero;

@@ -3,32 +3,95 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Link, useLocation } from "react-router-dom";
 import Button from "../Button";
 import Logo from "../../assets/logo.webp";
-import ModalForm from "../ModalForm"; 
+import ModalForm from "../ModalForm";
+import serviceData from "../../assets/data/serviceData";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false); 
+  const [showPhoneNumber, setShowPhoneNumber] = useState(false);
   const location = useLocation();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+    if (showPhoneNumber) {
+      setShowPhoneNumber(false);
+    }
+  };
+
+  const handleCallToActionClick = () => {
+    setShowPhoneNumber(!showPhoneNumber);
+    if (isMenuOpen) {
+      setIsMenuOpen(false);
+    }
   };
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 100);
+      const scrollY = window.scrollY;
+      if (window.innerWidth >= 1024) {
+        setIsScrolled(scrollY > 100);
+      }
+      if (scrollY > 0) {
+        setShowPhoneNumber(false);
+        setIsMenuOpen(false);
+      }
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const getServiceType = () => {
+    const currentService = serviceData.find(
+      (service) => service.slug === location.pathname
+    );
+    if (!currentService) return null;
+
+    const moversServices = [
+      "/services/house-moving",
+      "/services/office-relocation",
+      "/services/vehicle-import-and-export",
+      "/services/international-relocation",
+      "/services/insurance-coverage",
+      "/services/furniture-installation-on-contract",
+      "/services/pet-relocations",
+      "/services/event-and-exhibition-relocation",
+      "/services/storage-solutions-for-household-goods",
+    ];
+
+    const logisticsServices = [
+      "/services/commercial-storage-solutions",
+      "/services/air-freight-services",
+      "/services/sea-freight-services",
+      "/services/land-freight-services",
+    ];
+
+    if (moversServices.includes(currentService.slug)) {
+      return "Movers";
+    } else if (logisticsServices.includes(currentService.slug)) {
+      return "Logistics";
+    }
+    return null;
+  };
+
+  const serviceType = getServiceType();
+
   const navLinks = [
     { to: "/", label: "Home" },
     { to: "/about-us", label: "About Us" },
-    { to: "/moving-services", label: "Moving" },
-    { to: "/logistics-services", label: "Logistics" },
+    {
+      to: "/moving-services",
+      label: "Moving",
+      isActive: serviceType === "Movers" || location.pathname === "/moving-services",
+    },
+    {
+      to: "/logistics-services",
+      label: "Logistics",
+      isActive:
+        serviceType === "Logistics" || location.pathname === "/logistics-services",
+    },
     { to: "/track-your-cargo", label: "Track" },
     { to: "/blog", label: "Blogs" },
     { to: "/contact-us", label: "Contact Us" },
@@ -60,17 +123,17 @@ const Navbar = () => {
   return (
     <>
       <motion.div
-        className="container-primary w-full fixed z-50"
+        className="container-primary w-full fixed z-50 top-0"
         animate={{
-          top: isScrolled ? 0 : 4, 
+          top: window.innerWidth >= 1024 && isScrolled ? 0 : window.innerWidth >= 1024 ? 10 : 0,
         }}
         transition={{ duration: 0.3, ease: "easeInOut" }}
       >
         <div
           className={`bg-primary shadow-lg w-full flex items-center justify-between pr-4 sm:pr-6 md:pr-8 lg:pr-16 xl:pr-16 pl-4 sm:pl-6 md:pl-8 lg:pl-24 xl:pl-24 py-2 ${
             isScrolled
-              ? "rounded-t-none rounded-b-3xl"
-              : "rounded-t-3xl rounded-b-none"
+              ? "rounded-t-none rounded-b-none md:rounded-b-3xl md:rounded-t-none"
+              : "rounded-t-none rounded-b-none md:rounded-b-none md:rounded-t-3xl"
           }`}
         >
           <div className="flex-shrink-0">
@@ -94,7 +157,7 @@ const Navbar = () => {
                   <Link
                     to={link.to}
                     className={`px-0 md:px-0 lg:px-2 text-base sm:text-base md:text-sm font-medium transition-colors duration-300 ${
-                      location.pathname === link.to
+                      link.isActive || location.pathname === link.to
                         ? "text-secondary"
                         : "text-gray-50 hover:text-secondary"
                     }`}
@@ -116,7 +179,34 @@ const Navbar = () => {
             />
           </div>
 
-          <div className="lg:hidden">
+          <div className="lg:hidden flex items-center justify-center space-x-4">
+            <div className="relative">
+              <Button
+                label="Call to action"
+                icon="ArrowUpRight"
+                className="bg-secondary text-black rounded-2xl px-4 py-2 text-lg hover:bg-white hover:text-gray-900 transition-colors duration-300 ripple-button"
+                onClick={handleCallToActionClick}
+              />
+              <AnimatePresence>
+                {showPhoneNumber && (
+                  <motion.div
+                    className="absolute top-full w-full mt-2 left-0 bg-white text-black rounded-lg shadow-md p-2 z-50"
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <a
+                      href="tel:+97444355663"
+                      className="text-sm font-medium text-primary hover:underline"
+                      aria-label="Call +97444355663"
+                    >
+                      +97444355663
+                    </a>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
             <button
               onClick={toggleMenu}
               className="text-gray-50 hover:text-secondary focus:outline-none focus:ring-2 focus:ring-secondary rounded-md p-2"
@@ -190,14 +280,14 @@ const Navbar = () => {
                     <Link
                       to={link.to}
                       className={`text-base font-medium transition-colors duration-300 rounded-md hover:bg-white/10 block px-3 py-1.5 ${
-                        location.pathname === link.to
+                        link.isActive || location.pathname === link.to
                           ? "text-secondary"
                           : "text-gray-50 hover:text-secondary"
                       }`}
                       onClick={() => setIsMenuOpen(false)}
                       aria-label={`Navigate to ${link.label}`}
                     >
-                      {link.label} 
+                      {link.label}
                     </Link>
                   </motion.li>
                 ))}
@@ -213,6 +303,38 @@ const Navbar = () => {
                     className="bg-secondary text-black rounded-2xl px-4 py-2 text-base hover:bg-white hover:text-gray-900 transition-colors duration-300 ripple-button"
                     onClick={() => setIsModalOpen(true)}
                   />
+                </motion.li>
+                <motion.li
+                  variants={itemVariants}
+                  initial="hidden"
+                  animate="visible"
+                  className="mt-2"
+                >
+                  <Button
+                    label="Call to action"
+                    icon="ArrowUpRight"
+                    className="bg-secondary text-black rounded-2xl px-4 py-2 text-base hover:bg-white hover:text-gray-900 transition-colors duration-300 ripple-button"
+                    onClick={handleCallToActionClick}
+                  />
+                  <AnimatePresence>
+                    {showPhoneNumber && (
+                      <motion.div
+                        className="mt-2 bg-white text-black rounded-lg shadow-md p-2"
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        <a
+                          href="tel:+97444355663"
+                          className="text-sm font-medium text-primary hover:underline"
+                          aria-label="Call +97444355663"
+                        >
+                          +97444355663
+                        </a>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </motion.li>
               </ul>
             </motion.div>

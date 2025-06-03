@@ -1,4 +1,4 @@
-import card1 from "../../assets/blogs/card13.webp";
+import card1 from "../../assets/blogs/Storage.webp";
 import card2 from "../../assets/blogs/officemoving.webp";
 import card3 from "../../assets/blogs/fam.webp";
 import card4 from "../../assets/blogs/insurance.webp";

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom"; 
 import TitleDescription from "../../../../components/TitleDescription";
 import Imagedown from "../../../../assets/getintouch.webp";
 import Imageup from "../../../../assets/getintouch2.webp";
@@ -8,6 +7,7 @@ import Button from "../../../../components/Button";
 import FormField from "../../../../components/FormField";
 import Captcha from "../../../../components/Captcha";
 import apiClient from "../../../../api/apiClient";
+import ThankYouModal from "../../../../components/ThankYouModal";
 
 const formVariants = {
   hidden: { opacity: 0, y: 30 },
@@ -39,7 +39,7 @@ const GetInTouchSection = () => {
   });
   const [recaptchaToken, setRecaptchaToken] = useState("");
   const [error, setError] = useState("");
-  const navigate = useNavigate(); 
+  const [showThankYouModal, setShowThankYouModal] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -71,7 +71,7 @@ const GetInTouchSection = () => {
         });
         setRecaptchaToken("");
         setError("");
-        navigate("/thank-you"); 
+        setShowThankYouModal(true);
       })
       .catch((error) => {
         setError("Form submission failed. Please try again.");
@@ -217,6 +217,11 @@ const GetInTouchSection = () => {
           </div>
         </div>
       </motion.div>
+      <ThankYouModal
+        isOpen={showThankYouModal}
+        onClose={() => setShowThankYouModal(false)}
+        from="enquiry"
+      />
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import rightImage from "../../../../assets/Frame9757.webp";
+import rightImage from "../../../../assets/home/home-aboutus.webp";
 import Button from "../../../../components/Button";
 import TitleDescription from "../../../../components/TitleDescription";
 import { useNavigate } from "react-router-dom";
@@ -171,7 +171,7 @@ const AboutSection = () => {
               </div>
             </div>
           </div>
-          <div className="flex-1 flex items-stretch">
+          <div className="flex-1 flex items-stretch rounded-lg shadow-lg overflow-hidden">
             <img
               src={rightImage}
               alt="Logistics and Moving"
