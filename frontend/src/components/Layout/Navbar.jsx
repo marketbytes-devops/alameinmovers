@@ -184,7 +184,7 @@ const Navbar = () => {
               <Button
                 label="Call to action"
                 icon="ArrowUpRight"
-                className="bg-secondary text-black rounded-2xl px-4 py-2 text-lg hover:bg-white hover:text-gray-900 transition-colors duration-300 ripple-button"
+                className="bg-secondary text-black rounded-2xl px-4 py-2 text-sm hover:bg-white hover:text-gray-900 transition-colors duration-300 ripple-button"
                 onClick={handleCallToActionClick}
               />
               <AnimatePresence>
@@ -310,12 +310,6 @@ const Navbar = () => {
                   animate="visible"
                   className="mt-2"
                 >
-                  <Button
-                    label="Call to action"
-                    icon="ArrowUpRight"
-                    className="bg-secondary text-black rounded-2xl px-4 py-2 text-base hover:bg-white hover:text-gray-900 transition-colors duration-300 ripple-button"
-                    onClick={handleCallToActionClick}
-                  />
                   <AnimatePresence>
                     {showPhoneNumber && (
                       <motion.div
