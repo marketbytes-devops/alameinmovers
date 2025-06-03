@@ -62,7 +62,6 @@ def send_enquiry_emails(enquiry_data):
         Message: {enquiry_data.get("message", "N/A")}
         Referer URL: {enquiry_data.get("refererUrl", "N/A")}
         Submitted URL: {enquiry_data.get("submittedUrl", "N/A")}
-        Timestamp: {enquiry_data.get("created_at", "N/A")}
         """
         
         # Send user email
