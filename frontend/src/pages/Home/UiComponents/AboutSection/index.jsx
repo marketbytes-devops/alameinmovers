@@ -171,7 +171,7 @@ const AboutSection = () => {
               </div>
             </div>
           </div>
-          <div className="flex-1 flex items-stretch rounded-lg shadow-lg overflow-hidden">
+          <div className="flex-1 flex items-stretch overflow-hidden">
             <img
               src={rightImage}
               alt="Logistics and Moving"
