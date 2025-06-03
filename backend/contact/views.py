@@ -20,51 +20,16 @@ SERVICE_TYPE_DISPLAY = {
 }
 
 def send_enquiry_emails(enquiry_data):
-    """Send emails to the user and admin regarding the enquiry with improved reliability."""
+    """Send emails to the user and admin regarding the enquiry with working BCC."""
     service_type_display = SERVICE_TYPE_DISPLAY.get(enquiry_data["serviceType"], enquiry_data["serviceType"])
     
-    # Email settings
     from_email = settings.DEFAULT_FROM_EMAIL
-    admin_recipients = [settings.CONTACT_EMAIL]
-    bcc_recipients = getattr(settings, 'BCC_CONTACT_EMAILS', [])
-    if isinstance(bcc_recipients, str):
-        bcc_recipients = [email.strip() for email in bcc_recipients.split(',') if email.strip()]
     
     try:
-        # User email
+        # 1. Send email to user
         user_subject = 'Thank You for Your Enquiry'
-        user_message = f"""
-        Hi {enquiry_data['fullName']},
-
-        Thank you for your enquiry regarding our {service_type_display} services. 
-        We have received your message and will get back to you soon.
-
-        Here's a summary of your enquiry:
-        - Service: {service_type_display}
-        - Message: {enquiry_data.get('message', 'N/A')}
-
-        If you have any urgent questions, please call us at [company phone number].
-
-        Best regards,
-        Almas Movers International
-        www.almasintl.com
-        """
+        user_message = f"""..."""  
         
-        # Admin email
-        admin_subject = f'New Enquiry: {service_type_display} from {enquiry_data["fullName"]}'
-        admin_message = f"""
-        New enquiry received:
-
-        Name: {enquiry_data["fullName"]}
-        Phone: {enquiry_data["phoneNumber"]}
-        Email: {enquiry_data["email"]}
-        Service Type: {service_type_display}
-        Message: {enquiry_data.get("message", "N/A")}
-        Referer URL: {enquiry_data.get("refererUrl", "N/A")}
-        Submitted URL: {enquiry_data.get("submittedUrl", "N/A")}
-        """
-        
-        # Send user email
         send_mail(
             subject=user_subject,
             message=user_message,
@@ -74,43 +39,34 @@ def send_enquiry_emails(enquiry_data):
         )
         logger.info(f"User enquiry email sent to {enquiry_data['email']}")
         
-        # Send admin email with HTML alternative
+        admin_subject = f'New Enquiry: {service_type_display} from {enquiry_data["fullName"]}'
+        admin_message = f"""..."""  
+        
+        bcc_recipients = []
+        if hasattr(settings, 'BCC_CONTACT_EMAILS'):
+            if isinstance(settings.BCC_CONTACT_EMAILS, str):
+                bcc_recipients = [email.strip() for email in settings.BCC_CONTACT_EMAILS.split(',') if email.strip()]
+            elif isinstance(settings.BCC_CONTACT_EMAILS, (list, tuple)):
+                bcc_recipients = list(settings.BCC_CONTACT_EMAILS)
+        
         email = EmailMultiAlternatives(
             subject=admin_subject,
             body=admin_message,
             from_email=from_email,
-            to=admin_recipients,
-            bcc=bcc_recipients,
+            to=[settings.CONTACT_EMAIL],  
+            bcc=bcc_recipients,  
             reply_to=[enquiry_data['email']],
         )
         
-        # Add HTML version for better email client compatibility
-        html_content = f"""
-        <html>
-            <body>
-                <h2>New enquiry received:</h2>
-                <p><strong>Name:</strong> {enquiry_data["fullName"]}</p>
-                <p><strong>Phone:</strong> {enquiry_data["phoneNumber"]}</p>
-                <p><strong>Email:</strong> {enquiry_data["email"]}</p>
-                <p><strong>Service Type:</strong> {service_type_display}</p>
-                <p><strong>Message:</strong> {enquiry_data.get("message", "N/A")}</p>
-                <p><strong>Referer URL:</strong> {enquiry_data.get("refererUrl", "N/A")}</p>
-                <p><strong>Submitted URL:</strong> {enquiry_data.get("submittedUrl", "N/A")}</p>
-                <p><strong>Timestamp:</strong> {enquiry_data.get("created_at", "N/A")}</p>
-            </body>
-        </html>
-        """
+        html_content = f"""..."""  
         email.attach_alternative(html_content, "text/html")
         
-        # Add any attachments if needed
-        # email.attach_file('/path/to/file.pdf')
-        
         email.send(fail_silently=False)
-        logger.info(f"Admin enquiry email sent to {admin_recipients}")
+        logger.info(f"Admin email sent to {settings.CONTACT_EMAIL} with BCC to {bcc_recipients}")
         
     except Exception as e:
         logger.error(f"Failed to send enquiry emails: {str(e)}", exc_info=True)
-        raise  # Re-raise the exception to handle it in the calling function
+        raise
 
 class EnquiryListCreate(generics.ListCreateAPIView):
     queryset = Enquiry.objects.all()
