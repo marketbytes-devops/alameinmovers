@@ -111,8 +111,8 @@ class EnquiryListCreate(generics.ListCreateAPIView):
                 """,
                 from_email=settings.DEFAULT_FROM_EMAIL,
                 recipient_list=[settings.CONTACT_EMAIL],
-                bcc=bcc_recipients, 
-                fail_silently=True,
+                bcc=bcc_recipients,
+                fail_silently=False,  
             )
             logger.info("Enquiry email sent successfully for %s", serializer.validated_data["fullName"])
         except Exception as e:
