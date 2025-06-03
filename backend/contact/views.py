@@ -23,7 +23,6 @@ def send_enquiry_emails(enquiry_data):
     service_type_display = SERVICE_TYPE_DISPLAY.get(enquiry_data["serviceType"], enquiry_data["serviceType"])
 
     try:
-        # Send email to the user
         user_subject = 'Thank You for Your Enquiry'
         user_message = f"""
         Hi {enquiry_data['fullName']},
@@ -31,7 +30,8 @@ def send_enquiry_emails(enquiry_data):
         Thank you for your enquiry. We have received your message and will get back to you soon.
 
         Best regards,
-        Your Company
+        Almas Movers International\n"
+        www.almasintl.com"
         """
         send_mail(
             subject=user_subject,
@@ -40,6 +40,7 @@ def send_enquiry_emails(enquiry_data):
             recipient_list=[enquiry_data['email']],
             fail_silently=False,
         )
+        logger.info("User enquiry email sent successfully to %s", enquiry_data['email'])
 
         bcc_recipients = getattr(settings, 'BCC_CONTACT_EMAILS', '').split(',') if hasattr(settings, 'BCC_CONTACT_EMAILS') else []
         admin_subject = f'New Enquiry from {enquiry_data["fullName"]}'
@@ -62,7 +63,7 @@ def send_enquiry_emails(enquiry_data):
             bcc=bcc_recipients,
             fail_silently=False,
         )
-        logger.info("Enquiry emails sent successfully for %s", enquiry_data["fullName"])
+        logger.info("Admin enquiry email sent successfully to %s", settings.CONTACT_EMAIL)
     except Exception as e:
         logger.error("Failed to send enquiry emails: %s", str(e))
 
