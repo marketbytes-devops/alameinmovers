@@ -7,13 +7,11 @@ import storageServicesImage from '../../../assets/logistics/storage.webp';
 import vehicleImportExportImage from '../../../assets/logistics/carshipping.webp';
 import airFreightImage from '../../../assets/logistics/Airfreight.webp';
 import seaFreightImage from '../../../assets/logistics/seafreight.webp';
-import furnitureInstallationImage from '../../../assets/moving/furniture-installation.webp';
-
-import petRelocationImage from '../../../assets/moving/furniture-installation.webp';
-import eventExhibitionImage from '../../../assets/moving/furniture-installation.webp';
-import storageSolutionsHouseholdImage from '../../../assets/moving/furniture-installation.webp';
-
-import landFreightImage from '../../../assets/moving/land-relocation.webp';
+import furnitureInstallationImage from '../../../assets/services/furniture-card.webp';
+import petRelocationImage from '../../../assets/services/pet-card.webp';
+import eventExhibitionImage from '../../../assets/services/event-exhibition.webp';
+import storageSolutionsHouseholdImage from '../../../assets/services/storage-solutions-household.webp';
+import landFreightImage from '../../../assets/services/land-freight-card.webp';
 import Button from '../../../components/Button';
 
 const servicesData = {
@@ -50,7 +48,7 @@ const servicesData = {
     },
     {
       image: furnitureInstallationImage,
-      title: 'Furniture installation on Contract',
+      title: 'Furniture Installation on Contract',
       description: 'Professional furniture installation on contract, providing efficient assembly and seamless setup tailored to your space, ensuring a hassle-free experience and high-quality results.',
       link: '/services/furniture-installation-on-contract',
     },
