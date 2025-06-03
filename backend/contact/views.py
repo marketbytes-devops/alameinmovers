@@ -18,19 +18,60 @@ SERVICE_TYPE_DISPLAY = {
     'logistics': 'Logistics',
 }
 
+def send_enquiry_emails(enquiry_data):
+    """Send emails to the user and admin regarding the enquiry."""
+    service_type_display = SERVICE_TYPE_DISPLAY.get(enquiry_data["serviceType"], enquiry_data["serviceType"])
+
+    try:
+        # Send email to the user
+        user_subject = 'Thank You for Your Enquiry'
+        user_message = f"""
+        Hi {enquiry_data['fullName']},
+
+        Thank you for your enquiry. We have received your message and will get back to you soon.
+
+        Best regards,
+        Your Company
+        """
+        send_mail(
+            subject=user_subject,
+            message=user_message,
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            recipient_list=[enquiry_data['email']],
+            fail_silently=False,
+        )
+
+        bcc_recipients = getattr(settings, 'BCC_CONTACT_EMAILS', '').split(',') if hasattr(settings, 'BCC_CONTACT_EMAILS') else []
+        admin_subject = f'New Enquiry from {enquiry_data["fullName"]}'
+        admin_message = f"""
+        New enquiry received:
+
+        Name: {enquiry_data["fullName"]}
+        Phone: {enquiry_data["phoneNumber"]}
+        Email: {enquiry_data["email"]}
+        Service Type: {service_type_display}
+        Message: {enquiry_data["message"]}
+        Referer URL: {enquiry_data["refererUrl"]}
+        Submitted URL: {enquiry_data["submittedUrl"]}
+        """
+        send_mail(
+            subject=admin_subject,
+            message=admin_message,
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            recipient_list=[settings.CONTACT_EMAIL],
+            bcc=bcc_recipients,
+            fail_silently=False,
+        )
+        logger.info("Enquiry emails sent successfully for %s", enquiry_data["fullName"])
+    except Exception as e:
+        logger.error("Failed to send enquiry emails: %s", str(e))
+
 class EnquiryListCreate(generics.ListCreateAPIView):
-    """
-    API view to list all enquiries or create a new enquiry.
-    Supports filtering by date range and searching by name, email, or service type.
-    """
     queryset = Enquiry.objects.all()
     serializer_class = EnquirySerializer
     permission_classes = [AllowAny]
 
     def get_queryset(self):
-        """
-        Filter enquiries by date range and search query if provided.
-        """
         queryset = super().get_queryset()
         start_date = self.request.query_params.get('start_date')
         end_date = self.request.query_params.get('end_date')
@@ -89,58 +130,21 @@ class EnquiryListCreate(generics.ListCreateAPIView):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
-        
-        service_type_display = SERVICE_TYPE_DISPLAY.get(
-            serializer.validated_data["serviceType"],
-            serializer.validated_data["serviceType"]
-        )
 
-        try:
-            bcc_recipients = getattr(settings, 'BCC_CONTACT_EMAILS', []).split(',') if hasattr(settings, 'BCC_CONTACT_EMAILS') else []
-            send_mail(
-                subject=f'New Enquiry from {serializer.validated_data["fullName"]}',
-                message=f"""
-                New enquiry received:
-                Name: {serializer.validated_data["fullName"]}
-                Phone: {serializer.validated_data["phoneNumber"]}
-                Email: {serializer.validated_data["email"]}
-                Service Type: {service_type_display}
-                Message: {serializer.validated_data["message"]}
-                Referer URL: {serializer.validated_data["refererUrl"]}
-                Submitted URL: {serializer.validated_data["submittedUrl"]}
-                """,
-                from_email=settings.DEFAULT_FROM_EMAIL,
-                recipient_list=[settings.CONTACT_EMAIL],
-                bcc=bcc_recipients,
-                fail_silently=False,  
-            )
-            logger.info("Enquiry email sent successfully for %s", serializer.validated_data["fullName"])
-        except Exception as e:
-            logger.error("Failed to send enquiry email: %s", str(e))
+        send_enquiry_emails(serializer.validated_data)
 
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
 class EnquiryDelete(generics.DestroyAPIView):
-    """
-    API view to delete a single enquiry by ID.
-    """
     queryset = Enquiry.objects.all()
     serializer_class = EnquirySerializer
     permission_classes = [AllowAny]
 
-
 class EnquiryDeleteAll(generics.GenericAPIView):
-    """
-    API view to delete all enquiries.
-    """
     permission_classes = [AllowAny]
 
     def delete(self, request, *args, **kwargs):
-        """
-        Delete all enquiries in the database.
-        """
         count, _ = Enquiry.objects.all().delete()
         logger.info("Deleted %d enquiries", count)
         return Response(status=status.HTTP_204_NO_CONTENT)
-    
