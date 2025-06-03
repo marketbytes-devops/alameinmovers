@@ -42,7 +42,7 @@ import furnitureInstallationBanner from "../../assets/moving/pic2.webp";
 import furnitureInstallationIcon from "../../assets/moving/furniture-installation.webp";
 import furnitureInstallationFeatureImage from "../../assets/moving/pic2.webp";
 
-import landFreightBanner from "../../assets/moving/pic2.webp";
+import landFreightBanner from "../../assets/services/land-freight-banner.webp";
 import landFreightIcon from "../../assets/moving/land-relocation.webp";
 import landFreightFeatureImage from "../../assets/services/land-feature.webp";
 
