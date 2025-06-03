@@ -29,7 +29,7 @@ def send_enquiry_emails(enquiry_data):
         # 1. Send email to user
         user_subject = 'Thank You for Your Enquiry'
         user_message = f"""
-                Hi {enquiry_data['fullName']},
+        Hi {enquiry_data['fullName']},
 
         Thank you for your enquiry regarding our {service_type_display} services. 
         We have received your message and will get back to you soon.
@@ -97,7 +97,6 @@ def send_enquiry_emails(enquiry_data):
                 <p><strong>Message:</strong> {enquiry_data.get("message", "N/A")}</p>
                 <p><strong>Referer URL:</strong> {enquiry_data.get("refererUrl", "N/A")}</p>
                 <p><strong>Submitted URL:</strong> {enquiry_data.get("submittedUrl", "N/A")}</p>
-                <p><strong>Timestamp:</strong> {enquiry_data.get("created_at", "N/A")}</p>
             </body>
         </html>
         """  
