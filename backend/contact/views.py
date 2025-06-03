@@ -28,7 +28,36 @@ def send_enquiry_emails(enquiry_data):
     try:
         # 1. Send email to user
         user_subject = 'Thank You for Your Enquiry'
-        user_message = f"""..."""  
+        user_message = f"""
+                Hi {enquiry_data['fullName']},
+
+        Thank you for your enquiry regarding our {service_type_display} services. 
+        We have received your message and will get back to you soon.
+
+        Here's a summary of your enquiry:
+        - Service: {service_type_display}
+        - Message: {enquiry_data.get('message', 'N/A')}
+
+        If you have any urgent questions, please call us at [company phone number].
+
+        Best regards,
+        Almas Movers International
+        www.almasintl.com
+        """
+        
+        # Admin email
+        admin_subject = f'New Enquiry: {service_type_display} from {enquiry_data["fullName"]}'
+        admin_message = f"""
+        New enquiry received:
+
+        Name: {enquiry_data["fullName"]}
+        Phone: {enquiry_data["phoneNumber"]}
+        Email: {enquiry_data["email"]}
+        Service Type: {service_type_display}
+        Message: {enquiry_data.get("message", "N/A")}
+        Referer URL: {enquiry_data.get("refererUrl", "N/A")}
+        Submitted URL: {enquiry_data.get("submittedUrl", "N/A")}
+        """  
         
         send_mail(
             subject=user_subject,
@@ -39,8 +68,7 @@ def send_enquiry_emails(enquiry_data):
         )
         logger.info(f"User enquiry email sent to {enquiry_data['email']}")
         
-        admin_subject = f'New Enquiry: {service_type_display} from {enquiry_data["fullName"]}'
-        admin_message = f"""..."""  
+        admin_subject = f'New Enquiry: {service_type_display} from {enquiry_data["fullName"]}' 
         
         bcc_recipients = []
         if hasattr(settings, 'BCC_CONTACT_EMAILS'):
@@ -58,7 +86,21 @@ def send_enquiry_emails(enquiry_data):
             reply_to=[enquiry_data['email']],
         )
         
-        html_content = f"""..."""  
+        html_content = f"""
+                <html>
+            <body>
+                <h2>New enquiry received:</h2>
+                <p><strong>Name:</strong> {enquiry_data["fullName"]}</p>
+                <p><strong>Phone:</strong> {enquiry_data["phoneNumber"]}</p>
+                <p><strong>Email:</strong> {enquiry_data["email"]}</p>
+                <p><strong>Service Type:</strong> {service_type_display}</p>
+                <p><strong>Message:</strong> {enquiry_data.get("message", "N/A")}</p>
+                <p><strong>Referer URL:</strong> {enquiry_data.get("refererUrl", "N/A")}</p>
+                <p><strong>Submitted URL:</strong> {enquiry_data.get("submittedUrl", "N/A")}</p>
+                <p><strong>Timestamp:</strong> {enquiry_data.get("created_at", "N/A")}</p>
+            </body>
+        </html>
+        """  
         email.attach_alternative(html_content, "text/html")
         
         email.send(fail_silently=False)
