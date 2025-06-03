@@ -21,7 +21,7 @@ SERVICE_TYPE_DISPLAY = {
 class EnquiryListCreate(generics.ListCreateAPIView):
     """
     API view to list all enquiries or create a new enquiry.
-    Supports filtering by date range.
+    Supports filtering by date range and searching by name, email, or service type.
     """
     queryset = Enquiry.objects.all()
     serializer_class = EnquirySerializer
@@ -29,23 +29,30 @@ class EnquiryListCreate(generics.ListCreateAPIView):
 
     def get_queryset(self):
         """
-        Filter enquiries by date range if provided.
+        Filter enquiries by date range and search query if provided.
         """
         queryset = super().get_queryset()
         start_date = self.request.query_params.get('start_date')
         end_date = self.request.query_params.get('end_date')
+        search_query = self.request.query_params.get('search')
+
         if start_date and end_date:
             try:
                 queryset = queryset.filter(created_at__date__range=[start_date, end_date])
             except ValueError:
                 logger.error("Invalid date format for filtering enquiries.")
                 return queryset.none()
+
+        if search_query:
+            queryset = queryset.filter(
+                models.Q(fullName__icontains=search_query) |
+                models.Q(email__icontains=search_query) |
+                models.Q(serviceType__icontains=search_query)
+            )
+
         return queryset
 
     def create(self, request, *args, **kwargs):
-        """
-        Handle enquiry form submission with reCAPTCHA verification and email notification.
-        """
         recaptcha_token = request.data.get('recaptchaToken')
         if not recaptcha_token:
             logger.warning("Missing reCAPTCHA token in enquiry submission.")
@@ -89,6 +96,7 @@ class EnquiryListCreate(generics.ListCreateAPIView):
         )
 
         try:
+            bcc_recipients = getattr(settings, 'BCC_CONTACT_EMAILS', []).split(',') if hasattr(settings, 'BCC_CONTACT_EMAILS') else []
             send_mail(
                 subject=f'New Enquiry from {serializer.validated_data["fullName"]}',
                 message=f"""
@@ -103,6 +111,7 @@ class EnquiryListCreate(generics.ListCreateAPIView):
                 """,
                 from_email=settings.DEFAULT_FROM_EMAIL,
                 recipient_list=[settings.CONTACT_EMAIL],
+                bcc=bcc_recipients, 
                 fail_silently=True,
             )
             logger.info("Enquiry email sent successfully for %s", serializer.validated_data["fullName"])
@@ -111,7 +120,6 @@ class EnquiryListCreate(generics.ListCreateAPIView):
 
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
-
 
 class EnquiryDelete(generics.DestroyAPIView):
     """
@@ -135,3 +143,4 @@ class EnquiryDeleteAll(generics.GenericAPIView):
         count, _ = Enquiry.objects.all().delete()
         logger.info("Deleted %d enquiries", count)
         return Response(status=status.HTTP_204_NO_CONTENT)
+    

@@ -1,7 +1,6 @@
 from rest_framework import serializers
 from .models import Enquiry
 
-
 class EnquirySerializer(serializers.ModelSerializer):
     """
     Serializer for the Enquiry model.

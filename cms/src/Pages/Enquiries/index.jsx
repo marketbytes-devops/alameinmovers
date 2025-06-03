@@ -60,6 +60,23 @@ const Enquiries = () => {
     fetchEnquiries();
   }, []);
 
+  const updateStatus = (id, status) => {
+    apiClient
+      .patch(`contacts/enquiries/${id}/status/`, { status })
+      .then((response) => {
+        setEnquiries(
+          enquiries.map((enquiry) =>
+            enquiry.id === id ? { ...enquiry, status: response.data.status } : enquiry
+          )
+        );
+        setError('');
+      })
+      .catch((error) => {
+        setError('Failed to update enquiry status. Please try again.');
+        console.error('Update status error:', error.response?.data || error.message);
+      });
+  };
+
   const handleFilter = (e) => {
     e.preventDefault();
     if (startDate && endDate && new Date(startDate) > new Date(endDate)) {
@@ -133,7 +150,7 @@ const Enquiries = () => {
       </div>
       {error && <p className="text-red-500 text-center mb-4">{error}</p>}
       <div className="overflow-x-auto">
-        <table className="min-w-full bg-white border border-gray-200 rounded-lg shadow-md">
+      <table className="min-w-full bg-white border border-gray-200 rounded-lg shadow-md">
           <thead className="bg-gray-100">
             <tr>
               <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700 border-b">Serial Number</th>
@@ -148,6 +165,7 @@ const Enquiries = () => {
               {showRecaptchaToken && (
                 <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700 border-b">reCAPTCHA Token</th>
               )}
+              <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700 border-b">Status</th>
               <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700 border-b">Actions</th>
             </tr>
           </thead>
@@ -155,7 +173,7 @@ const Enquiries = () => {
             {enquiries.length === 0 ? (
               <tr>
                 <td
-                  colSpan={showRecaptchaToken ? 11 : 10}
+                  colSpan={showRecaptchaToken ? 12 : 11}
                   className="px-6 py-4 text-center text-sm text-gray-600"
                 >
                   No enquiries found.
@@ -191,6 +209,17 @@ const Enquiries = () => {
                         : enquiry.recaptchaToken}
                     </td>
                   )}
+                  <td className="px-6 py-4 text-sm text-gray-600 border-b">
+                    <select
+                      value={enquiry.status}
+                      onChange={(e) => updateStatus(enquiry.id, e.target.value)}
+                      className="border rounded px-2 py-1"
+                    >
+                      <option value="new">New</option>
+                      <option value="in_progress">In Progress</option>
+                      <option value="resolved">Resolved</option>
+                    </select>
+                  </td>
                   <td className="px-6 py-4 text-sm text-gray-600 border-b">
                     <button
                       onClick={() => deleteEnquiry(enquiry.id)}
