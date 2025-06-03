@@ -144,9 +144,9 @@ const Hero = () => {
           >
             <div>
               <span className="text-white">ISO Certified Moving Company in </span>
-              <span className="text-yellow-400">Qatar? </span>
+              <span className="text-yellow-400">Qatar</span>
             </div>
-            <div>
+            <div className="text-[25px]">
               <span className="text-white">We Make Your Relocation </span>
               <span className="text-yellow-400">Easy and Safe!</span>
             </div>

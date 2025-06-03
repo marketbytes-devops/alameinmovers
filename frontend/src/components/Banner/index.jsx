@@ -34,14 +34,17 @@ const Banner = ({
       <div
         className="relative w-full min-h-[380px] lg:min-h-[500px] bg-cover bg-center flex flex-col justify-center items-center text-center text-white px-2 sm:px-3"
         style={{
-          backgroundImage: `url(${bannerImage})`,
+          backgroundImage: `
+            linear-gradient(to right, rgba(0, 0, 0, 0.4), rgba(255, 255, 255, 0)),
+            url(${bannerImage})
+          `,
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
           backgroundAttachment: "scroll",
         }}
       >
         <motion.div
-          className="relative -top-4 sm:-top-4 md:-top-0 lg:-top-0 xl:-top-0 z-20 max-w-5xl mx-auto "
+          className="relative -top-4 sm:-top-4 md:-top-0 lg:-top-0 xl:-top-0 z-20 max-w-5xl mx-auto"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1 }}

@@ -4,7 +4,6 @@ import whowearePic from "../../../../assets/about/whowearepic.webp";
 import yellowTick from "../../../../assets/about/yellowtick.svg";
 import TitleDescription from "../../../../components/TitleDescription";
 
-// JSON data for dynamic content
 const whoWeAreData = {
   title: "Who we are",
   description:
@@ -106,7 +105,7 @@ const WhoweAre = () => {
             <motion.img
               src={whoWeAreData.image.src}
               alt={whoWeAreData.image.alt}
-              className="w-full h-auto object-cover rounded-lg"
+              className="w-full h-auto object-cover rounded-3xl"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.2 }}
