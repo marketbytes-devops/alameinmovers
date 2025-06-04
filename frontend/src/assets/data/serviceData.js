@@ -1,24 +1,27 @@
 import InternationalRelocationIcon from "../../assets/Icon_InternationalRelocation.webp";
-import InternationalRelocationBanner from "../../assets/international_relocation.webp";
-import InternationalFeatureImage from "../../assets/moving/pic2.webp";
+import InternationalRelocationBanner from "../../assets/services/International-Relocation-Banner.webp";
+import InternationalFeatureImage from "../../assets/services/International-Relocation-Feature.webp";
 
-import HouseMovingBanner from "../../assets/international_relocation.webp";
+import HouseMovingBanner from "../../assets/services/House-Moving-Banner.webp";
 import HouseMovingIcon from "../../assets/Icon_HouseMoving.webp";
+import HouseMovingFeatureImage from "../../assets/moving/pic2.webp"
 
 import VehicleMovingIcon from "../../assets/Icon_vechiclemoving.webp";
-import VehicleMovingBanner from "../../assets/international_relocation.webp";
+import VehicleMovingBanner from "../../assets/services/Vehicle-Import-and-Export-Banner.webp";
+import VehicleMovingFeatureImage from "../../assets/services/Vehicle-Import-and-Export-Feature.webp"
 
 import OfficeRelocationIcon from "../../assets/Icon_OfficeRelocation.webp";
-import OfficeRelocationBanner from "../../assets/international_relocation.webp";
+import OfficeRelocationBanner from "../../assets/services/Office-Relocation-Banner.webp";
+import OfficeRelocationFeature from "../../assets/services/Office-Relocation-Feature.webp"
 
 import StorageIcon from "../../assets/Icon_StorageandWarehouse.webp";
-import StorageBanner from "../../assets/international_relocation.webp";
+import StorageBanner from "../../assets/services/Commercial-Storage-Solutions-Banner.webp";
 
 import AirfreightIcon from "../../assets/Air-freight.webp";
 import AirfreightBanner from "../../assets/services/air-freight-banner.webp";
 import AirfreightFeatureImage from "../../assets/services/air-feature.webp";
 
-import SeafrieghtBanner from "../../assets/international_relocation.webp";
+import SeafrieghtBanner from "../../assets/services/Sea-Freight-Banner.webp";
 import SeafrieghtIcon from "../../assets/Sea-frieght.webp";
 import SeafrieghtFeatureImage from "../../assets/services/sea-feature.webp";
 
@@ -28,19 +31,19 @@ import InsuranceFeatureImage from "../../assets/services/insurance-feature.webp"
 
 import storageSolutionsforHouseholdIcon from "../../assets/moving/land-relocation.webp";
 import storageSolutionsforHouseholdBanner from "../../assets/moving/pic2.webp";
-import storageSolutionsforHouseholdFeatureImage from "../../assets/moving/pic2.webp";
+import storageSolutionsforHouseholdFeatureImage from "../../assets/services/Storage-Solutions-for-Household-Goods-Feature.webp";
 
-import eventandExhibitionBanner from "../../assets/moving/pic2.webp";
+import eventandExhibitionBanner from "../../assets/services/Event-and-Exhibition-Relocation-Banner.webp";
 import eventandExhibitionIcon from "../../assets/moving/land-relocation.webp";
-import eventandExhibitionFeatureImage from "../../assets/moving/pic2.webp";
+import eventandExhibitionFeatureImage from "../../assets/services/Event-and-Exhibition-Relocation-Feature.webp";
 
-import petRelocationsBanner from "../../assets/moving/pic2.webp";
+import petRelocationsBanner from "../../assets/services/Pet-Relocations-Banner.webp";
 import petRelocationsIcon from "../../assets/moving/land-relocation.webp";
-import petRelocationsFeatureImage from "../../assets/moving/pic2.webp";
+import petRelocationsFeatureImage from "../../assets/services/Pet-Relocations-Feature.webp";
 
-import furnitureInstallationBanner from "../../assets/moving/pic2.webp";
+import furnitureInstallationBanner from "../../assets/services/Furniture-Installation-on-Contract-Banner.webp";
 import furnitureInstallationIcon from "../../assets/moving/furniture-installation.webp";
-import furnitureInstallationFeatureImage from "../../assets/moving/pic2.webp";
+import furnitureInstallationFeatureImage from "../../assets/services/Furniture-Installation-on-Contract-Feature.webp";
 
 import landFreightBanner from "../../assets/services/land-freight-banner.webp";
 import landFreightIcon from "../../assets/moving/land-relocation.webp";
@@ -84,7 +87,7 @@ const serviceData = [
       "Efficient and reliable house moving services, ensuring safe packing, transport, and timely delivery of your belongings to your new home with minimal stress.",
     shortDescription:
       "Stress-free house moving services for a hassle-free experience.",
-    featureImage: InternationalFeatureImage,
+    featureImage: HouseMovingFeatureImage,
     featureTitle: "House Moving Made Easy",
     featureDescription:
       "Moving to a new home can be overwhelming, but our house moving services make it easy. We provide comprehensive solutions, including packing, loading, transportation, and unpacking. Our team ensures your belongings are handled with care, delivering them safely to your new home.",
@@ -110,7 +113,7 @@ const serviceData = [
     bannerDescription:
       "Seamless office relocation services, ensuring secure packing, efficient transport, and quick setup to minimize downtime and keep your business running smoothly.",
     shortDescription: "Efficient office moving with minimal downtime.",
-    featureImage: InternationalFeatureImage,
+    featureImage: OfficeRelocationFeature,
     featureTitle: "Comprehensive Office Relocation Solutions",
     featureDescription:
       "Relocating your office requires precision and efficiency to minimize disruptions. Our office relocation services are designed to get your business up and running quickly. We handle everything from packing office equipment to setting up at the new location, ensuring a seamless transition.",
@@ -274,7 +277,7 @@ const serviceData = [
     bannerDescription:
       "Reliable vehicle import and export services, handling all logistics for safe and timely transportation of your vehicle across borders with full compliance.",
     shortDescription: "Safe and reliable Vehicle Import and Export services.",
-    featureImage: InternationalFeatureImage,
+    featureImage: VehicleMovingFeatureImage,
     featureTitle: "Secure and Timely Vehicle Import and Export",
     featureDescription:
       "Your vehicle is one of your most valuable assets, and we treat it as such. Our Vehicle Import and Export services ensure your car, motorcycle, or other vehicles are transported securely to your destination. We offer both open and enclosed transport options to suit your needs.",

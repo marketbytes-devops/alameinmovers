@@ -3,6 +3,7 @@ import card2 from "../../assets/blogs/officemoving.webp";
 import card3 from "../../assets/blogs/fam.webp";
 import card4 from "../../assets/blogs/insurance.webp";
 import card5 from "../../assets/blogs/stress-free-move.webp";
+
 export const data = {
   blogLists: [
     {

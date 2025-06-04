@@ -2,7 +2,6 @@ import React from "react";
 import { Helmet } from "react-helmet";
 import Banner from "../../components/Banner";
 import bannerImage from "../../assets/tracking/Banner.webp";
-import MakeanEnquiry from "../Moving/UiComponents/MakeanEnquiry";
 import Shipment from "./UiComponents/Shipment";
 import GetInTouchSection from "../Home/UiComponents/GetinTouch";
 import ContactUs from "../../pages/Home/UiComponents/ContactUs";
