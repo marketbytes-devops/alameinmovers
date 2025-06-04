@@ -15,7 +15,7 @@ import StorageIcon from "../../assets/Icon_StorageandWarehouse.webp";
 import StorageBanner from "../../assets/international_relocation.webp";
 
 import AirfreightIcon from "../../assets/Air-freight.webp";
-import AirfreightBanner from "../../assets/international_relocation.webp";
+import AirfreightBanner from "../../assets/services/air-freight-banner.webp";
 import AirfreightFeatureImage from "../../assets/services/air-feature.webp";
 
 import SeafrieghtBanner from "../../assets/international_relocation.webp";
@@ -231,7 +231,6 @@ const serviceData = [
     keywords:
       "sea freight, Qatar shipping, Almas Movers, ocean cargo, cost-effective shipping",
   },
-
   {
     id: 7,
     title: "Land Freight",
@@ -245,11 +244,10 @@ const serviceData = [
     featureTitle: "Smart Land Transport Solutions for Every Shipment",
     featureDescription: "At Almas Movers International, we offer tailored land freight services that combine efficiency, flexibility, and safety. From scheduled deliveries to urgent shipments, our ground logistics solutions are designed to move your goods with precision. No delays, no confusion—just smooth, reliable transport you can count on.",
     features: ["Custom transport plans for varied cargo sizes", "Compliance with all transport regulations and road laws", "Modern fleet equipped for long-distance hauls", "Constant communication and delivery status tracking"],
-    metaTitle: "",
-    metaDescription: "",
-    keywords: "",
+    metaTitle: "Land Freight Services in Qatar | Almas Movers International",
+    metaDescription: "Almas Movers International offers reliable land freight transportation across Qatar. Safe, timely, and cost-effective freight solutions for all cargo types.",
+    keywords: "land freight Qatar, ground transportation services, GCC freight logistics, road cargo transport, land shipping solutions, freight forwarding Qatar, logistics company Qatar, Almas Movers land transport, cross-border freight services"
   },
-
   {
     id: 8,
     title: "Pet Relocations",
@@ -263,11 +261,10 @@ const serviceData = [
     featureTitle: "Safe and Smooth Transitions for Your Pets",
     featureDescription: "Relocating with your pets doesn’t have to be stressful. Our pet relocation services provide comprehensive solutions to ensure your pets are transported safely and comfortably to their new home. Whether you're moving locally or internationally, we handle all aspects of the journey, so your pets feel secure and cared for.",
     features: ["Expert Handling of Pets", "Customized Travel Arrangements", "Comprehensive Health and Documentation Support", "Affordable Pricing with No Hidden Fees"],
-    metaTitle: "",
-    metaDescription: "",
-    keywords: "",
+    metaTitle: "Pet Relocation Services in Qatar | Safe & Trusted by Almas Movers",
+    metaDescription: "Move your pets safely and comfortably with Almas Movers International. Expert pet relocation services in Qatar with full documentation and care.",
+    keywords: "pet relocation Qatar, pet transport services, international pet relocation, moving pets safely, pet travel arrangements, pet relocation company Qatar, dog and cat transport services, pet moving services, Almas Movers pet relocation"
   },
-
   {
     id: 9,
     title: "Vehicle Import and Export",
@@ -307,9 +304,9 @@ const serviceData = [
     featureTitle: "Professional Setup for Your Space",
     featureDescription: "When it comes to installing furniture, it’s essential to get it done right. Our professional furniture installation service ensures that your pieces are correctly assembled and installed, making your space functional and stylish. We offer flexible contracts to fit your needs, whether it’s for a one-time service or long-term partnership.",
     features: ["Skilled and Experienced Installers", "Customizable Contract Terms", "Precise and Safe Installation", "Clear, Upfront Pricing"],
-    metaTitle: "",
-    metaDescription: "",
-    keywords: "",
+    metaTitle: "Contract Furniture Installation in Qatar | Almas Movers International",
+    metaDescription: "Professional furniture installation services for residential, commercial, and office projects in Qatar. Available on short or long-term contract basis.",
+    keywords: "furniture installation Qatar, contract furniture setup, office furniture assembly, residential furniture installation, commercial furniture installation, professional furniture installers, furniture assembly services Qatar, long-term furniture installation contracts, custom furniture setup Qatar"
   },
   {
     id: 11,
@@ -323,9 +320,9 @@ const serviceData = [
     featureTitle: "Complete Event and Exhibition Relocation Services",
     featureDescription: "We provide end-to-end event and exhibition relocation, ensuring that your equipment, displays, and materials are securely transported and professionally set up, so your event runs smoothly.",
     features: ["Safe and secure transportation of event items", "Timely, efficient setup and breakdown", "Tailored scheduling to meet your event deadlines", "Transparent pricing with no hidden charges"],
-    metaTitle: "",
-    metaDescription: "",
-    keywords: "",
+    metaTitle: "Event & Exhibition Relocation Services in Qatar | Almas Movers",
+    metaDescription: "Efficient relocation services for events, exhibitions, and trade shows in Qatar. Almas Movers ensures secure and timely transport for all event materials.",
+    keywords: "event relocation Qatar, exhibition relocation services, trade show transport Qatar, event logistics Qatar, exhibition setup and breakdown, secure event material transport, professional event movers, exhibition movers Qatar, Almas Movers event services"
   },
   {
     id: 12,
@@ -339,9 +336,9 @@ const serviceData = [
     featureTitle: "Convenient and Secure Storage for Household Goods",
     featureDescription: "Moving or decluttering? Our storage solutions for household goods provide a safe and convenient place for your items. Whether you need short-term or long-term storage, we offer flexible options tailored to your needs. Our secure facilities ensure that your belongings remain protected, giving you peace of mind.",
     features: ["Secure and climate-controlled storage options", "Flexible rental terms to suit your needs", "24/7 access to your stored items", "Affordable pricing with no hidden fees"],
-    metaTitle: "",
-    metaDescription: "",
-    keywords: "",
+    metaTitle: "Household Storage Solutions in Qatar | Secure & Affordable by Almas Movers",
+    metaDescription: "Secure short-term and long-term storage options for household goods in Qatar. Climate-controlled and fully protected facilities by Almas Movers.",
+    keywords: "household storage Qatar, secure storage solutions, short-term storage Qatar, long-term storage for household items, climate-controlled storage Qatar, personal storage units, home storage services, flexible storage rental Qatar, Almas Movers storage"
   },
 ];
 
