@@ -38,11 +38,9 @@ def send_enquiry_emails(enquiry_data):
         - Service: {service_type_display}
         - Message: {enquiry_data.get('message', 'N/A')}
 
-        If you have any urgent questions, please call us at [company phone number].
-
         Best regards,
         Almas Movers International
-        www.almasintl.com
+        Website: www.almasintl.com
         """
         
         # Admin email
