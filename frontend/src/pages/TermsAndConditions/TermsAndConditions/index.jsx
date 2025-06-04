@@ -17,7 +17,7 @@ const TermsAndConditions = () => {
         <link rel="canonical" href="https://www.almasmovers.com/terms-and-conditions" />
       </Helmet>
       <div className='container-secondary'>
-        <div className="w-full px-4 sm:px-4 lg:px-0 pt-4 sm:pt-4 lg:pt-16 text-gray-900">
+        <div className="w-full px-4 sm:px-4 lg:px-0 pt-4 sm:pt-4 lg:pt-8 text-gray-900">
           <div className="py-6 sm:py-8 lg:py-10 text-center -mb-4">
             <TitleDescription
               title="Terms and Conditions"
@@ -129,7 +129,7 @@ const TermsAndConditions = () => {
                 If you have any questions about these Terms and Conditions, or if you need to make any adjustments or file a claim, please contact us at:
                 <ul className="list-none pl-0 mt-2 space-y-1">
                   <li><strong>Email:</strong> <a href="mailto:movers@almasintl.com" className="text-primary hover:underline" aria-label="Email Almas Movers International">movers@almasintl.com</a></li>
-                  <li><strong>Phone:</strong> <a href="tel:+97444355663" className="text-primary hover:underline" aria-label="Call Almas Movers International at +974 4435 5663">+974 4435 5663</a> / <a href="tel:+97466404688" className="text-primary hover:underline" aria-label="Call Almas Movers International at +974 6640 4688">+974 6640 4688</a></li>
+                  <li><strong>Phone:</strong> <a href="tel:+97444355663" className="text-primary hover:underline" aria-label="Call Almas Movers International at +974 4435 5663">+974 4435 5663</a><span className='text-primary'>,</span> <a href="tel:+97466404688" className="text-primary hover:underline" aria-label="Call Almas Movers International at +974 6640 4688">+974 6640 4688</a></li>
                 </ul>
               </p>
             </section>
