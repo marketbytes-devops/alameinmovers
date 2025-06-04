@@ -19,13 +19,14 @@ const ModalForm = ({ isOpen, onClose }) => {
   const [recaptchaToken, setRecaptchaToken] = useState("");
   const [error, setError] = useState("");
   const [showThankYouModal, setShowThankYouModal] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const serviceOptions = [
     { value: "localMove", label: "Local Move" },
     { value: "internationalMove", label: "International Move" },
     { value: "carExport", label: "Car Import and Export" },
     { value: "storageServices", label: "Storage Services" },
-    { value: "logistics", label: "Logistics" },
+    { value: "logistics", label: "limitless Logistics" },
   ];
 
   const handleChange = (e) => {
@@ -39,6 +40,8 @@ const ModalForm = ({ isOpen, onClose }) => {
       setError("reCAPTCHA verification failed. Please try again.");
       return;
     }
+
+    setIsLoading(true);
 
     apiClient
       .post("contacts/enquiries/", {
@@ -58,11 +61,13 @@ const ModalForm = ({ isOpen, onClose }) => {
         });
         setRecaptchaToken("");
         setError("");
+        setIsLoading(false);
         onClose();
         setShowThankYouModal(true);
       })
       .catch((error) => {
         setError("Form submission failed. Please try again.");
+        setIsLoading(false);
         console.error("Form submission error:", error);
       });
   };
@@ -166,9 +171,10 @@ const ModalForm = ({ isOpen, onClose }) => {
                 <Captcha setRecaptchaToken={setRecaptchaToken} />
                 <div className="flex justify-center">
                   <Button
-                    label="Submit"
-                    icon="ArrowUpRight"
-                    className="w-fit bg-secondary text-black rounded-2xl px-4 py-3 text-lg hover:bg-white hover:text-gray-900 transition-colors duration-300 ripple-button"
+                    label={isLoading ? "Submitting" : "Submit"}
+                    icon={isLoading ? null : "ArrowUpRight"}
+                    className={`w-fit bg-secondary text-black rounded-2xl px-4 py-3 text-lg hover:bg-white hover:text-gray-900 transition-colors duration-300 ripple-button ${isLoading ? "opacity-75 cursor-not-allowed" : ""}`}
+                    isLoading={isLoading}
                   />
                 </div>
               </form>
