@@ -8,6 +8,7 @@ from rest_framework.response import Response
 import requests
 from .models import Enquiry
 from .serializers import EnquirySerializer
+from authapp.permissions import IsAdmin  # Import the custom permission
 
 logger = logging.getLogger(__name__)
 
@@ -66,8 +67,6 @@ def send_enquiry_emails(enquiry_data):
         )
         logger.info(f"User enquiry email sent to {enquiry_data['email']}")
         
-        admin_subject = f'New Enquiry: {service_type_display} from {enquiry_data["fullName"]}' 
-        
         bcc_recipients = []
         if hasattr(settings, 'BCC_CONTACT_EMAILS'):
             if isinstance(settings.BCC_CONTACT_EMAILS, str):
@@ -85,7 +84,7 @@ def send_enquiry_emails(enquiry_data):
         )
         
         html_content = f"""
-                <html>
+        <html>
             <body>
                 <h2>New enquiry received:</h2>
                 <p><strong>Name:</strong> {enquiry_data["fullName"]}</p>
@@ -110,7 +109,15 @@ def send_enquiry_emails(enquiry_data):
 class EnquiryListCreate(generics.ListCreateAPIView):
     queryset = Enquiry.objects.all()
     serializer_class = EnquirySerializer
-    permission_classes = [AllowAny]
+
+    def get_permissions(self):
+        """
+        Apply IsAdmin permission for GET (listing) requests,
+        AllowAny for POST (creation) requests.
+        """
+        if self.request.method == 'GET':
+            return [IsAdmin()]
+        return [AllowAny()]
 
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -157,7 +164,7 @@ class EnquiryListCreate(generics.ListCreateAPIView):
                     'secret': settings.RECAPTCHA_SECRET_KEY,
                     'response': recaptcha_token,
                 },
-                timeout=10  # Increased timeout
+                timeout=10
             )
             recaptcha_response.raise_for_status()
             recaptcha_data = recaptcha_response.json()
@@ -165,7 +172,7 @@ class EnquiryListCreate(generics.ListCreateAPIView):
             if not recaptcha_data.get('success') or recaptcha_data.get('score', 0) < 0.5:
                 logger.warning(f"reCAPTCHA verification failed: {recaptcha_data}")
                 return Response(
-                    {'error': 'reCAPTCHA verification failed. Please refresh the page.'},
+                    {'error': 'reCAPTCHA verification failed. Please try again.'},
                     status=status.HTTP_400_BAD_REQUEST
                 )
         except requests.RequestException as e:
@@ -203,7 +210,7 @@ class EnquiryListCreate(generics.ListCreateAPIView):
 class EnquiryDelete(generics.DestroyAPIView):
     queryset = Enquiry.objects.all()
     serializer_class = EnquirySerializer
-    permission_classes = [AllowAny]
+    permission_classes = [IsAdmin]  # Restrict to admin role
 
     def perform_destroy(self, instance):
         try:
@@ -214,7 +221,7 @@ class EnquiryDelete(generics.DestroyAPIView):
             raise
 
 class EnquiryDeleteAll(generics.GenericAPIView):
-    permission_classes = [AllowAny]
+    permission_classes = [IsAdmin]  # Restrict to admin role
 
     def delete(self, request, *args, **kwargs):
         try:

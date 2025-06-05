@@ -21,7 +21,8 @@ class LoginView(APIView):
                 refresh = RefreshToken.for_user(user)
                 return Response({
                     'access': str(refresh.access_token),
-                    'refresh': str(refresh)
+                    'refresh': str(refresh),
+                    'role': user.role  # Include role in response
                 }, status=status.HTTP_200_OK)
             return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
