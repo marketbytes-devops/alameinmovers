@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { createBrowserRouter, RouterProvider, useLocation, Navigate } from "react-router-dom";
 import Layout from "./Components/Layout";
 import Home from "./Pages/Home";
-import AddCustomerForm from "./Pages/AddCustomerForm";
+import AddCustomerForm from "./Pages/AddCustomer";
 import UpdateCustomer from "./Pages/UpdateCustomer";
 import AddJob from "./Pages/AddJob";
 import ManageJobs from "./Pages/ManageJobs";
