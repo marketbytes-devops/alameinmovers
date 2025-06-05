@@ -1,78 +1,59 @@
-from rest_framework import serializers
-from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from .models import CustomUser
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+from django.db import models
 from django.utils import timezone
-from datetime import timedelta
+import random
+import string
 
-class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
-    @classmethod
-    def get_token(cls, user):
-        token = super().get_token(user)
-        token['role'] = user.role
-        return token
+class CustomUserManager(BaseUserManager):
+    def create_user(self, email, password=None, role='admin', **extra_fields):
+        if not email:
+            raise ValueError('The Email field must be set')
+        email = self.normalize_email(email)
+        user = self.model(email=email, role=role, **extra_fields)
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
 
-    def validate(self, attrs):
-        data = super().validate(attrs)
-        data['role'] = self.user.role
-        return data
+    def create_superuser(self, email, password=None, **extra_fields):
+        extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('is_superuser', True)
+        extra_fields.setdefault('role', 'admin')  
 
-class LoginSerializer(CustomTokenObtainPairSerializer):
-    email = serializers.EmailField()
-    password = serializers.CharField(write_only=True)
+        if extra_fields.get('is_staff') is not True:
+            raise ValueError('Superuser must have is_staff=True.')
+        if extra_fields.get('is_superuser') is not True:
+            raise ValueError('Superuser must have is_superuser=True.')
+        if extra_fields.get('role') != 'admin':
+            raise ValueError('Superuser must have role=admin.')
 
-    def validate(self, attrs):
-        credentials = {
-            'email': attrs.get('email'),
-            'password': attrs.get('password'),
-        }
-        return super().validate(credentials)
+        return self.create_user(email, password, **extra_fields)
 
-class ForgotPasswordSerializer(serializers.Serializer):
-    email = serializers.EmailField()
+class CustomUser(AbstractBaseUser, PermissionsMixin):
+    ROLE_CHOICES = (
+        ('admin', 'Admin'),
+        ('enquiry', 'Enquiry'),
+    )
+    
+    email = models.EmailField(unique=True)
+    first_name = models.CharField(max_length=30, blank=True)
+    last_name = models.CharField(max_length=30, blank=True)
+    is_active = models.BooleanField(default=True)
+    is_staff = models.BooleanField(default=False)
+    date_joined = models.DateTimeField(default=timezone.now)
+    otp = models.CharField(max_length=6, blank=True, null=True)
+    otp_created_at = models.DateTimeField(blank=True, null=True)
+    role = models.CharField(max_length=10, choices=ROLE_CHOICES, default='admin')  
 
-    def validate_email(self, value):
-        if not CustomUser.objects.filter(email=value).exists():
-            raise serializers.ValidationError("User with this email does not exist.")
-        return value
+    objects = CustomUserManager()
 
-class OTPVerificationSerializer(serializers.Serializer):
-    email = serializers.EmailField()
-    otp = serializers.CharField(max_length=6)
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
 
-    def validate(self, data):
-        email = data.get('email')
-        otp = data.get('otp')
-        try:
-            user = CustomUser.objects.get(email=email)
-            if not user.otp or user.otp != otp:
-                raise serializers.ValidationError("Invalid or expired OTP")
-            if user.otp_created_at < timezone.now() - timedelta(minutes=10):
-                raise serializers.ValidationError("OTP has expired")
-        except CustomUser.DoesNotExist:
-            raise serializers.ValidationError("User with this email does not exist")
-        return data
+    def __str__(self):
+        return self.email
 
-class ResetPasswordSerializer(serializers.Serializer):
-    email = serializers.EmailField()
-    new_password = serializers.CharField(write_only=True)
-    confirm_new_password = serializers.CharField(write_only=True)
-
-    def validate(self, data):
-        if data['new_password'] != data['confirm_new_password']:
-            raise serializers.ValidationError("Passwords do not match")
-        if not (8 <= len(data['new_password']) <= 128):
-            raise serializers.ValidationError("Password must be between 8 and 128 characters")
-        if not any(c.isupper() for c in data['new_password']):
-            raise serializers.ValidationError("Password must contain at least one uppercase letter")
-        if not any(c.islower() for c in data['new_password']):
-            raise serializers.ValidationError("Password must contain at least one lowercase letter")
-        if not any(c.isdigit() for c in data['new_password']):
-            raise serializers.ValidationError("Password must contain at least one digit")
-        if not any(c in "!@#$%^&*()_+-=[]{}|;:,.<>?" for c in data['new_password']):
-            raise serializers.ValidationError("Password must contain at least one special character")
-        return data
-
-    def validate_email(self, value):
-        if not CustomUser.objects.filter(email=value).exists():
-            raise serializers.ValidationError("User with this email does not exist.")
-        return value
+    def generate_otp(self):
+        self.otp = ''.join(random.choices(string.digits, k=6))
+        self.otp_created_at = timezone.now()
+        self.save()
+        return self.otp
