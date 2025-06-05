@@ -1,31 +1,11 @@
 from rest_framework import serializers
-from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from .models import CustomUser
 from django.utils import timezone
 from datetime import timedelta
 
-class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
-    @classmethod
-    def get_token(cls, user):
-        token = super().get_token(user)
-        token['role'] = user.role
-        return token
-
-    def validate(self, attrs):
-        data = super().validate(attrs)
-        data['role'] = self.user.role
-        return data
-
-class LoginSerializer(CustomTokenObtainPairSerializer):
+class LoginSerializer(serializers.Serializer):
     email = serializers.EmailField()
     password = serializers.CharField(write_only=True)
-
-    def validate(self, attrs):
-        credentials = {
-            'email': attrs.get('email'),
-            'password': attrs.get('password'),
-        }
-        return super().validate(credentials)
 
 class ForgotPasswordSerializer(serializers.Serializer):
     email = serializers.EmailField()

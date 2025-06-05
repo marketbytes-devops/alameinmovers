@@ -14,34 +14,41 @@ const FormField = ({
   onChange,
   required,
   readOnly,
-  value: externalValue,
+  value,
   className,
-  isSearchable = false,
-  pattern,
-  minLength,
+  isSearchable = false, // New prop to enable search
   ...props
 }) => {
-  const [dateValue, setDateValue] = useState(externalValue ? new Date(externalValue) : null);
+  const [dateValue, setDateValue] = useState(value || null);
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState("");
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState(""); // State for search input
 
   const dropdownVariants = {
     hidden: { opacity: 0, y: -10 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.2, ease: "easeInOut" },
+      transition: {
+        duration: 0.2,
+        ease: "easeInOut",
+      },
     },
-    exit: { opacity: 0, y: -10, transition: { duration: 0.2 } },
+    exit: {
+      opacity: 0,
+      y: -10,
+      transition: {
+        duration: 0.2,
+      },
+    },
   };
 
   useEffect(() => {
-    if (type === "select" && options && externalValue) {
-      const matchingOption = options.find((option) => option.value === externalValue);
+    if (type === "select" && options && value) {
+      const matchingOption = options.find((option) => option.value === value);
       setSelectedOption(matchingOption ? matchingOption.label : placeholder || "Select");
     }
-  }, [externalValue, options, type, placeholder]);
+  }, [value, options, type, placeholder]);
 
   const handleSelect = (option) => {
     setSelectedOption(option.label);
@@ -49,31 +56,20 @@ const FormField = ({
     register(name).onChange(event);
     if (onChange) onChange(event);
     setIsOpen(false);
-    setSearchTerm("");
+    setSearchTerm(""); // Clear search term on selection
   };
 
+  // Filter options based on search term if searchable
   const filteredOptions = isSearchable
-    ? options?.filter((option) =>
+    ? options.filter((option) =>
         option.label.toLowerCase().includes(searchTerm.toLowerCase())
-      ) || []
-    : options || [];
-
-  // Build validation rules for react-hook-form
-  const validationRules = {};
-  if (required) {
-    validationRules.required = typeof required === "string" ? required : "This field is required";
-  }
-  if (pattern) {
-    validationRules.pattern = pattern;
-  }
-  if (minLength) {
-    validationRules.minLength = minLength;
-  }
+      )
+    : options;
 
   return (
     <div className={`mb-4 ${className || ""}`}>
       {label && (
-        <label htmlFor={name} className="block text-sm font-semibold text-gray-700 mb-1">
+        <label htmlFor={name} className="block text-sm font-semibold text-gray-700 mb-4">
           {label}
           {required && <span className="text-red-500 ml-1">*</span>}
         </label>
@@ -82,12 +78,13 @@ const FormField = ({
       {type === "select" ? (
         <div className="relative">
           <div
-            className="w-full p-2 border border-gray-300 rounded bg-white text-gray-800 cursor-pointer flex justify-between items-center focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full p-2 border border-gray-400 rounded bg-gray-100 text-gray-800 cursor-pointer flex justify-between items-center focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 mt-4"
             onClick={() => setIsOpen(!isOpen)}
           >
             <span>{selectedOption || placeholder || "Select"}</span>
             <span className="text-gray-600">▼</span>
           </div>
+
           <AnimatePresence>
             {isOpen && (
               <motion.div
@@ -95,7 +92,7 @@ const FormField = ({
                 initial="hidden"
                 animate="visible"
                 exit="exit"
-                className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded shadow-lg max-h-60 overflow-y-auto"
+                className="absolute z-10 w-full mt-1 bg-white border border-gray-400 rounded shadow-lg max-h-60 overflow-y-auto"
               >
                 {isSearchable && (
                   <div className="p-2">
@@ -104,8 +101,8 @@ const FormField = ({
                       value={searchTerm}
                       onChange={(e) => setSearchTerm(e.target.value)}
                       placeholder="Search..."
-                      className="w-full p-2 border border-gray-300 rounded text-gray-800 focus:border-blue-500 focus:outline-none"
-                      onClick={(e) => e.stopPropagation()}
+                      className="w-full p-2 border border-gray-300 rounded text-gray-800 focus:border-indigo-500 focus:outline-none"
+                      onClick={(e) => e.stopPropagation()} // Prevent dropdown from closing
                     />
                   </div>
                 )}
@@ -117,7 +114,7 @@ const FormField = ({
                       className="p-2 cursor-pointer text-gray-800"
                       onClick={() => handleSelect(option)}
                     >
-                      {option.label}
+                      {option.label || option}
                     </motion.div>
                   ))
                 ) : (
@@ -132,33 +129,26 @@ const FormField = ({
           selected={dateValue}
           onChange={(date) => {
             setDateValue(date);
-            const formattedDate =
-              type === "datetime-local"
-                ? date?.toISOString()
-                : date?.toISOString().split("T")[0];
-            const event = { target: { name, value: formattedDate } };
-            register(name).onChange(event);
-            if (onChange) onChange(event);
+            const formattedDate = date?.toISOString().split("T")[0];
+            if (onChange) onChange(formattedDate);
+            register(name).onChange({ target: { name, value: formattedDate } });
           }}
           showTimeSelect={type === "datetime-local"}
           dateFormat={type === "datetime-local" ? "yyyy-MM-dd HH:mm" : "yyyy-MM-dd"}
           placeholderText={placeholder || "Select date"}
-          className="w-full p-2 border border-gray-300 rounded bg-white text-gray-800 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:text-gray-400"
-          required={typeof required === "string" ? !!required : required}
+          className="w-full p-2 border border-gray-400 rounded bg-gray-100 text-gray-800 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 placeholder:text-gray-400"
+          required={required}
         />
       ) : type === "radio" ? (
         <div className="flex space-x-4">
-          {options?.map((option) => (
+          {options.map((option) => (
             <label key={option.value} className="flex items-center">
               <input
                 type="radio"
-                {...register(name, validationRules)}
+                {...register(name, { required: required && "This field is required" })}
                 value={option.value}
-                onChange={(e) => {
-                  register(name).onChange(e);
-                  if (onChange) onChange(e);
-                }}
-                className="mr-2 text-blue-500 focus:ring-blue-500"
+                onChange={onChange}
+                className="mr-2"
               />
               {option.label}
             </label>
@@ -169,13 +159,11 @@ const FormField = ({
           id={name}
           type={type}
           placeholder={placeholder || `Enter ${label?.toLowerCase() || "value"}`}
-          {...register(name, validationRules)}
-          onChange={(e) => {
-            register(name).onChange(e);
-            if (onChange) onChange(e);
-          }}
-          className="w-full p-2 border border-gray-300 rounded bg-white text-gray-800 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-200 placeholder:text-gray-400"
+          {...register(name, { required: required && "This field is required" })}
+          onChange={onChange}
+          className="w-full p-2 border border-gray-400 rounded bg-gray-100 text-gray-800 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 disabled:bg-gray-200"
           readOnly={readOnly}
+          value={value}
           {...props}
         />
       )}

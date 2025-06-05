@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate, useLocation } from "react-router-dom";
 import apiClient from "../../api/apiClient";
@@ -6,16 +6,12 @@ import FormField from "../../Components/FormField";
 import AlmasImage from "../../assets/Almas.webp";
 
 const OTPVerification = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm({
-    defaultValues: { email: "", otp: "" },
-  });
+  const { register, handleSubmit, formState: { errors } } = useForm();
   const navigate = useNavigate();
   const location = useLocation();
   const email = location.state?.email || "";
-  const [isLoading, setIsLoading] = useState(false);
 
   const onSubmit = async (data) => {
-    setIsLoading(true);
     try {
       const response = await apiClient.post("/auth/otp-verification/", {
         email: email || data.email,
@@ -25,9 +21,7 @@ const OTPVerification = () => {
       navigate("/reset-password", { state: { email: email || data.email } });
     } catch (error) {
       console.error("OTP verification failed:", error);
-      alert(error.response?.data?.error || "Invalid or expired OTP. Please try again.");
-    } finally {
-      setIsLoading(false);
+      alert(error.response?.data?.error || "Invalid or expired OTP");
     }
   };
 
@@ -37,7 +31,9 @@ const OTPVerification = () => {
         <div
           className="hidden md:block w-1/2 bg-cover bg-center"
           style={{ backgroundImage: `url(${AlmasImage})` }}
-        ></div>
+        >
+        </div>
+
         <div className="w-full md:w-1/2 p-8 bg-white">
           <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">Verify OTP</h2>
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
@@ -48,11 +44,7 @@ const OTPVerification = () => {
                 type="email"
                 placeholder="Enter your email..."
                 register={register}
-                required="Email is required"
-                pattern={{
-                  value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                  message: "Invalid email format",
-                }}
+                required={true}
                 error={errors.email}
               />
             )}
@@ -62,19 +54,14 @@ const OTPVerification = () => {
               type="text"
               placeholder="Enter the OTP..."
               register={register}
-              required="OTP is required"
-              pattern={{
-                value: /^\d{6}$/,
-                message: "OTP must be 6 digits",
-              }}
+              required={true}
               error={errors.otp}
             />
             <button
               type="submit"
-              className="w-full bg-black text-white py-2 rounded-md hover:bg-gray-800 transition-colors duration-300 disabled:opacity-50"
-              disabled={isLoading}
+              className="w-full bg-black text-white py-2 rounded-md hover:bg-gray-800 transition-colors duration-300"
             >
-              {isLoading ? "Verifying..." : "Verify OTP"}
+              Verify OTP
             </button>
           </form>
         </div>

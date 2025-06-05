@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import * as React from "react";
 import { createBrowserRouter, RouterProvider, useLocation, Navigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 import Layout from "./Components/Layout";
 import Home from "./Pages/Home";
-import AddCustomerForm from "./Pages/AddCustomer"; 
+import AddCustomerForm from "./Pages/AddCustomer";
 import UpdateCustomer from "./Pages/UpdateCustomer";
 import AddJob from "./Pages/AddJob";
 import ManageJobs from "./Pages/ManageJobs";
@@ -15,20 +16,14 @@ import apiClient from "./api/apiClient";
 import ManageCustomers from "./Pages/ManageCustomers";
 import UpdateJob from "./Pages/UpdateJobs";
 
-const PrivateRoute = ({ element, allowedRoles = ['admin'] }) => {
+const PrivateRoute = ({ element }) => {
   const location = useLocation();
   const [isAuthenticated, setIsAuthenticated] = useState(null);
-  const [userRole, setUserRole] = useState(null);
 
   useEffect(() => {
     const token = localStorage.getItem("access_token") || sessionStorage.getItem("access_token");
-    const role = localStorage.getItem("user_role");
-    if (token && role && ['admin', 'enquiry'].includes(role)) { 
-      setUserRole(role);
-      setIsAuthenticated(true);
-    } else {
-      setIsAuthenticated(false);
-    }
+    console.log("PrivateRoute checking token:", !!token); 
+    setIsAuthenticated(!!token);
   }, []);
 
   if (isAuthenticated === null) {
@@ -39,35 +34,28 @@ const PrivateRoute = ({ element, allowedRoles = ['admin'] }) => {
     );
   }
 
-  if (!isAuthenticated) {
-    return <Navigate to="/login" state={{ from: location }} replace />;
-  }
-
-  if (!allowedRoles.includes(userRole)) {
-    return <Navigate to="/home" replace />;
-  }
-
-  return element;
+  return isAuthenticated ? element : <Navigate to="/login" state={{ from: location }} replace />;
 };
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userRole, setUserRole] = useState(null);
+  const [currentPath, setCurrentPath] = useState("/");
 
   useEffect(() => {
     const accessToken = localStorage.getItem("access_token");
-    const role = localStorage.getItem("user_role");
-    setIsLoggedIn(!!accessToken && ['admin', 'enquiry'].includes(role));
-    setUserRole(['admin', 'enquiry'].includes(role) ? role : null);
+    const savedPath = localStorage.getItem("currentPath");
+    console.log("App init, token:", !!accessToken, "savedPath:", savedPath); 
+    setIsLoggedIn(!!accessToken);
+    if (savedPath) {
+      setCurrentPath(savedPath);
+    }
   }, []);
 
-  const handleLogin = (accessToken, refreshToken, role) => {
-    console.log("Storing tokens and role:", { accessToken, refreshToken, role });
+  const handleLogin = (accessToken, refreshToken) => {
+    console.log("Storing tokens:", { accessToken, refreshToken }); 
     localStorage.setItem("access_token", accessToken);
     localStorage.setItem("refresh_token", refreshToken);
-    localStorage.setItem("user_role", role);
     setIsLoggedIn(true);
-    setUserRole(role);
   };
 
   const handleLogout = () => {
@@ -76,25 +64,21 @@ function App() {
         refresh: localStorage.getItem("refresh_token") || sessionStorage.getItem("refresh_token"),
       })
       .then(() => {
-        console.log("Logout successful");
+        console.log("Logout successful"); 
         localStorage.removeItem("access_token");
         localStorage.removeItem("refresh_token");
-        localStorage.removeItem("user_role");
         sessionStorage.removeItem("access_token");
         sessionStorage.removeItem("refresh_token");
         setIsLoggedIn(false);
-        setUserRole(null);
         window.location.href = "/login";
       })
       .catch((error) => {
-        console.error("Logout error:", error);
+        console.error("Logout error:", error); 
         localStorage.removeItem("access_token");
         localStorage.removeItem("refresh_token");
-        localStorage.removeItem("user_role");
         sessionStorage.removeItem("access_token");
         sessionStorage.removeItem("refresh_token");
         setIsLoggedIn(false);
-        setUserRole(null);
         window.location.href = "/login";
       });
   };
@@ -102,17 +86,17 @@ function App() {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <Layout onLogout={handleLogout} />, 
+      element: <Layout />,
       children: [
-        { path: "/", element: <PrivateRoute element={<Home />} allowedRoles={["admin", "enquiry"]} /> },
-        { path: "/home", element: <PrivateRoute element={<Home />} allowedRoles={["admin", "enquiry"]} /> },
-        { path: "/add-customer-form", element: <PrivateRoute element={<AddCustomerForm />} allowedRoles={["admin"]} /> },
-        { path: "/update-customer/:id", element: <PrivateRoute element={<UpdateCustomer />} allowedRoles={["admin"]} /> },
-        { path: "/add-job", element: <PrivateRoute element={<AddJob />} allowedRoles={["admin"]} /> },
-        { path: "/manage-jobs", element: <PrivateRoute element={<ManageJobs />} allowedRoles={["admin"]} /> },
-        { path: "/manage-customers", element: <PrivateRoute element={<ManageCustomers />} allowedRoles={["admin"]} /> },
-        { path: "/update-job/:id", element: <PrivateRoute element={<UpdateJob />} allowedRoles={["admin"]} /> },
-        { path: "/enquiries", element: <PrivateRoute element={<Enquiries />} allowedRoles={["enquiry", "admin"]} /> },
+        { path: "/", element: <PrivateRoute element={<Home />} /> },
+        { path: "/home", element: <PrivateRoute element={<Home />} /> },
+        { path: "/add-customer-form", element: <PrivateRoute element={<AddCustomerForm />} /> },
+        { path: "/update-customer/:id", element: <PrivateRoute element={<UpdateCustomer />} /> },
+        { path: "/add-job", element: <PrivateRoute element={<AddJob />} /> },
+        { path: "/manage-jobs", element: <PrivateRoute element={<ManageJobs />} /> },
+        { path: "/manage-customers", element: <PrivateRoute element={<ManageCustomers />} /> },
+        { path: "/update-job/:id", element: <PrivateRoute element={<UpdateJob />} /> }, 
+        { path: "/enquiries", element: <PrivateRoute element={<Enquiries />} /> },
       ],
     },
     {
