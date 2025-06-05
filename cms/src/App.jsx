@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { createBrowserRouter, RouterProvider, useLocation, Navigate } from "react-router-dom";
 import Layout from "./Components/Layout";
 import Home from "./Pages/Home";
-import AddCustomerForm from "./Pages/AddCustomer";
+import AddCustomerForm from "./Pages/AddCustomer"; 
 import UpdateCustomer from "./Pages/UpdateCustomer";
 import AddJob from "./Pages/AddJob";
 import ManageJobs from "./Pages/ManageJobs";
@@ -23,7 +23,7 @@ const PrivateRoute = ({ element, allowedRoles = ['admin'] }) => {
   useEffect(() => {
     const token = localStorage.getItem("access_token") || sessionStorage.getItem("access_token");
     const role = localStorage.getItem("user_role");
-    if (token && role) {
+    if (token && role && ['admin', 'enquiry'].includes(role)) { 
       setUserRole(role);
       setIsAuthenticated(true);
     } else {
@@ -52,19 +52,13 @@ const PrivateRoute = ({ element, allowedRoles = ['admin'] }) => {
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [currentPath, setCurrentPath] = useState("/");
   const [userRole, setUserRole] = useState(null);
 
   useEffect(() => {
     const accessToken = localStorage.getItem("access_token");
-    const savedPath = localStorage.getItem("currentPath");
     const role = localStorage.getItem("user_role");
-    console.log("App init, token:", !!accessToken, "savedPath:", savedPath, "role:", role);
-    setIsLoggedIn(!!accessToken);
-    setUserRole(role);
-    if (savedPath) {
-      setCurrentPath(savedPath);
-    }
+    setIsLoggedIn(!!accessToken && ['admin', 'enquiry'].includes(role));
+    setUserRole(['admin', 'enquiry'].includes(role) ? role : null);
   }, []);
 
   const handleLogin = (accessToken, refreshToken, role) => {
@@ -108,7 +102,7 @@ function App() {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <Layout />,
+      element: <Layout onLogout={handleLogout} />, 
       children: [
         { path: "/", element: <PrivateRoute element={<Home />} allowedRoles={["admin", "enquiry"]} /> },
         { path: "/home", element: <PrivateRoute element={<Home />} allowedRoles={["admin", "enquiry"]} /> },

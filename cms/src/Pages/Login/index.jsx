@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate, Link, useLocation } from "react-router-dom";
 import apiClient from "../../api/apiClient";
@@ -6,11 +6,15 @@ import FormField from "../../Components/FormField";
 import AlmasImage from "../../assets/Almas.webp";
 
 const Login = ({ onLogin }) => {
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { register, handleSubmit, formState: { errors } } = useForm({
+    defaultValues: { email: "", password: "" },
+  });
   const navigate = useNavigate();
   const location = useLocation();
+  const [isLoading, setIsLoading] = useState(false);
 
   const onSubmit = async (data) => {
+    setIsLoading(true);
     try {
       console.log("Sending login request:", data);
       const response = await apiClient.post("/auth/login/", {
@@ -19,15 +23,15 @@ const Login = ({ onLogin }) => {
       });
       console.log("Login response:", response);
       const { access, refresh, role } = response.data;
-      if (!access || !refresh || !role) {
-        throw new Error("Response missing access, refresh token, or role");
+      if (!access || !refresh || !['admin', 'enquiry'].includes(role)) {
+        throw new Error("Invalid response data");
       }
       if (typeof onLogin !== "function") {
         throw new Error("onLogin is not a function");
       }
       console.log("Calling onLogin with tokens and role:", { access, refresh, role });
       onLogin(access, refresh, role);
-      const from = location.state?.from?.pathname || "/";
+      const from = location.state?.from?.pathname || "/home";
       console.log("Navigating to:", from);
       navigate(from, { replace: true });
     } catch (error) {
@@ -36,7 +40,9 @@ const Login = ({ onLogin }) => {
         response: error.response?.data,
         status: error.response?.status,
       });
-      alert(error.response?.data?.error || error.message || "Login failed. Please check your credentials.");
+      alert(error.response?.data?.error || "Invalid email or password. Please try again.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -56,7 +62,11 @@ const Login = ({ onLogin }) => {
               type="email"
               placeholder="Enter your email..."
               register={register}
-              required={true}
+              required="Email is required"
+              pattern={{
+                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                message: "Invalid email format",
+              }}
               error={errors.email}
             />
             <FormField
@@ -65,7 +75,11 @@ const Login = ({ onLogin }) => {
               type="password"
               placeholder="Enter your password..."
               register={register}
-              required={true}
+              required="Password is required"
+              minLength={{
+                value: 6,
+                message: "Password must be at least 6 characters",
+              }}
               error={errors.password}
             />
             <div className="text-right">
@@ -75,9 +89,10 @@ const Login = ({ onLogin }) => {
             </div>
             <button
               type="submit"
-              className="w-full bg-black text-white py-2 rounded-md hover:bg-gray-800 transition-colors duration-300"
+              className="w-full bg-black text-white py-2 rounded-md hover:bg-gray-800 transition-colors duration-300 disabled:opacity-50"
+              disabled={isLoading}
             >
-              Login
+              {isLoading ? "Logging in..." : "Login"}
             </button>
           </form>
         </div>

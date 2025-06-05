@@ -6,7 +6,7 @@ const Home = () => {
 
   useEffect(() => {
     const role = localStorage.getItem("user_role");
-    setUserRole(role);
+    setUserRole(['admin', 'enquiry'].includes(role) ? role : null);
   }, []);
 
   const cardStyle = {
@@ -23,6 +23,7 @@ const Home = () => {
     justifyContent: "center",
     alignItems: "center",
     color: "white",
+    backgroundColor: "#003087", 
   };
 
   const cardContainerStyle = {
@@ -35,6 +36,14 @@ const Home = () => {
     marginTop: "50px",
     maxWidth: "1200px",
   };
+
+  if (!userRole) {
+    return (
+      <div className="h-screen flex items-center justify-center bg-gray-50">
+        <p className="text-red-500">Invalid session. Please log in again.</p>
+      </div>
+    );
+  }
 
   return (
     <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
