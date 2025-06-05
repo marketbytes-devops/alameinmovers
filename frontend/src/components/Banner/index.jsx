@@ -35,7 +35,7 @@ const Banner = ({
         className="relative w-full min-h-[380px] lg:min-h-[500px] bg-cover bg-center flex flex-col justify-center items-center text-center text-white px-2 sm:px-3"
         style={{
           backgroundImage: `
-            linear-gradient(to right, rgba(0, 0, 0, 0.4), rgba(255, 255, 255, 0)),
+            linear-gradient(to right, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.3)),
             url(${bannerImage})
           `,
           backgroundSize: "cover",

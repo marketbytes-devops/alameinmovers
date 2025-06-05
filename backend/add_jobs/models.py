@@ -33,7 +33,7 @@ class Job(models.Model):
     def save(self, *args, **kwargs):
         if not self.tracking_id:
             while True:
-                tracking_id = 'allm' + ''.join(random.choices(string.digits, k=6))
+                tracking_id = 'AMI' + ''.join(random.choices(string.digits, k=6))
                 if not Job.objects.filter(tracking_id=tracking_id).exists():
                     self.tracking_id = tracking_id
                     break
@@ -47,7 +47,7 @@ class Job(models.Model):
     def save(self, *args, **kwargs):
         if not self.tracking_id:
             while True:
-                tracking_id = 'allm' + ''.join(random.choices(string.digits, k=6))
+                tracking_id = 'AMI' + ''.join(random.choices(string.digits, k=6))
                 if not Job.objects.filter(tracking_id=tracking_id).exists():
                     self.tracking_id = tracking_id
                     break

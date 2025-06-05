@@ -165,7 +165,7 @@ class EnquiryListCreate(generics.ListCreateAPIView):
             if not recaptcha_data.get('success') or recaptcha_data.get('score', 0) < 0.5:
                 logger.warning(f"reCAPTCHA verification failed: {recaptcha_data}")
                 return Response(
-                    {'error': 'reCAPTCHA verification failed. Please try again.'},
+                    {'error': 'reCAPTCHA verification failed. Please refresh the page.'},
                     status=status.HTTP_400_BAD_REQUEST
                 )
         except requests.RequestException as e:

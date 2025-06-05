@@ -60,6 +60,9 @@ const Hero = () => {
     };
     let hasError = false;
 
+    // Email format regex
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
     if (!recaptchaToken) {
       newErrors.recaptcha = "Please complete the reCAPTCHA verification.";
       hasError = true;
@@ -81,6 +84,9 @@ const Hero = () => {
       if (!formData.email) {
         newErrors.email = "Please enter your email address.";
         hasError = true;
+      } else if (!emailRegex.test(formData.email)) {
+        newErrors.email = "Please enter a valid email address.";
+        hasError = true;
       }
       if (!formData.message) {
         newErrors.message = "Please enter a message.";
@@ -101,7 +107,7 @@ const Hero = () => {
     setIsLoading(true);
 
     apiClient
-      .post("contacts/enquiries/", {
+      .post("clients/enquiries/", {
         ...formData,
         recaptchaToken,
       })
@@ -212,31 +218,31 @@ const Hero = () => {
   return (
     <div className="container-primary w-full">
       <div
-        className="relative w-full min-h-[500px] sm:min-h-[600px] md:min-h-[700px] bg-cover bg-center flex flex-col justify-center items-center text-center text-white mx-0 px-0 sm:px-6 md:px-8 rounded-b-3xl rounded-t-none"
+        className="relative w-full min-h-[500px] sm:min-h-[600px] md:min-h-[600px] bg-cover bg-center flex items-center text-center text-white py-12 sm:p-0"
         style={{
           backgroundImage: `url(${backgroundImage})`,
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
-          backgroundAttachment: "scroll",
+          backgroundPosition: "center bottom",
         }}
       >
         <div
-          className="absolute inset-0 rounded-b-3xl rounded-t-none"
+          className="absolute inset-0 rounded-b-2xl"
           style={{
-            backgroundImage: `linear-gradient(to bottom right, rgba(76, 112, 133, 0.8), rgba(0,0,0, 0.3))`,
+            backgroundImage: `linear-gradient(to bottom right, rgba(76, 112, 133, 0.8), rgba(0,0,0, 0.4))`,
           }}
         ></div>
         <motion.div
-          className="relative z-10 w-full max-w-5xl mx-auto pt-12 sm:pt-16 md:pt-20"
+          className="relative z-4 w-full max-w-5xl mx-auto px-4 sm:px-6"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1 }}
         >
           <motion.h1
-            className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 space-y-4 sm:space-y-5 px-4 sm:px-0"
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.2 }}
+            className="text-3xl sm:text-4xl font-bold mb-6 space-y-5 px-4 sm:px-10"
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 10 }}
+            transition={{ duration: 1, ease: "easeOut" }}
           >
             <div>
               <span className="text-white">ISO Certified Moving Company in </span>
@@ -246,7 +252,7 @@ const Hero = () => {
               <span className="text-white">We Make Your Relocation </span>
               <span className="text-yellow-400">Easy and Safe!</span>
             </div>
-            <div className="text-gray-100 font-normal text-base sm:text-lg md:text-xl">
+            <div className="text-gray-100 font-normal text-base sm:text-lg">
               Qatar’s Most Trusted Experts in Local & International Relocation,<br />
               Delivering Seamless and Reliable Moving Solutions.
             </div>
