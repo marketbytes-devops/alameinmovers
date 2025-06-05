@@ -17,7 +17,7 @@ class CustomUserManager(BaseUserManager):
     def create_superuser(self, email, password=None, **extra_fields):
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
-        extra_fields.setdefault('role', 'admin')  
+        extra_fields.setdefault('role', 'superadmin')  
 
         if extra_fields.get('is_staff') is not True:
             raise ValueError('Superuser must have is_staff=True.')
@@ -28,8 +28,9 @@ class CustomUserManager(BaseUserManager):
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     ROLE_CHOICES = (
-        ('user', 'User'),  
-        ('admin', 'Admin'),  
+        ('user', 'User'),
+        ('admin', 'Admin'),
+        ('superadmin', 'Superadmin'), 
     )
     email = models.EmailField(unique=True)
     first_name = models.CharField(max_length=30, blank=True)

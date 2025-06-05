@@ -16,6 +16,7 @@ import OfficeRelocationFeature from "../../assets/services/Office-Relocation-Fea
 
 import StorageIcon from "../../assets/Icon_StorageandWarehouse.webp";
 import StorageBanner from "../../assets/services/Commercial-Storage-Solutions-Banner.webp";
+import StorageFeatureImage from "../../assets/services/Commercial-Storage-Feature.webp";
 
 import AirfreightIcon from "../../assets/Air-freight.webp";
 import AirfreightBanner from "../../assets/services/air-freight-banner.webp";
@@ -139,7 +140,7 @@ const serviceData = [
     bannerDescription:
       "Almas Movers International offers secure, climate-controlled commercial storage in Qatar, ideal for inventory, equipment, or documents with flexible plans, 24/7 access, and professional management.",
     shortDescription: "Secure storage options for your belongings.",
-    featureImage: InternationalFeatureImage,
+    featureImage: StorageFeatureImage,
     featureTitle: "Reliable and Cost-Effective Commercial Storage Solutions",
     featureDescription:
       "Whether you need short-term or long-term storage, our secure storage solutions provide a safe place for your belongings. Our facilities are climate-controlled and monitored 24/7, ensuring your items are protected until you're ready to retrieve them.",

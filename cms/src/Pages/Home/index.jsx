@@ -34,7 +34,7 @@ const Home = () => {
   return (
     <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
       <div style={cardContainerStyle}>
-        {userRole === "user" && (
+        {(userRole === "user" || userRole === "superadmin") && (
           <>
             <Link to="/add-job" style={{ textDecoration: "none" }}>
               <div style={cardStyle} className="bg-primary font-extrabold">
@@ -58,7 +58,7 @@ const Home = () => {
             </Link>
           </>
         )}
-        {userRole === "admin" && (
+        {(userRole === "admin" || userRole === "superadmin") && (
           <Link to="/enquiries" style={{ textDecoration: "none" }}>
             <div style={cardStyle} className="bg-primary font-extrabold">
               <h3>Enquiries</h3>

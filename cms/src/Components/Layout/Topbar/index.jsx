@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import apiClient from '../../../api/apiClient';
-import { FaHome, FaChevronDown, FaPowerOff, FaBars, FaTimes } from 'react-icons/fa';
+import { FaChevronDown, FaPowerOff, FaBars, FaTimes } from 'react-icons/fa';
 
 const Topbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -188,7 +188,7 @@ const Topbar = () => {
           </div>
 
           <div className="bg-secondary text-black font-semibold hidden md:flex flex-1 justify-center space-x-10 py-[13px]">
-            {userRole === 'user' && (
+            {(userRole === 'user' || userRole === 'superadmin') && (
               <>
                 <div className="relative">
                   <button
@@ -262,7 +262,7 @@ const Topbar = () => {
                 </div>
               </>
             )}
-            {userRole === 'admin' && (
+            {(userRole === 'admin' || userRole === 'superadmin') && (
               <Link
                 to="/enquiries"
                 className={`flex items-center transition-colors duration-200 text-md ${
@@ -297,7 +297,7 @@ const Topbar = () => {
 
         {isMenuOpen && (
           <div className="md:hidden bg-secondary text-black font-semibold">
-            {userRole === 'user' && (
+            {(userRole === 'user' || userRole === 'superadmin') && (
               <>
                 <button
                   onClick={toggleCustomersDropdown}
@@ -313,9 +313,9 @@ const Topbar = () => {
                   <div>
                     <Link
                       to="/add-customer-form"
-                      className={(`block px-4 py-2 pl-8 hover:bg-gray-100 ${
+                      className={`block px-4 py-2 pl-8 hover:bg-gray-100 ${
                         isActive('/add-customer-form') ? 'bg-gray-200 font-bold' : ''
-                      }`)}
+                      }`}
                       onClick={toggleMenu}
                     >
                       Add Customer
@@ -365,7 +365,7 @@ const Topbar = () => {
                 )}
               </>
             )}
-            {userRole === 'admin' && (
+            {(userRole === 'admin' || userRole === 'superadmin') && (
               <Link
                 to="/enquiries"
                 className={`block px-4 py-2 hover:bg-gray-100 ${
