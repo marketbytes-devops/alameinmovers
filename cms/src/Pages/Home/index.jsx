@@ -53,6 +53,11 @@ const Home = () => {
             <h3>Manage Customers</h3>
           </div>
         </Link>
+        <Link to="/enquiries" style={{ textDecoration: 'none' }}>
+          <div style={cardStyle} className="bg-primary font-extrabold">
+            <h3>Enquiries</h3>
+          </div>
+        </Link>
       </div>
     </div>
   );
