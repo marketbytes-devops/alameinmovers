@@ -1,6 +1,5 @@
 from django.db import models
 
-
 class Enquiry(models.Model):
     """
     Model to store enquiry form submissions.

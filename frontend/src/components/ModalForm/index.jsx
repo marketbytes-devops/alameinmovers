@@ -17,7 +17,14 @@ const ModalForm = ({ isOpen, onClose }) => {
     submittedUrl: window.location.href,
   });
   const [recaptchaToken, setRecaptchaToken] = useState("");
-  const [error, setError] = useState("");
+  const [errors, setErrors] = useState({
+    fullName: "",
+    phoneNumber: "",
+    email: "",
+    serviceType: "",
+    message: "",
+    recaptcha: "",
+  });
   const [showThankYouModal, setShowThankYouModal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -32,12 +39,52 @@ const ModalForm = ({ isOpen, onClose }) => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+    // Clear error for the field when user starts typing
+    setErrors((prev) => ({
+      ...prev,
+      [name]: "",
+    }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    let newErrors = {
+      fullName: "",
+      phoneNumber: "",
+      email: "",
+      serviceType: "",
+      message: "",
+      recaptcha: "",
+    };
+    let hasError = false;
+
+    if (!formData.fullName) {
+      newErrors.fullName = "Please enter your full name.";
+      hasError = true;
+    }
+    if (!formData.phoneNumber) {
+      newErrors.phoneNumber = "Please enter your phone number.";
+      hasError = true;
+    }
+    if (!formData.email) {
+      newErrors.email = "Please enter your email address.";
+      hasError = true;
+    }
+    if (!formData.serviceType) {
+      newErrors.serviceType = "Please select a service type.";
+      hasError = true;
+    }
+    if (!formData.message) {
+      newErrors.message = "Please enter a message.";
+      hasError = true;
+    }
     if (!recaptchaToken) {
-      setError("reCAPTCHA verification failed. Please try again.");
+      newErrors.recaptcha = "Please complete the reCAPTCHA verification.";
+      hasError = true;
+    }
+
+    if (hasError) {
+      setErrors(newErrors);
       return;
     }
 
@@ -60,13 +107,25 @@ const ModalForm = ({ isOpen, onClose }) => {
           submittedUrl: window.location.href,
         });
         setRecaptchaToken("");
-        setError("");
+        setErrors({
+          fullName: "",
+          phoneNumber: "",
+          email: "",
+          serviceType: "",
+          message: "",
+          recaptcha: "",
+        });
         setIsLoading(false);
         onClose();
         setShowThankYouModal(true);
       })
       .catch((error) => {
-        setError("Form submission failed. Please try again.");
+        const errorMessage =
+          error.response?.data?.error || "Form submission failed. Please try again.";
+        setErrors((prev) => ({
+          ...prev,
+          recaptcha: errorMessage,
+        }));
         setIsLoading(false);
         console.error("Form submission error:", error);
       });
@@ -125,7 +184,6 @@ const ModalForm = ({ isOpen, onClose }) => {
                 </svg>
               </button>
               <h2 className="text-2xl text-center mb-6">Moving Soon? Let's Talk</h2>
-              {error && <p className="text-red-500 text-center mb-4">{error}</p>}
               <form onSubmit={handleSubmit} className="space-y-4">
                 <FormField
                   type="text"
@@ -133,7 +191,7 @@ const ModalForm = ({ isOpen, onClose }) => {
                   value={formData.fullName}
                   onChange={handleChange}
                   placeholder="Name"
-                  required
+                  error={errors.fullName}
                 />
                 <FormField
                   type="number"
@@ -141,7 +199,7 @@ const ModalForm = ({ isOpen, onClose }) => {
                   value={formData.phoneNumber}
                   onChange={handleChange}
                   placeholder="Phone number"
-                  required
+                  error={errors.phoneNumber}
                 />
                 <FormField
                   type="email"
@@ -149,7 +207,7 @@ const ModalForm = ({ isOpen, onClose }) => {
                   value={formData.email}
                   onChange={handleChange}
                   placeholder="Email"
-                  required
+                  error={errors.email}
                 />
                 <FormField
                   type="select"
@@ -158,7 +216,7 @@ const ModalForm = ({ isOpen, onClose }) => {
                   onChange={handleChange}
                   options={serviceOptions}
                   placeholder="Service type"
-                  required
+                  error={errors.serviceType}
                 />
                 <FormField
                   type="textarea"
@@ -166,9 +224,14 @@ const ModalForm = ({ isOpen, onClose }) => {
                   value={formData.message}
                   onChange={handleChange}
                   placeholder="Message"
-                  required
+                  error={errors.message}
                 />
-                <Captcha setRecaptchaToken={setRecaptchaToken} />
+                <div>
+                  <Captcha setRecaptchaToken={setRecaptchaToken} />
+                  {errors.recaptcha && (
+                    <p className="text-red-500 text-xs mt-1">{errors.recaptcha}</p>
+                  )}
+                </div>
                 <div className="flex justify-center">
                   <Button
                     label={isLoading ? "Submitting" : "Submit"}

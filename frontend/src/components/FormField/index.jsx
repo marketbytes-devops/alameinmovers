@@ -2,16 +2,17 @@ import React, { useState, useEffect, useRef } from "react";
 import Icons from "../../components/Icons";
 import PropTypes from "prop-types";
 
-const FormField = ({ type, name, placeholder, value, onChange, onClick, options, required, disabled }) => {
+const FormField = ({ type, name, placeholder, value, onChange, onClick, options, disabled, error }) => {
   const containerStyles = `
     w-full
   `;
 
   const wrapperStyles = `
-    flex items-center w-full px-4 py-3 border border-gray-300 rounded-lg
+    flex items-center w-full px-4 py-3 border rounded-lg
     bg-white text-gray-500 gap-3 placeholder-gray-400 placeholder:text-sm placeholder:font-normal
     transition-all duration-200
     ${disabled ? 'opacity-50 cursor-not-allowed' : ''}
+    ${error ? 'border-red-500' : 'border-gray-300'}
   `;
 
   const inputStyles = `
@@ -143,32 +144,35 @@ const FormField = ({ type, name, placeholder, value, onChange, onClick, options,
                   ))}
                 </div>
               )}
-              {isOpen && type === "select" && (
-                <div className="mt-4">
-                </div>
-              )}
             </div>
           );
         };
-        return <CustomDropdown />;
+        return (
+          <div>
+            <CustomDropdown />
+            {error && <p className="text-red-500 text-xs text-left mt-1">{error}</p>}
+          </div>
+        );
       default:
         return (
-          <div className={wrapperStyles}>
-            {renderIcon()}
-            <input
-              type={type}
-              name={name}
-              placeholder={placeholder}
-              value={value}
-              onChange={onChange}
-              onClick={onClick}
-              onKeyDown={handleKeyDown} 
-              className={inputStyles}
-              required={required}
-              disabled={disabled}
-              pattern={name === "phoneNumber" ? "[0-9]*" : undefined}
-              inputMode={name === "phoneNumber" ? "numeric" : undefined}
-            />
+          <div>
+            <div className={wrapperStyles}>
+              {renderIcon()}
+              <input
+                type={type}
+                name={name}
+                placeholder={placeholder}
+                value={value}
+                onChange={onChange}
+                onClick={onClick}
+                onKeyDown={handleKeyDown}
+                className={inputStyles}
+                disabled={disabled}
+                pattern={name === "phoneNumber" ? "[0-9]*" : undefined}
+                inputMode={name === "phoneNumber" ? "numeric" : undefined}
+              />
+            </div>
+            {error && <p className="text-red-500 text-xs text-left mt-1">{error}</p>}
           </div>
         );
     }
@@ -190,8 +194,8 @@ FormField.propTypes = {
       label: PropTypes.string,
     })
   ),
-  required: PropTypes.bool,
   disabled: PropTypes.bool,
+  error: PropTypes.string,
 };
 
 FormField.defaultProps = {
@@ -200,8 +204,8 @@ FormField.defaultProps = {
   onChange: () => {},
   onClick: () => {},
   options: [],
-  required: false,
   disabled: false,
+  error: "",
 };
 
 export default FormField;

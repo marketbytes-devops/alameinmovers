@@ -38,20 +38,69 @@ const GetInTouchSection = () => {
     submittedUrl: window.location.href,
   });
   const [recaptchaToken, setRecaptchaToken] = useState("");
-  const [error, setError] = useState("");
+  const [errors, setErrors] = useState({
+    fullName: "",
+    phoneNumber: "",
+    email: "",
+    serviceType: "",
+    message: "",
+    recaptcha: "",
+  });
   const [showThankYouModal, setShowThankYouModal] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+    setErrors((prev) => ({
+      ...prev,
+      [name]: "",
+    }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    let newErrors = {
+      fullName: "",
+      phoneNumber: "",
+      email: "",
+      serviceType: "",
+      message: "",
+      recaptcha: "",
+    };
+    let hasError = false;
+
+    if (!formData.fullName) {
+      newErrors.fullName = "Please enter your full name.";
+      hasError = true;
+    }
+    if (!formData.phoneNumber) {
+      newErrors.phoneNumber = "Please enter your phone number.";
+      hasError = true;
+    }
+    if (!formData.email) {
+      newErrors.email = "Please enter your email address.";
+      hasError = true;
+    }
+    if (!formData.serviceType) {
+      newErrors.serviceType = "Please select a service type.";
+      hasError = true;
+    }
+    if (!formData.message) {
+      newErrors.message = "Please enter a message.";
+      hasError = true;
+    }
     if (!recaptchaToken) {
-      setError("reCAPTCHA verification failed. Please try again.");
+      newErrors.recaptcha = "Please complete the reCAPTCHA verification.";
+      hasError = true;
+    }
+
+    if (hasError) {
+      setErrors(newErrors);
       return;
     }
+
+    setIsLoading(true);
 
     apiClient
       .post("contacts/enquiries/", {
@@ -70,11 +119,25 @@ const GetInTouchSection = () => {
           submittedUrl: window.location.href,
         });
         setRecaptchaToken("");
-        setError("");
+        setErrors({
+          fullName: "",
+          phoneNumber: "",
+          email: "",
+          serviceType: "",
+          message: "",
+          recaptcha: "",
+        });
         setShowThankYouModal(true);
+        setIsLoading(false);
       })
       .catch((error) => {
-        setError("Form submission failed. Please try again.");
+        const errorMessage =
+          error.response?.data?.error || "Form submission failed. Please try again.";
+        setErrors((prev) => ({
+          ...prev,
+          recaptcha: errorMessage,
+        }));
+        setIsLoading(false);
         console.error("Form submission error:", error);
       });
   };
@@ -102,7 +165,6 @@ const GetInTouchSection = () => {
           titleClass="text-3xl sm:text-4xl text-black py-2 mt-4"
           descriptionClass="text-base sm:text-lg text-gray-600 mt-4 mb-6"
         />
-        {error && <p className="text-red-500 text-center mb-4">{error}</p>}
         <form onSubmit={handleSubmit} className="space-y-4">
           <FormField
             type="text"
@@ -110,7 +172,7 @@ const GetInTouchSection = () => {
             value={formData.fullName}
             onChange={handleChange}
             placeholder="Name"
-            required
+            error={errors.fullName}
             style={{ fontFamily: '"Poppins", sans-serif' }}
             className="w-full text-sm sm:text-base"
           />
@@ -120,7 +182,7 @@ const GetInTouchSection = () => {
             value={formData.phoneNumber}
             onChange={handleChange}
             placeholder="Phone number"
-            required
+            error={errors.phoneNumber}
             style={{ fontFamily: '"Poppins", sans-serif' }}
             className="w-full text-sm sm:text-base"
           />
@@ -130,7 +192,7 @@ const GetInTouchSection = () => {
             value={formData.email}
             onChange={handleChange}
             placeholder="Email"
-            required
+            error={errors.email}
             style={{ fontFamily: '"Poppins", sans-serif' }}
             className="w-full text-sm sm:text-base"
           />
@@ -141,7 +203,7 @@ const GetInTouchSection = () => {
             onChange={handleChange}
             options={serviceOptions}
             placeholder="Service type"
-            required
+            error={errors.serviceType}
             style={{ fontFamily: '"Poppins", sans-serif' }}
             className="w-full text-sm sm:text-base"
           />
@@ -151,16 +213,22 @@ const GetInTouchSection = () => {
             value={formData.message}
             onChange={handleChange}
             placeholder="Message"
-            required
+            error={errors.message}
             style={{ fontFamily: '"Poppins", sans-serif' }}
             className="w-full text-sm sm:text-base"
           />
-          <Captcha setRecaptchaToken={setRecaptchaToken} />
+          <div>
+            <Captcha setRecaptchaToken={setRecaptchaToken} />
+            {errors.recaptcha && (
+              <p className="text-red-500 text-xs mt-1">{errors.recaptcha}</p>
+            )}
+          </div>
           <motion.div>
             <Button
-              label="Submit"
-              icon="ArrowUpRight"
-              className="bg-secondary text-black rounded-2xl px-4 py-3 text-lg hover:bg-white hover:text-gray-900 transition-colors duration-300"
+              label={isLoading ? "Submitting" : "Submit"}
+              icon={isLoading ? null : "ArrowUpRight"}
+              className={`bg-secondary text-black rounded-2xl px-4 py-3 text-lg hover:bg-white hover:text-gray-900 transition-colors duration-300 ${isLoading ? "opacity-75 cursor-not-allowed" : ""}`}
+              isLoading={isLoading}
             />
           </motion.div>
         </form>
