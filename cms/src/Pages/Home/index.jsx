@@ -31,6 +31,11 @@ const Home = () => {
     maxWidth: "1200px",
   };
 
+  const enquiriesCardStyle = {
+    ...cardStyle,
+    display: userRole === "admin" ? "flex" : "none", 
+  };
+
   return (
     <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
       <div style={cardContainerStyle}>
@@ -54,13 +59,11 @@ const Home = () => {
             <h3>Manage Customers</h3>
           </div>
         </Link>
-        {userRole === "admin" && (
-          <Link to="/enquiries" style={{ textDecoration: "none" }}>
-            <div style={cardStyle} className="bg-primary font-extrabold">
-              <h3>Enquiries</h3>
-            </div>
-          </Link>
-        )}
+        <Link to="/enquiries" style={{ textDecoration: "none" }}>
+          <div style={enquiriesCardStyle} className="bg-primary font-extrabold">
+            <h3>Enquiries</h3>
+          </div>
+        </Link>
       </div>
     </div>
   );
