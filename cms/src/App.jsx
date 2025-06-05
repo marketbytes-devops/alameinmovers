@@ -1,5 +1,5 @@
 import * as React from "react";
-import { createBrowserRouter, RouterProvider, useLocation, Navigate } from "react-router-dom";
+import { createBrowserRouter, RouterProvider, useLocation, Navigate, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Layout from "./Components/Layout";
 import Home from "./Pages/Home";
