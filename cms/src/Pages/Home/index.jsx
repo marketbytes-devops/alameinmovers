@@ -1,20 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import jwtDecode from "jwt-decode";
 
 const Home = () => {
   const [userRole, setUserRole] = useState(null);
 
   useEffect(() => {
-    const token = localStorage.getItem("access_token") || sessionStorage.getItem("access_token");
-    if (token) {
-      try {
-        const decoded = jwtDecode(token);
-        setUserRole(decoded.role);
-      } catch (error) {
-        console.error("Error decoding token:", error);
-      }
-    }
+    const role = localStorage.getItem("user_role");
+    setUserRole(role);
   }, []);
 
   const cardStyle = {
