@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { createBrowserRouter, RouterProvider, useLocation, Navigate } from "react-router-dom";
-import jwtDecode from "jwt-decode";
 import Layout from "./Components/Layout";
 import Home from "./Pages/Home";
 import AddCustomerForm from "./Pages/AddCustomerForm";
@@ -23,15 +22,10 @@ const PrivateRoute = ({ element, allowedRoles = ['admin'] }) => {
 
   useEffect(() => {
     const token = localStorage.getItem("access_token") || sessionStorage.getItem("access_token");
-    if (token) {
-      try {
-        const decoded = jwtDecode(token);
-        setUserRole(decoded.role);
-        setIsAuthenticated(true);
-      } catch (error) {
-        console.error("Error decoding token:", error);
-        setIsAuthenticated(false);
-      }
+    const role = localStorage.getItem("user_role");
+    if (token && role) {
+      setUserRole(role);
+      setIsAuthenticated(true);
     } else {
       setIsAuthenticated(false);
     }
@@ -64,16 +58,10 @@ function App() {
   useEffect(() => {
     const accessToken = localStorage.getItem("access_token");
     const savedPath = localStorage.getItem("currentPath");
-    console.log("App init, token:", !!accessToken, "savedPath:", savedPath);
+    const role = localStorage.getItem("user_role");
+    console.log("App init, token:", !!accessToken, "savedPath:", savedPath, "role:", role);
     setIsLoggedIn(!!accessToken);
-    if (accessToken) {
-      try {
-        const decoded = jwtDecode(accessToken);
-        setUserRole(decoded.role);
-      } catch (error) {
-        console.error("Error decoding token:", error);
-      }
-    }
+    setUserRole(role);
     if (savedPath) {
       setCurrentPath(savedPath);
     }
