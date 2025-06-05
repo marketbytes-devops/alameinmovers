@@ -134,7 +134,7 @@ const Relocate = () => {
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
       }}
-      className="w-full h-full lg:h-[400px] py-10 lg:py-0 mx-auto overflow-hidden flex flex-col justify-center items-center relative bg-black/50"
+      className="w-full h-full lg:h-[380px] py-10 lg:py-0 mx-auto overflow-hidden flex flex-col justify-center items-center relative bg-black/50"
     >
       <div className="relative w-full mb-4">
         <div className="w-full flex items-center flex-col">

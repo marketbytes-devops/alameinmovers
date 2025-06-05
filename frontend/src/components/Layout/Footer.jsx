@@ -189,7 +189,7 @@ const Footer = () => {
       <div className="border border-primary/20 max-w-[90rem] mx-auto mt-8 sm:mt-10 md:mt-12"></div>
       <div className="text-sm sm:text-base md:text-lg text-center py-6 sm:py-8 md:py-10">
         <p>
-          © {currentYear}All Rights Reserved by Almas Movers International.  Made With Passion By{" "}
+          © {currentYear} All Rights Reserved by Almas Movers International.  Made With Passion By{" "}
           <span className="font-bold">
             <a href="https://www.marketbytes.in/" className="decoration-none cursor-pointer hover:text-primary">
               MarketBytes WebWorks Pvt Ltd
