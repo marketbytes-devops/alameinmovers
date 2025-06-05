@@ -30,16 +30,16 @@ import InsuranceBanner from "../../assets/services/Insurance-Banner.webp";
 import InsuranceIcon from "../../assets/Icon_Insurance.webp";
 import InsuranceFeatureImage from "../../assets/services/insurance-feature.webp";
 
-import storageSolutionsforHouseholdIcon from "../../assets/moving/land-relocation.webp";
+import storageSolutionsforHouseholdIcon from "../../assets/Storage-Solutions-icons.webp";
 import storageSolutionsforHouseholdBanner from "../../assets/moving/pic2.webp";
 import storageSolutionsforHouseholdFeatureImage from "../../assets/services/Storage-Solutions-for-Household-Goods-Feature.webp";
 
 import eventandExhibitionBanner from "../../assets/services/Event-and-Exhibition-Relocation-Banner.webp";
-import eventandExhibitionIcon from "../../assets/moving/land-relocation.webp";
+import eventandExhibitionIcon from "../../assets/Event-and-Exhibition-icon.webp";
 import eventandExhibitionFeatureImage from "../../assets/services/Event-and-Exhibition-Relocation-Feature.webp";
 
 import petRelocationsBanner from "../../assets/services/Pet-Relocations-Banner.webp";
-import petRelocationsIcon from "../../assets/moving/land-relocation.webp";
+import petRelocationsIcon from "../../assets/pet-relocation.webp";
 import petRelocationsFeatureImage from "../../assets/services/Pet-Relocations-Feature.webp";
 
 import furnitureInstallationBanner from "../../assets/services/Furniture-Installation-on-Contract-Banner.webp";

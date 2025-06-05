@@ -8,7 +8,7 @@ from rest_framework.response import Response
 import requests
 from .models import Enquiry
 from .serializers import EnquirySerializer
-from authapp.permissions import IsAdmin  # Import the custom permission
+from authapp.permissions import IsAdmin  
 
 logger = logging.getLogger(__name__)
 
@@ -210,7 +210,7 @@ class EnquiryListCreate(generics.ListCreateAPIView):
 class EnquiryDelete(generics.DestroyAPIView):
     queryset = Enquiry.objects.all()
     serializer_class = EnquirySerializer
-    permission_classes = [IsAdmin]  # Restrict to admin role
+    permission_classes = [IsAdmin]  
 
     def perform_destroy(self, instance):
         try:
@@ -221,7 +221,7 @@ class EnquiryDelete(generics.DestroyAPIView):
             raise
 
 class EnquiryDeleteAll(generics.GenericAPIView):
-    permission_classes = [IsAdmin]  # Restrict to admin role
+    permission_classes = [IsAdmin]  
 
     def delete(self, request, *args, **kwargs):
         try:
@@ -237,3 +237,9 @@ class EnquiryDeleteAll(generics.GenericAPIView):
                 {'error': 'Failed to delete enquiries'},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
+
+from rest_framework.permissions import BasePermission
+
+class IsAdmin(BasePermission):
+    def has_permission(self, request, view):
+        return request.user.is_authenticated and request.user.role in ['admin', 'superadmin']
