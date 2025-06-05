@@ -158,7 +158,7 @@ const Topbar = () => {
               onClick={handleLogout}
               className="flex items-center transition-colors duration-200 text-md hover:text-primary"
             >
-              <FaPowerOff className="w-[18px] h-[18px] mr-2" />
+              <FaPowerOff className="w-[16px] h-[16px] mr-2" />
               <span>Logout</span>
             </button>
           </div>
