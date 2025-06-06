@@ -29,23 +29,23 @@ const Enquiries = () => {
       });
   };
 
-  const deleteEnquiry = (id) => {
-    if (window.confirm('Are you sure you want to delete this enquiry?')) {
-      apiClient
-        .delete(`contacts/enquiries/${id}/`)
-        .then(() => {
-          const updatedEnquiries = enquiries.filter((enquiry) => enquiry.id !== id).sort((a, b) => 
-            new Date(b.created_at) - new Date(a.created_at)
-          );
-          setEnquiries(updatedEnquiries);
-          setError('');
-        })
-        .catch((error) => {
-          setError('Failed to delete enquiry. Please try again.');
-          console.error('Delete enquiry error:', error.response?.data || error.message);
-        });
-    }
-  };
+  // const deleteEnquiry = (id) => {
+  //   if (window.confirm('Are you sure you want to delete this enquiry?')) {
+  //     apiClient
+  //       .delete(`contacts/enquiries/${id}/`)
+  //       .then(() => {
+  //         const updatedEnquiries = enquiries.filter((enquiry) => enquiry.id !== id).sort((a, b) => 
+  //           new Date(b.created_at) - new Date(a.created_at)
+  //         );
+  //         setEnquiries(updatedEnquiries);
+  //         setError('');
+  //       })
+  //       .catch((error) => {
+  //         setError('Failed to delete enquiry. Please try again.');
+  //         console.error('Delete enquiry error:', error.response?.data || error.message);
+  //       });
+  //   }
+  // };
 
   useEffect(() => {
     fetchEnquiries();
@@ -132,7 +132,7 @@ const Enquiries = () => {
               {showRecaptchaToken && (
                 <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700 border-b">reCAPTCHA Token</th>
               )}
-              <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700 border-b">Actions</th>
+              {/* <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700 border-b">Actions</th> */}
             </tr>
           </thead>
           <tbody>
@@ -164,7 +164,7 @@ const Enquiries = () => {
                   <td className="px-6 py-4 text-sm text-gray-600 border-b">{enquiry.fullName}</td>
                   <td className="px-6 py-4 text-sm text-gray-600 border-b">{enquiry.phoneNumber}</td>
                   <td className="px-6 py-4 text-sm text-gray-600 border-b">{enquiry.email}</td>
-                  <td className="px-6 py-4 text-sm text-gray-600 border-b">{enquiry.serviceType}</td>
+                  <td className="px-6 py-4 text-sm text-gray-600 border-b">{enquiry.service_type_display}</td>
                   <td className="px-6 py-4 text-sm text-gray-600 border-b">{enquiry.message}</td>
                   <td className="px-6 py-4 text-sm text-gray-600 border-b">{enquiry.refererUrl}</td>
                   <td className="px-6 py-4 text-sm text-gray-600 border-b">{enquiry.submittedUrl}</td>
@@ -175,14 +175,14 @@ const Enquiries = () => {
                         : enquiry.recaptchaToken}
                     </td>
                   )}
-                  <td className="px-6 py-4 text-sm text-gray-600 border-b">
+                  {/* <td className="px-6 py-4 text-sm text-gray-600 border-b">
                     <button
                       onClick={() => deleteEnquiry(enquiry.id)}
                       className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 transition-colors"
                     >
                       Delete
                     </button>
-                  </td>
+                  </td> */}
                 </motion.tr>
               ))
             )}
