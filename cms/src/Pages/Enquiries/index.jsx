@@ -17,13 +17,34 @@ const Enquiries = () => {
     apiClient
       .get('contacts/enquiries/', { params })
       .then((response) => {
-        setEnquiries(response.data);
+        const sortedEnquiries = response.data.sort((a, b) => 
+          new Date(b.created_at) - new Date(a.created_at)
+        );
+        setEnquiries(sortedEnquiries);
         setError('');
       })
       .catch((error) => {
         setError('Failed to fetch enquiries. Please check your connection or try again.');
         console.error('Fetch enquiries error:', error.response?.data || error.message);
       });
+  };
+
+  const deleteEnquiry = (id) => {
+    if (window.confirm('Are you sure you want to delete this enquiry?')) {
+      apiClient
+        .delete(`contacts/enquiries/${id}/`)
+        .then(() => {
+          const updatedEnquiries = enquiries.filter((enquiry) => enquiry.id !== id).sort((a, b) => 
+            new Date(b.created_at) - new Date(a.created_at)
+          );
+          setEnquiries(updatedEnquiries);
+          setError('');
+        })
+        .catch((error) => {
+          setError('Failed to delete enquiry. Please try again.');
+          console.error('Delete enquiry error:', error.response?.data || error.message);
+        });
+    }
   };
 
   useEffect(() => {
@@ -111,20 +132,21 @@ const Enquiries = () => {
               {showRecaptchaToken && (
                 <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700 border-b">reCAPTCHA Token</th>
               )}
+              <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700 border-b">Actions</th>
             </tr>
           </thead>
           <tbody>
             {enquiries.length === 0 ? (
               <tr>
                 <td
-                  colSpan={showRecaptchaToken ? 10 : 9}
+                  colSpan={showRecaptchaToken ? 11 : 10}
                   className="px-6 py-4 text-center text-sm text-gray-600"
                 >
                   No enquiries found.
                 </td>
               </tr>
             ) : (
-              enquiries.map((enquiry) => (
+              enquiries.map((enquiry, index) => (
                 <motion.tr
                   key={enquiry.id}
                   initial={{ opacity: 0 }}
@@ -132,7 +154,7 @@ const Enquiries = () => {
                   transition={{ duration: 0.3 }}
                   className="hover:bg-gray-50"
                 >
-                  <td className="px-6 py-4 text-sm text-gray-600 border-b">{enquiry.id}</td>
+                  <td className="px-6 py-4 text-sm text-gray-600 border-b">{index + 1}</td>
                   <td className="px-6 py-4 text-sm text-gray-600 border-b">
                     {new Date(enquiry.created_at).toLocaleString('en-US', {
                       dateStyle: 'medium',
@@ -153,6 +175,14 @@ const Enquiries = () => {
                         : enquiry.recaptchaToken}
                     </td>
                   )}
+                  <td className="px-6 py-4 text-sm text-gray-600 border-b">
+                    <button
+                      onClick={() => deleteEnquiry(enquiry.id)}
+                      className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 transition-colors"
+                    >
+                      Delete
+                    </button>
+                  </td>
                 </motion.tr>
               ))
             )}
