@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import TitleDescription from "../../../../components/TitleDescription";
-import Imagedown from "../../../../assets/getintouch.webp";
-import Imageup from "../../../../assets/getintouch2.webp";
+import Imagedown from "../../../../assets/getintouch2.webp";
+import Imageup from "../../../../assets/getintouch.webp";
 import Button from "../../../../components/Button";
 import FormField from "../../../../components/FormField";
 import Captcha from "../../../../components/Captcha";
