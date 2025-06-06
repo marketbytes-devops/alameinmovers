@@ -9,7 +9,6 @@ const Enquiries = () => {
   const [endDate, setEndDate] = useState('');
   const [showRecaptchaToken, setShowRecaptchaToken] = useState(false);
 
-  // Service type display mapping
   const SERVICE_TYPE_DISPLAY = {
     localMove: 'Local Move',
     internationalMove: 'International Move',
@@ -26,7 +25,6 @@ const Enquiries = () => {
     apiClient
       .get('contacts/enquiries/', { params })
       .then((response) => {
-        // Sort enquiries in LIFO order based on created_at
         const sortedEnquiries = response.data.sort((a, b) => 
           new Date(b.created_at) - new Date(a.created_at)
         );
@@ -165,7 +163,7 @@ const Enquiries = () => {
                   transition={{ duration: 0.3 }}
                   className="hover:bg-gray-50"
                 >
-                  <td className="px-6 py-4 text-sm text-gray-600 border-b">{index + 1}</td>
+                  <td className="px-6 py-4 text-sm text-gray-600 border-b">{enquiries.length - index}</td>
                   <td className="px-6 py-4 text-sm text-gray-600 border-b">
                     {new Date(enquiry.created_at).toLocaleString('en-US', {
                       dateStyle: 'medium',
