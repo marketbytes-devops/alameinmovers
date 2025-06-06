@@ -9,6 +9,15 @@ const Enquiries = () => {
   const [endDate, setEndDate] = useState('');
   const [showRecaptchaToken, setShowRecaptchaToken] = useState(false);
 
+  // Service type display mapping
+  const SERVICE_TYPE_DISPLAY = {
+    localMove: 'Local Move',
+    internationalMove: 'International Move',
+    carExport: 'Car Import and Export',
+    storageServices: 'Storage Services',
+    logistics: 'Logistics',
+  };
+
   const fetchEnquiries = (start = '', end = '') => {
     const params = {};
     if (start) params.start_date = start;
@@ -17,6 +26,7 @@ const Enquiries = () => {
     apiClient
       .get('contacts/enquiries/', { params })
       .then((response) => {
+        // Sort enquiries in LIFO order based on created_at
         const sortedEnquiries = response.data.sort((a, b) => 
           new Date(b.created_at) - new Date(a.created_at)
         );
@@ -34,6 +44,7 @@ const Enquiries = () => {
   //     apiClient
   //       .delete(`contacts/enquiries/${id}/`)
   //       .then(() => {
+  //         // Update enquiries list and maintain LIFO order
   //         const updatedEnquiries = enquiries.filter((enquiry) => enquiry.id !== id).sort((a, b) => 
   //           new Date(b.created_at) - new Date(a.created_at)
   //         );
@@ -164,7 +175,9 @@ const Enquiries = () => {
                   <td className="px-6 py-4 text-sm text-gray-600 border-b">{enquiry.fullName}</td>
                   <td className="px-6 py-4 text-sm text-gray-600 border-b">{enquiry.phoneNumber}</td>
                   <td className="px-6 py-4 text-sm text-gray-600 border-b">{enquiry.email}</td>
-                  <td className="px-6 py-4 text-sm text-gray-600 border-b">{enquiry.service_type_display}</td>
+                  <td className="px-6 py-4 text-sm text-gray-600 border-b">
+                    {SERVICE_TYPE_DISPLAY[enquiry.serviceType] || enquiry.serviceType}
+                  </td>
                   <td className="px-6 py-4 text-sm text-gray-600 border-b">{enquiry.message}</td>
                   <td className="px-6 py-4 text-sm text-gray-600 border-b">{enquiry.refererUrl}</td>
                   <td className="px-6 py-4 text-sm text-gray-600 border-b">{enquiry.submittedUrl}</td>
