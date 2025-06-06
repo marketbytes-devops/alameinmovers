@@ -2,32 +2,52 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import apiClient from "../../api/apiClient";
 
+const countriesData = {
+  countries: [
+    "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda", "Argentina",
+    "Armenia", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados",
+    "Belarus", "Belgium", "Belize", "Benin", "Bhutan", "Bolivia", "Bosnia and Herzegovina", "Botswana",
+    "Brazil", "Brunei", "Bulgaria", "Burkina Faso", "Burundi", "Cabo Verde", "Cambodia", "Cameroon",
+    "Canada", "Central African Republic", "Chad", "Chile", "China", "Colombia", "Comoros",
+    "Congo (Congo-Brazzaville)", "Costa Rica", "Croatia", "Cuba", "Cyprus", "Czech Republic",
+    "Democratic Republic of the Congo", "Denmark", "Djibouti", "Dominica", "Dominican Republic",
+    "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Eswatini", "Ethiopia",
+    "Fiji", "Finland", "France", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Greece", "Grenada",
+    "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Honduras", "Hungary", "Iceland", "India",
+    "Indonesia", "Iran", "Iraq", "Ireland", "Israel", "Italy", "Jamaica", "Japan", "Jordan", "Kazakhstan",
+    "Kenya", "Kiribati", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia",
+    "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Madagascar", "Malawi", "Malaysia", "Maldives",
+    "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius", "Mexico", "Micronesia", "Moldova",
+    "Monaco", "Mongolia", "Montenegro", "Morocco", "Mozambique", "Myanmar", "Namibia", "Nauru", "Nepal",
+    "Netherlands", "New Zealand", "Nicaragua", "Niger", "Nigeria", "North Korea", "North Macedonia",
+    "Norway", "Oman", "Pakistan", "Palau", "Palestine", "Panama", "Papua New Guinea", "Paraguay", "Peru",
+    "Philippines", "Poland", "Portugal", "Qatar", "Romania", "Russia", "Rwanda", "Saint Kitts and Nevis",
+    "Saint Lucia", "Saint Vincent and the Grenadines", "Samoa", "San Marino", "Sao Tome and Principe",
+    "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia",
+    "Solomon Islands", "Somalia", "South Africa", "South Korea", "South Sudan", "Spain", "Sri Lanka",
+    "Sudan", "Suriname", "Sweden", "Switzerland", "Syria", "Taiwan", "Tajikistan", "Tanzania", "Thailand",
+    "Timor-Leste", "Togo", "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey", "Turkmenistan", "Tuvalu",
+    "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States of America", "Uruguay",
+    "Uzbekistan", "Vanuatu", "Vatican City", "Venezuela", "Vietnam", "Yemen", "Zambia", "Zimbabwe"
+  ]
+};
+
 const UpdateJobs = () => {
-  const { id } = useParams(); // Get job ID from URL
+  const { id } = useParams();
   const navigate = useNavigate();
   const [jobDetails, setJobDetails] = useState(null);
   const [statusUpdates, setStatusUpdates] = useState([]);
   const [newStatus, setNewStatus] = useState("");
-  const [countries, setCountries] = useState([]);
+  const [countries, setCountries] = useState(countriesData.countries);
   const [customers, setCustomers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [notification, setNotification] = useState(null);
 
-  // Fetch job details, status updates, countries, and customers
   useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true);
-
-        // Fetch countries
-        const countryResponse = await fetch("https://restcountries.com/v3.1/all");
-        if (!countryResponse.ok) throw new Error("Failed to fetch countries");
-        const countryData = await countryResponse.json();
-        const countryNames = countryData
-          .map((country) => country.name.common)
-          .sort((a, b) => a.localeCompare(b));
-        setCountries(countryNames);
 
         // Fetch customers
         const customerResponse = await apiClient.get("/customers/add-customers/");
@@ -38,7 +58,7 @@ const UpdateJobs = () => {
         const jobResponse = await apiClient.get(`jobs/jobs/${id}/`);
         setJobDetails({
           ...jobResponse.data,
-          customer_id: jobResponse.data.customer?.id || "", // Set customer_id from customer.id
+          customer_id: jobResponse.data.customer?.id || "",
         });
 
         // Fetch status updates
@@ -64,19 +84,16 @@ const UpdateJobs = () => {
     fetchData();
   }, [id]);
 
-  // Validate phone number
   const validatePhoneNumber = (phone) => {
     const regex = /^\+?\d{10,15}$/;
     return regex.test(phone);
   };
 
-  // Validate cargo reference number
   const validateCargoRefNumber = (ref) => {
     const regex = /^[A-Z0-9-]{1,50}$/;
     return regex.test(ref);
   };
 
-  // Handle adding new status
   const handleSubmitStatus = async (e) => {
     e.preventDefault();
     if (!newStatus.trim()) {
@@ -92,12 +109,12 @@ const UpdateJobs = () => {
 
     try {
       const newStatusUpdate = {
-        job: parseInt(id), // Ensure job is an integer
+        job: parseInt(id),
         status_date: new Date().toISOString().split("T")[0],
         status_time: new Date().toTimeString().split(" ")[0].slice(0, 5),
         status_content: newStatus,
       };
-      console.log("Sending payload:", newStatusUpdate); // Debug log
+      console.log("Sending payload:", newStatusUpdate);
       const response = await apiClient.post(`jobs/status-updates/`, newStatusUpdate);
       setStatusUpdates((prev) => [response.data, ...prev]);
       setNewStatus("");
@@ -115,7 +132,6 @@ const UpdateJobs = () => {
     }
   };
 
-  // Handle deleting status
   const handleDeleteStatus = async (statusId) => {
     if (!window.confirm("Are you sure you want to delete this status?")) return;
     try {
@@ -135,11 +151,9 @@ const UpdateJobs = () => {
     }
   };
 
-  // Handle updating job details
   const handleUpdateJob = async (e) => {
     e.preventDefault();
 
-    // Validate phone number
     if (!validatePhoneNumber(jobDetails.contact_number)) {
       setNotification({
         type: "error",
@@ -149,7 +163,6 @@ const UpdateJobs = () => {
       return;
     }
 
-    // Validate cargo reference number
     if (!validateCargoRefNumber(jobDetails.cargo_ref_number)) {
       setNotification({
         type: "error",
@@ -159,7 +172,6 @@ const UpdateJobs = () => {
       return;
     }
 
-    // Validate customer
     const customerExists = customers.some(
       (customer) => customer.id === parseInt(jobDetails.customer_id)
     );
@@ -175,7 +187,7 @@ const UpdateJobs = () => {
     try {
       const submissionData = {
         cargo_type: jobDetails.cargo_type,
-        customer: parseInt(jobDetails.customer_id) || null, // Use customer_id
+        customer: parseInt(jobDetails.customer_id) || null,
         receiver_name: jobDetails.receiver_name,
         contact_number: jobDetails.contact_number,
         email: jobDetails.email,
@@ -205,13 +217,11 @@ const UpdateJobs = () => {
     }
   };
 
-  // Handle input changes for job details
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setJobDetails((prev) => ({ ...prev, [name]: value }));
   };
 
-  // Format date for display
   const formatDate = (dateStr) => {
     if (!dateStr) return "-";
     const date = new Date(dateStr);
@@ -238,7 +248,6 @@ const UpdateJobs = () => {
         </div>
       )}
 
-      {/* Job Details Section */}
       <div className="mb-8">
         <h3 className="text-xl font-bold mb-4 text-gray-700">Job Details</h3>
         {jobDetails && (
@@ -505,7 +514,6 @@ const UpdateJobs = () => {
         )}
       </div>
 
-      {/* Status Updates Section */}
       <div className="mb-8">
         <h3 className="text-xl font-bold mb-4 text-gray-700">Status Updates</h3>
         <div className="overflow-x-auto">
@@ -540,7 +548,6 @@ const UpdateJobs = () => {
         </div>
       </div>
 
-      {/* Add New Status Section */}
       <div>
         <h3 className="text-xl font-bold mb-4 text-gray-700">Add New Status</h3>
         <div className="flex flex-col gap-4">
@@ -563,7 +570,6 @@ const UpdateJobs = () => {
         </div>
       </div>
 
-      {/* Back Button */}
       <div className="flex justify-center mt-6">
         <button
           onClick={() => navigate("/manage-jobs")}

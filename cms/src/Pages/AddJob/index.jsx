@@ -53,12 +53,12 @@ const AddJobs = () => {
     time_of_departure: "",
     time_of_arrival: "",
   });
-
   const [countries, setCountries] = useState([]);
   const [customers, setCustomers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [submissionStatus, setSubmissionStatus] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -101,12 +101,15 @@ const AddJobs = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
+    setSubmissionStatus(null);
 
     if (!formData.customer_id) {
       setSubmissionStatus({
         type: "error",
         message: "Please select a customer.",
       });
+      setIsSubmitting(false);
       return;
     }
 
@@ -116,6 +119,7 @@ const AddJobs = () => {
         type: "error",
         message: "Invalid customer selected.",
       });
+      setIsSubmitting(false);
       return;
     }
 
@@ -125,6 +129,7 @@ const AddJobs = () => {
         type: "error",
         message: "Selected customer does not exist. Please choose a valid customer.",
       });
+      setIsSubmitting(false);
       return;
     }
 
@@ -133,6 +138,7 @@ const AddJobs = () => {
         type: "error",
         message: "Invalid phone number format (e.g., +1234567890)",
       });
+      setIsSubmitting(false);
       return;
     }
 
@@ -141,6 +147,7 @@ const AddJobs = () => {
         type: "error",
         message: "Cargo Reference Number must be 1-50 characters (letters, numbers, or hyphens).",
       });
+      setIsSubmitting(false);
       return;
     }
 
@@ -172,7 +179,10 @@ const AddJobs = () => {
         type: "success",
         message: `Job created successfully! Tracking ID: ${tracking_id}, Cargo Ref: ${cargo_ref_number}`,
       });
-      setTimeout(() => navigate("/manage-jobs"), 2000);
+      setTimeout(() => {
+        navigate("/manage-jobs");
+        setIsSubmitting(false);
+      }, 2000);
     } catch (err) {
       const errorMessage =
         err.response?.status === 401
@@ -182,6 +192,7 @@ const AddJobs = () => {
           : err.response?.data?.detail || "Failed to create job";
       console.error("Submission error:", errorMessage);
       setSubmissionStatus({ type: "error", message: errorMessage });
+      setIsSubmitting(false);
     }
   };
 
@@ -189,7 +200,12 @@ const AddJobs = () => {
   if (error) return <div className="container mx-auto px-4 py-8 text-center text-red-600">Error: {error}</div>;
 
   return (
-    <div className="container max-w-6xl mx-auto p-4">
+    <div className="container max-w-6xl mx-auto p-4 relative">
+      {isSubmitting && (
+        <div className="absolute inset-0 flex items-center justify-center bg-gray-200 bg-opacity-50 z-10">
+          <div className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+        </div>
+      )}
       <div className="form-container bg-white p-6 w-full">
         <h2 className="flex justify-center items-center text-2xl font-extrabold mb-6 text-gray-800">
           Add New Job
@@ -218,6 +234,7 @@ const AddJobs = () => {
                   required
                   className="w-full p-3 font-poppins text-base font-light border border-gray-300 rounded outline-none bg-gray-100 transition-colors"
                   placeholder="e.g., CARGO-20250521-ABCD"
+                  disabled={isSubmitting}
                 />
               </div>
               <div className="form-group mb-4">
@@ -230,6 +247,7 @@ const AddJobs = () => {
                   onChange={handleChange}
                   required
                   className="w-full p-3 font-poppins text-base font-light border border-gray-300 rounded outline-none bg-gray-100 transition-colors"
+                  disabled={isSubmitting}
                 >
                   <option value="" disabled>
                     Select cargo type
@@ -250,6 +268,7 @@ const AddJobs = () => {
                   onChange={handleChange}
                   required
                   className="w-full p-3 font-poppins text-base font-light border border-gray-300 rounded outline-none bg-gray-100 transition-colors"
+                  disabled={isSubmitting}
                 >
                   <option value="" disabled>
                     Select customer
@@ -272,6 +291,7 @@ const AddJobs = () => {
                   onChange={handleChange}
                   required
                   className="w-full p-3 font-poppins text-base font-light border border-gray-300 rounded outline-none bg-gray-100 transition-colors"
+                  disabled={isSubmitting}
                 />
               </div>
               <div className="form-group mb-4">
@@ -285,6 +305,7 @@ const AddJobs = () => {
                   onChange={handleChange}
                   required
                   className="w-full p-3 font-poppins text-base font-light border border-gray-300 rounded outline-none bg-gray-100 transition-colors"
+                  disabled={isSubmitting}
                 />
               </div>
               <div className="form-group mb-4">
@@ -298,6 +319,7 @@ const AddJobs = () => {
                   onChange={handleChange}
                   required
                   className="w-full p-3 font-poppins text-base font-light border border-gray-300 rounded outline-none bg-gray-100 transition-colors"
+                  disabled={isSubmitting}
                 />
               </div>
               <div className="form-group mb-4">
@@ -311,6 +333,7 @@ const AddJobs = () => {
                   rows="3"
                   required
                   className="w-full p-3 font-poppins text-base font-light border border-gray-300 rounded outline-none bg-gray-100 transition-colors resize-y"
+                  disabled={isSubmitting}
                 />
               </div>
               <div className="form-group mb-4">
@@ -323,6 +346,7 @@ const AddJobs = () => {
                   onChange={handleChange}
                   required
                   className="w-full p-3 font-poppins text-base font-light border border-gray-300 rounded outline-none bg-gray-100 transition-colors"
+                  disabled={isSubmitting}
                 >
                   <option value="" disabled>
                     Select a country
@@ -345,6 +369,7 @@ const AddJobs = () => {
                   onChange={handleChange}
                   required
                   className="w-full p-3 font-poppins text-base font-light border border-gray-300 rounded outline-none bg-gray-100 transition-colors"
+                  disabled={isSubmitting}
                 />
               </div>
             </div>
@@ -361,6 +386,7 @@ const AddJobs = () => {
                   required
                   className="w-full p-3 font-poppins text-base font-light border border-gray-300 rounded outline-none bg-gray-100 transition-colors"
                   min="1"
+                  disabled={isSubmitting}
                 />
               </div>
               <div className="form-group mb-4">
@@ -376,6 +402,7 @@ const AddJobs = () => {
                   className="w-full p-3 font-poppins text-base font-light border border-gray-300 rounded outline-none bg-gray-100 transition-colors"
                   min="0"
                   step="0.01"
+                  disabled={isSubmitting}
                 />
               </div>
               <div className="form-group mb-4">
@@ -391,6 +418,7 @@ const AddJobs = () => {
                   className="w-full p-3 font-poppins text-base font-light border border-gray-300 rounded outline-none bg-gray-100 transition-colors"
                   min="0"
                   step="0.01"
+                  disabled={isSubmitting}
                 />
               </div>
               <div className="form-group mb-4">
@@ -404,6 +432,7 @@ const AddJobs = () => {
                   onChange={handleChange}
                   required
                   className="w-full p-3 font-poppins text-base font-light border border-gray-300 rounded outline-none bg-gray-100 transition-colors"
+                  disabled={isSubmitting}
                 />
               </div>
               <div className="form-group mb-4">
@@ -417,6 +446,7 @@ const AddJobs = () => {
                   onChange={handleChange}
                   required
                   className="w-full p-3 font-poppins text-base font-light border border-gray-300 rounded outline-none bg-gray-100 transition-colors"
+                  disabled={isSubmitting}
                 />
               </div>
               <div className="form-group mb-4">
@@ -430,6 +460,7 @@ const AddJobs = () => {
                   onChange={handleChange}
                   required
                   className="w-full p-3 font-poppins text-base font-light border border-gray-300 rounded outline-none bg-gray-100 transition-colors"
+                  disabled={isSubmitting}
                 />
               </div>
               <div className="form-group mb-4">
@@ -443,6 +474,7 @@ const AddJobs = () => {
                   onChange={handleChange}
                   required
                   className="w-full p-3 font-poppins text-base font-light border border-gray-300 rounded outline-none bg-gray-100 transition-colors"
+                  disabled={isSubmitting}
                 />
               </div>
               <div className="form-group mb-4">
@@ -456,15 +488,19 @@ const AddJobs = () => {
                   onChange={handleChange}
                   required
                   className="w-full p-3 font-poppins text-base font-light border border-gray-300 rounded outline-none bg-gray-100 transition-colors"
+                  disabled={isSubmitting}
                 />
               </div>
             </div>
           </div>
           <button
             type="submit"
-            className="submit-button block w-32 mx-auto mt-6 p-3 font-poppins text-base font-medium uppercase text-black bg-white border border-black rounded cursor-pointer hover:bg-gray-100 hover:border-gray-100 transition-colors"
+            className={`submit-button block w-32 mx-auto mt-6 p-3 font-poppins text-base font-medium uppercase text-black bg-white border border-black rounded cursor-pointer hover:bg-gray-100 hover:border-gray-100 transition-colors ${
+              isSubmitting ? "opacity-50 cursor-not-allowed" : ""
+            }`}
+            disabled={isSubmitting}
           >
-            Submit
+            {isSubmitting ? "Submitting..." : "Submit"}
           </button>
         </form>
       </div>

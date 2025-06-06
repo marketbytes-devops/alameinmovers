@@ -121,7 +121,12 @@ const AddCustomerForm = () => {
     } rounded outline-none bg-gray-100 transition-colors`;
 
   return (
-    <div className="container flex justify-center items-start gap-8 max-w-6xl mx-auto p-4">
+    <div className="container flex justify-center items-start gap-8 max-w-6xl mx-auto p-4 relative">
+      {isSubmitting && (
+        <div className="absolute inset-0 flex items-center justify-center bg-gray-200 bg-opacity-50 z-10">
+          <div className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+        </div>
+      )}
       <div className="form-container bg-white p-6 max-w-xl w-full flex-1">
         <h2 className="flex justify-center items-center text-2xl font-extrabold mb-6 text-gray-800">
           Add Customers
@@ -151,6 +156,7 @@ const AddCustomerForm = () => {
               onBlur={() => handleBlur("name")}
               required
               className={inputClasses("name")}
+              disabled={isSubmitting}
             />
           </div>
           <div className="form-group mb-4">
@@ -167,11 +173,12 @@ const AddCustomerForm = () => {
               required
               className={inputClasses("phone_number")}
               placeholder={formData.country === "India" ? "6385427433" : "+1234567890"}
+              disabled={isSubmitting}
             />
           </div>
           <div className="form-group mb-4">
             <label className="label block font-poppins text-sm font-medium uppercase text-gray-600 mb-2">
-              Email ID
+              in ID
             </label>
             <input
               type="email"
@@ -182,6 +189,7 @@ const AddCustomerForm = () => {
               onBlur={() => handleBlur("email")}
               required
               className={inputClasses("email")}
+              disabled={isSubmitting}
             />
           </div>
           <div className="form-group mb-4">
@@ -197,6 +205,7 @@ const AddCustomerForm = () => {
               rows="3"
               required
               className={`${inputClasses("address")} resize-y`}
+              disabled={isSubmitting}
             />
           </div>
           <div className="form-group mb-4">
@@ -211,6 +220,7 @@ const AddCustomerForm = () => {
               onBlur={() => handleBlur("country")}
               required
               className={inputClasses("country")}
+              disabled={isSubmitting}
             >
               <option value="" disabled>
                 Select a country
@@ -224,7 +234,9 @@ const AddCustomerForm = () => {
           </div>
           <button
             type="submit"
-            className="submit-button block w-32 mx-auto p-3 font-poppins text-base font-medium uppercase text-black bg-white border border-black rounded cursor-pointer hover:bg-gray-100 hover:border-gray-100 transition-colors"
+            className={`submit-button block w-32 mx-auto p-3 font-poppins text-base font-medium uppercase text-black bg-white border border-black rounded cursor-pointer hover:bg-gray-100 hover:border-gray-100 transition-colors ${
+              isSubmitting ? "opacity-50 cursor-not-allowed" : ""
+            }`}
             disabled={isSubmitting}
           >
             {isSubmitting ? "Submitting..." : "Submit"}

@@ -1,7 +1,37 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import apiClient from "../../api/apiClient";
- 
+
+const countriesData = {
+  countries: [
+    "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda", "Argentina",
+    "Armenia", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados",
+    "Belarus", "Belgium", "Belize", "Benin", "Bhutan", "Bolivia", "Bosnia and Herzegovina", "Botswana",
+    "Brazil", "Brunei", "Bulgaria", "Burkina Faso", "Burundi", "Cabo Verde", "Cambodia", "Cameroon",
+    "Canada", "Central African Republic", "Chad", "Chile", "China", "Colombia", "Comoros",
+    "Congo (Congo-Brazzaville)", "Costa Rica", "Croatia", "Cuba", "Cyprus", "Czech Republic",
+    "Democratic Republic of the Congo", "Denmark", "Djibouti", "Dominica", "Dominican Republic",
+    "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Eswatini", "Ethiopia",
+    "Fiji", "Finland", "France", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Greece", "Grenada",
+    "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Honduras", "Hungary", "Iceland", "India",
+    "Indonesia", "Iran", "Iraq", "Ireland", "Israel", "Italy", "Jamaica", "Japan", "Jordan", "Kazakhstan",
+    "Kenya", "Kiribati", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia",
+    "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Madagascar", "Malawi", "Malaysia", "Maldives",
+    "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius", "Mexico", "Micronesia", "Moldova",
+    "Monaco", "Mongolia", "Montenegro", "Morocco", "Mozambique", "Myanmar", "Namibia", "Nauru", "Nepal",
+    "Netherlands", "New Zealand", "Nicaragua", "Niger", "Nigeria", "North Korea", "North Macedonia",
+    "Norway", "Oman", "Pakistan", "Palau", "Palestine", "Panama", "Papua New Guinea", "Paraguay", "Peru",
+    "Philippines", "Poland", "Portugal", "Qatar", "Romania", "Russia", "Rwanda", "Saint Kitts and Nevis",
+    "Saint Lucia", "Saint Vincent and the Grenadines", "Samoa", "San Marino", "Sao Tome and Principe",
+    "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia",
+    "Solomon Islands", "Somalia", "South Africa", "South Korea", "South Sudan", "Spain", "Sri Lanka",
+    "Sudan", "Suriname", "Sweden", "Switzerland", "Syria", "Taiwan", "Tajikistan", "Tanzania", "Thailand",
+    "Timor-Leste", "Togo", "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey", "Turkmenistan", "Tuvalu",
+    "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States of America", "Uruguay",
+    "Uzbekistan", "Vanuatu", "Vatican City", "Venezuela", "Vietnam", "Yemen", "Zambia", "Zimbabwe"
+  ]
+};
+
 const UpdateCustomer = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -19,12 +49,12 @@ const UpdateCustomer = () => {
     address: false,
     country: false,
   });
-  const [countries, setCountries] = useState([]);
+  const [countries, setCountries] = useState(countriesData.countries);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [submissionStatus, setSubmissionStatus] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
- 
+
   useEffect(() => {
     const fetchCustomer = async () => {
       try {
@@ -45,38 +75,22 @@ const UpdateCustomer = () => {
         setLoading(false);
       }
     };
- 
-    const fetchCountries = async () => {
-      try {
-        const response = await fetch("https://restcountries.com/v3.1/all");
-        if (!response.ok) throw new Error("Failed to fetch countries");
-        const data = await response.json();
-        const countryNames = data
-          .map((country) => country.name.common)
-          .sort((a, b) => a.localeCompare(b));
-        setCountries(countryNames);
-      } catch (err) {
-        console.error("Fetch countries error:", err.message);
-        setError(err.message);
-      }
-    };
- 
+
     fetchCustomer();
-    fetchCountries();
   }, [id]);
- 
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
     setSubmissionStatus(null);
     console.log("Form data updated:", { ...formData, [name]: value });
   };
- 
+
   const validatePhoneNumber = (phone) => {
     const regex = /^\+?\d{10,15}$/;
     return regex.test(phone);
   };
- 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     let phone_number = formData.phone_number;
@@ -116,23 +130,23 @@ const UpdateCustomer = () => {
       setIsSubmitting(false);
     }
   };
- 
+
   const handleFocus = (field) => {
     setFocusedField((prev) => ({ ...prev, [field]: true }));
   };
- 
+
   const handleBlur = (field) => {
     setFocusedField((prev) => ({ ...prev, [field]: false }));
   };
- 
+
   const inputClasses = (field) =>
     `w-full p-3 font-sans text-base font-light border ${
       focusedField[field] ? "border-blue-500" : "border-gray-300"
     } rounded outline-none bg-gray-100 transition-colors`;
- 
+
   if (loading) return <div className="container mx-auto px-4 py-8 text-center">Loading...</div>;
   if (error) return <div className="container mx-auto px-4 py-8 text-center text-red-600">Error: {error}</div>;
- 
+
   return (
     <div className="container flex justify-center items-start gap-8 max-w-6xl mx-auto p-4">
       <div className="form-container bg-white p-6 max-w-xl w-full flex-1">
@@ -222,10 +236,9 @@ const UpdateCustomer = () => {
               onBlur={() => handleBlur("country")}
               required
               className={inputClasses("country")}
-              disabled={loading || countries.length === 0}
             >
               <option value="" disabled>
-                {loading ? "Loading countries..." : countries.length === 0 ? "Error loading countries" : "Select a country"}
+                Select a country
               </option>
               {countries.map((country) => (
                 <option key={country} value={country}>
@@ -246,6 +259,5 @@ const UpdateCustomer = () => {
     </div>
   );
 };
- 
+
 export default UpdateCustomer;
- 
