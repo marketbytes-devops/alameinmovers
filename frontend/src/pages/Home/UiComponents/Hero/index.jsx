@@ -107,7 +107,7 @@ const Hero = () => {
     setIsLoading(true);
 
     apiClient
-      .post("clients/enquiries/", {
+      .post("contacts/enquiries/", {
         ...formData,
         recaptchaToken,
       })
