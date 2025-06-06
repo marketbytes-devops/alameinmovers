@@ -178,7 +178,7 @@ class EnquiryListCreate(generics.ListCreateAPIView):
         except requests.RequestException as e:
             logger.error(f"reCAPTCHA verification error: {str(e)}")
             return Response(
-                {'error': 'Failed to verify reCAPTCHA. Please try again later.'},
+                {'error': 'Failed to verify reCAPTCHA. Please refresh the page.'},
                 status=status.HTTP_503_SERVICE_UNAVAILABLE
             )
         
