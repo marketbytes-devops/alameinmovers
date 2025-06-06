@@ -59,6 +59,8 @@ const FormField = ({ type, name, placeholder, value, onChange, onClick, options,
         "Enter",
         "ArrowLeft",
         "ArrowRight",
+        "Home",
+        "End",
       ];
       if (
         allowedKeys.includes(e.key) ||
@@ -67,6 +69,18 @@ const FormField = ({ type, name, placeholder, value, onChange, onClick, options,
         return;
       }
       e.preventDefault();
+    }
+  };
+
+  const handleInput = (e) => {
+    if (type === "number" && name === "phoneNumber") {
+      const numericValue = e.target.value.replace(/[^0-9]/g, "");
+      const event = {
+        target: { name, value: numericValue },
+      };
+      onChange(event);
+    } else {
+      onChange(e);
     }
   };
 
@@ -163,7 +177,7 @@ const FormField = ({ type, name, placeholder, value, onChange, onClick, options,
                 name={name}
                 placeholder={placeholder}
                 value={value}
-                onChange={onChange}
+                onChange={handleInput}
                 onClick={onClick}
                 onKeyDown={handleKeyDown}
                 className={inputStyles}

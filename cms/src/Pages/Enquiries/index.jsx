@@ -26,36 +26,6 @@ const Enquiries = () => {
       });
   };
 
-  const deleteEnquiry = (id) => {
-    if (window.confirm('Are you sure you want to delete this enquiry?')) {
-      apiClient
-        .delete(`contacts/enquiries/${id}/`)
-        .then(() => {
-          setEnquiries(enquiries.filter((enquiry) => enquiry.id !== id));
-          setError('');
-        })
-        .catch((error) => {
-          setError('Failed to delete enquiry. Please try again.');
-          console.error('Delete enquiry error:', error.response?.data || error.message);
-        });
-    }
-  };
-
-  const deleteAllEnquiries = () => {
-    if (window.confirm('Are you sure you want to delete all enquiries?')) {
-      apiClient
-        .delete('contacts/enquiries/delete-all/')
-        .then(() => {
-          setEnquiries([]);
-          setError('');
-        })
-        .catch((error) => {
-          setError('Failed to delete all enquiries. Please try again.');
-          console.error('Delete all enquiries error:', error.response?.data || error.message);
-        });
-    }
-  };
-
   useEffect(() => {
     fetchEnquiries();
   }, []);
@@ -113,13 +83,6 @@ const Enquiries = () => {
             >
               Reset
             </button>
-            <button
-              type="button"
-              onClick={deleteAllEnquiries}
-              className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition-colors"
-            >
-              Delete All
-            </button>
           </div>
         </form>
       </div>
@@ -148,14 +111,13 @@ const Enquiries = () => {
               {showRecaptchaToken && (
                 <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700 border-b">reCAPTCHA Token</th>
               )}
-              <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700 border-b">Actions</th>
             </tr>
           </thead>
           <tbody>
             {enquiries.length === 0 ? (
               <tr>
                 <td
-                  colSpan={showRecaptchaToken ? 11 : 10}
+                  colSpan={showRecaptchaToken ? 10 : 9}
                   className="px-6 py-4 text-center text-sm text-gray-600"
                 >
                   No enquiries found.
@@ -191,14 +153,6 @@ const Enquiries = () => {
                         : enquiry.recaptchaToken}
                     </td>
                   )}
-                  <td className="px-6 py-4 text-sm text-gray-600 border-b">
-                    <button
-                      onClick={() => deleteEnquiry(enquiry.id)}
-                      className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 transition-colors"
-                    >
-                      Delete
-                    </button>
-                  </td>
                 </motion.tr>
               ))
             )}
