@@ -218,7 +218,7 @@ const Hero = () => {
   return (
     <div className="container-primary w-full">
       <div
-        className="relative w-full min-h-[500px] sm:min-h-[600px] md:min-h-[600px] bg-cover bg-center flex items-center text-center text-white py-12 sm:p-0"
+        className={`relative w-full rounded-b-3xl ${isExpanded ? 'min-h-[120vh]' : 'min-h-[500px] sm:min-h-[600px] md:min-h-[600px]'} bg-cover bg-center flex ${isExpanded ? 'items-center' : 'items-center'} text-center text-white py-12 sm:p-0`}
         style={{
           backgroundImage: `url(${backgroundImage})`,
           backgroundSize: "cover",
@@ -227,13 +227,13 @@ const Hero = () => {
         }}
       >
         <div
-          className="absolute inset-0 rounded-b-2xl"
+          className="absolute inset-0 rounded-b-3xl"
           style={{
             backgroundImage: `linear-gradient(to bottom right, rgba(76, 112, 133, 0.8), rgba(0,0,0, 0.4))`,
           }}
         ></div>
         <motion.div
-          className="relative z-4 w-full max-w-5xl mx-auto px-4 sm:px-6"
+          className="relative z-4 w-full max-w-5xl mx-auto px-4 sm:px-6 pt-8 sm:pt-12"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1 }}
