@@ -5,73 +5,67 @@ import "slick-carousel/slick/slick-theme.css";
 import AlmasLogo from "../../../../assets/watermark.svg";
 import TitleDescription from "../../../../components/TitleDescription";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons"; 
-import FA from "../../../../assets/home/Fatima.webp"
-import AK from "../../../../assets/home/Ahmedk.webp"
-import SM from "../../../../assets/home/Sarah.webp"
-import KS from "../../../../assets/home/Khalid.webp"
-import RT from "../../../../assets/home/Reem.webp"
+import { faAngleLeft, faAngleRight, faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import person1 from "../../../../assets/review/unnamed-1.png";
+import person2 from "../../../../assets/review/unnamed-2.png";
+import person3 from "../../../../assets/review/unnamed-3.png";
+import person4 from "../../../../assets/review/unnamed-4.png";
+import person5 from "../../../../assets/review/unnamed-5.png";
+
 
 const reviewCard = [
-   {
+  {
     id: "1",
-    person: FA,
-    title: "Fatima A",
-    role: "Al Khor",
-    description:
-      "Almas Mover handled my office relocation with precision and professionalism. They worked efficiently and minimized downtime for our business. Truly a reliable moving partner in Qatar.",
- 
+    person: person1,
+    title: "Colleen Mae Sumagaysay",
+    role: "Doha",
+    description: 'Almas Movers’ team was very professional and helpful. They packed and arranged our things neatly and with care. Kudos to Rishad and his team. Highly recommended!',
     stars: 5,
-    date: "23 May 2025",
+    date: "03 June 2025",
   },
   {
     id: "2",
-    person: AK,
-    title: "Ahmed K",
-    role: "Al Wakrah",
-    description:
-      "I was impressed by the efficiency and friendliness of Almas Mover’s staff. They handled everything with great attention to detail and made sure my move was completed on time. Excellent service!",
-    stars: 4,
-    date: "07 January 2025",
+    person: person2,
+    title: "Muhammad Nasir",
+    role: "Doha",
+    description: 'Having moved houses quite a few times, I decided to Google for professional home movers and came across Almas...',
+    stars: 5,
+    date: "10 May 2025",
   },
   {
     id: "3",
-    person: SM,
-    title: "Sarah S",
-    role: "Al Jumail",
-    description:
-      "From packing to unloading, Almas Mover International exceeded my expectations. Their communication was clear, and the entire process was seamless. I wouldn’t trust anyone else with my move.",
-    stars: 4,
-    date: "26 January 2025",
+    person: person3,
+    title: "Hashem Burjaq",
+    role: "Doha",
+    description: "Absolutely the Best Moving Experience of My Life! I don’t usually write reviews, but Almas Movers absolutely deserve recognition. Having moved several times in my life, I can confidently say this was the smoothest, most professional, and stress-free move I’ve ever experienced by far. In fact, I’d go as far as to say they’re probably the best, if not the best movers I’ve ever worked with...",
+    stars: 5,
+    date: "03 June 2025",
   },
   {
     id: "4",
-    person: KS,
-    title: "Khalid S",
+    person: person4,
+    title: "Ahmad Kaddourah",
     role: "Doha",
-    description:
-      "Moving can be stressful, but Almas Mover International made it so easy. Their team was careful, professional, and respectful. Great value for money and highly recommended in Qatar!",
+    description: 'This is an excellent team, well trained, very professional. The supervisor Anas is very aware of his business and working with a big smile. You will not go wrong with them. This was my first move within Doha and for future movers, I will not choose others...',
     stars: 5,
-    date: "16 February 2025",
+    date: "10 April 2025",
   },
   {
     id: "5",
-    person: RT,
-    title: "Reem T",
-    role: "Abu Dhalouf",
-    description:
-      "Almas Mover handled my office relocation with precision and professionalism. They worked efficiently and minimized downtime for our business. Truly a reliable moving partner in Qatar.",
-    stars: 4,
-    date: "31 March 2025",
-  },
- 
- 
+    person: person5,
+    title: "Venita Vaz",
+    role: "Doha",
+    description: 'I recently had the pleasure of working with Ashik and his incredible team at Almas Movers for both a local and an international move, and I must say, their service was exceptional. From start to finish, the professionalism and meticulous attention to detail provided by the team made what could have been a stressful experience, completely seamless...',
+    stars: 5,
+    date: "10 April 2025",
+  }
 ];
- 
+
+
 const Review = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const sliderRef = useRef(null);
- 
+
   const settings = {
     className: "center",
     centerMode: true,
@@ -100,7 +94,7 @@ const Review = () => {
       },
     ],
   };
- 
+
   const renderStars = (count) => {
     return Array.from({ length: 5 }, (_, index) => (
       index < count ? (
@@ -136,45 +130,61 @@ const Review = () => {
       )
     ));
   };
- 
+
   const handlePrev = () => {
     if (sliderRef.current) {
       sliderRef.current.slickPrev();
     }
   };
- 
+
   const handleNext = () => {
     if (sliderRef.current) {
       sliderRef.current.slickNext();
     }
   };
- 
+
   return (
     <div className="slider-container pb-12 sm:pb-20">
-      <TitleDescription
-        title="Moving Stories"
-        titleClass="text-3xl text-black py-2"
-      />
-      <div className="flex flex-col sm:flex-row justify-between items-center mb-6 sm:mb-8">
-        <p className="text-gray-600 text-base sm:text-base text-center sm:text-left mt-5">
-         Delivering excellence to every move, ready to do the same for you!
-        </p>
+      <div className="flex items-center justify-between">
+        <div>
+        <TitleDescription
+          title="Moving Stories"
+          titleClass="text-3xl text-black py-2"
+        />
+        <div className="flex flex-col sm:flex-row justify-between items-center mb-6 sm:mb-8">
+          <p className="text-gray-600 text-base sm:text-base text-center sm:text-left mt-5">
+            Delivering excellence to every move, ready to do the same for you!
+          </p>
+        </div>
+        </div>
+
+        <div>
+          <a href="https://www.google.com/maps/place/Almas+Movers+International+%7C+Domestic+%26+International+Moving+Company/@25.2540967,51.5100692,17z/data=!3m1!4b1!4m18!1m9!3m8!1s0x3e45da80e7e1d1df:0x1bdbf7283ef3599e!2sAlmas+Movers+International+%7C+Domestic+%26+International+Moving+Company!8m2!3d25.2540967!4d51.5126441!9m1!1b1!16s%2Fg%2F11b6v4jk_5!3m7!1s0x3e45da80e7e1d1df:0x1bdbf7283ef3599e!8m2!3d25.2540967!4d51.5126441!9m1!1b1!16s%2Fg%2F11b6v4jk_5?entry=ttu&g_ep=EgoyMDI1MDYwNC4wIKXMDSoASAFQAw%3D%3D" target="_blank"
+            className="text-gray-800 hover:text-primary transition-all duration-300 text-sm sm:text-base font-medium mt-2 sm:mt-0 decoration-none"
+          >
+            View all
+            <FontAwesomeIcon
+              icon={faChevronRight}
+              className="ml-2 text-sm sm:text-base"
+            />
+          </a>
+        </div>
       </div>
+
       <div className="relative">
         <Slider {...settings} ref={sliderRef}>
           {reviewCard.map((review, index) => (
             <div key={review.id} className="card-container w-full px-0 sm:px-0 md:px-2 lg:px-2 py-0 sm:py-0 md:py-4">
               <div
-                className={`review-card relative w-full py-8 sm:py-12 pb-12 sm:pb-16 space-y-4 px-4 mb-16 sm:mb-16 md:mb-0 lg:mb-0 xl:mb-0 rounded-3xl shadow-lg overflow-hidden ${
-                  index === currentSlide % reviewCard.length
+                className={`review-card relative w-full py-8 sm:py-12 pb-12 sm:pb-16 space-y-4 px-4 mb-16 sm:mb-16 md:mb-0 lg:mb-0 xl:mb-0 rounded-3xl shadow-lg overflow-hidden ${index === currentSlide % reviewCard.length
                     ? "bg-gradient-to-br from-primary to-gray-700"
                     : "bg-gradient-to-br from-[#c0c0c0] to-gray-50"
-                }`}
+                  }`}
               >
                 <div className="flex items-center">
                   <div className="flex-shrink-0">
                     <div className="relative inline-block">
-                        <img src={review.person} alt={review.title} className="w-10 sm:w-12 h-10 sm:h-12 rounded-full bg-gray-300 flex items-center justify-center" />
+                      <img src={review.person} alt={review.title} className="w-10 sm:w-12 h-10 sm:h-12 rounded-full bg-gray-300 flex items-center justify-center" />
                     </div>
                   </div>
                   <div className="ml-4">
@@ -207,13 +217,13 @@ const Review = () => {
                     {review.date}
                   </p>
                 </div>
-              <div className="absolute bottom-[-3rem] sm:bottom-[-3rem] lg:bottom-[-8rem] left-1/2 -translate-x-1/2">
-                <img
-                  src={AlmasLogo}
-                  alt="Almas Logo"
-                  className="w-40 sm:w-56 lg:w-80 h-40 sm:h-56 lg:h-80 opacity-90 object-contain"
-                />
-              </div>
+                <div className="absolute bottom-[-3rem] sm:bottom-[-3rem] lg:bottom-[-8rem] left-1/2 -translate-x-1/2">
+                  <img
+                    src={AlmasLogo}
+                    alt="Almas Logo"
+                    className="w-40 sm:w-56 lg:w-80 h-40 sm:h-56 lg:h-80 opacity-90 object-contain"
+                  />
+                </div>
               </div>
             </div>
           ))}
@@ -245,7 +255,7 @@ const Review = () => {
         {`
           /* Consistent card sizing */
           .review-card {
-            height: 400px;
+            height: 450px;
             display: flex;
             flex-direction: column;
             transition: all 0.5s ease;
@@ -306,7 +316,7 @@ const Review = () => {
          
           @media (min-width: 641px) and (max-width: 1024px) {
             .review-card {
-              height: 300px;
+              height: 350px;
             }
            
             .slick-slide {
@@ -323,5 +333,5 @@ const Review = () => {
     </div>
   );
 };
- 
+
 export default Review;
