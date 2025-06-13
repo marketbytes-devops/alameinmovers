@@ -50,8 +50,8 @@ const AddJobs = () => {
     destination: "",
     cargo_ref_number: "",
     collection_date: "",
-    time_of_departure: "",
-    time_of_arrival: "",
+    date_of_departure: "",
+    date_of_arrival: "",
   });
   const [countries, setCountries] = useState([]);
   const [customers, setCustomers] = useState([]);
@@ -64,14 +64,10 @@ const AddJobs = () => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        // Set countries from static JSON data
         setCountries(countriesData.countries);
-
-        // Fetch customers from API
         const customerResponse = await apiClient.get("/customers/add-customers/");
         if (!Array.isArray(customerResponse.data)) throw new Error("Invalid customer data");
         setCustomers(customerResponse.data);
-
         setLoading(false);
       } catch (err) {
         console.error("Fetch error:", err.message);
@@ -79,7 +75,6 @@ const AddJobs = () => {
         setLoading(false);
       }
     };
-
     fetchData();
   }, []);
 
@@ -90,11 +85,13 @@ const AddJobs = () => {
   };
 
   const validatePhoneNumber = (phone) => {
+    if (!phone) return true; // Optional field
     const regex = /^\+?\d{10,15}$/;
     return regex.test(phone);
   };
 
   const validateCargoRefNumber = (ref) => {
+    if (!ref) return true; // Optional field
     const regex = /^[A-Z0-9-]{1,50}$/;
     return regex.test(ref);
   };
@@ -103,6 +100,11 @@ const AddJobs = () => {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmissionStatus(null);
+
+    // Explicitly prevent browser validation for optional fields
+    e.target.querySelectorAll('input:not([required]), textarea:not([required])').forEach((input) => {
+      input.removeAttribute('required');
+    });
 
     if (!formData.customer_id) {
       setSubmissionStatus({
@@ -133,7 +135,7 @@ const AddJobs = () => {
       return;
     }
 
-    if (!validatePhoneNumber(formData.contact_number)) {
+    if (formData.contact_number && !validatePhoneNumber(formData.contact_number)) {
       setSubmissionStatus({
         type: "error",
         message: "Invalid phone number format (e.g., +1234567890)",
@@ -142,7 +144,7 @@ const AddJobs = () => {
       return;
     }
 
-    if (!validateCargoRefNumber(formData.cargo_ref_number)) {
+    if (formData.cargo_ref_number && !validateCargoRefNumber(formData.cargo_ref_number)) {
       setSubmissionStatus({
         type: "error",
         message: "Cargo Reference Number must be 1-50 characters (letters, numbers, or hyphens).",
@@ -154,8 +156,8 @@ const AddJobs = () => {
     const submissionData = {
       cargo_type: formData.cargo_type,
       customer_id: customerId,
-      receiver_name: formData.receiver_name,
-      contact_number: formData.contact_number,
+      receiver_name: formData.receiver_name || null,
+      contact_number: formData.contact_number || null,
       email: formData.email,
       recipient_address: formData.recipient_address,
       recipient_country: formData.recipient_country,
@@ -165,10 +167,10 @@ const AddJobs = () => {
       volume: parseFloat(formData.volume) || 0.0,
       origin: formData.origin,
       destination: formData.destination,
-      cargo_ref_number: formData.cargo_ref_number,
+      cargo_ref_number: formData.cargo_ref_number || null,
       collection_date: formData.collection_date,
-      time_of_departure: formData.time_of_departure,
-      time_of_arrival: formData.time_of_arrival,
+      date_of_departure: formData.date_of_departure,
+      date_of_arrival: formData.date_of_arrival,
     };
 
     try {
@@ -177,7 +179,7 @@ const AddJobs = () => {
       const { tracking_id, cargo_ref_number } = response.data;
       setSubmissionStatus({
         type: "success",
-        message: `Job created successfully! Tracking ID: ${tracking_id}, Cargo Ref: ${cargo_ref_number}`,
+        message: `Job created successfully! Tracking ID: ${tracking_id}, Cargo Ref: ${cargo_ref_number || 'Not provided'}`,
       });
       setTimeout(() => {
         navigate("/manage-jobs");
@@ -219,19 +221,18 @@ const AddJobs = () => {
             {submissionStatus.message}
           </div>
         )}
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} noValidate>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <div className="form-group mb-4">
                 <label className="label block font-poppins text-sm font-medium uppercase text-gray-600 mb-2">
-                  Cargo Reference Number
+                  Cargo Reference Number (Optional)
                 </label>
                 <input
                   type="text"
                   name="cargo_ref_number"
                   value={formData.cargo_ref_number}
                   onChange={handleChange}
-                  required
                   className="w-full p-3 font-poppins text-base font-light border border-gray-300 rounded outline-none bg-gray-100 transition-colors"
                   placeholder="e.g., CARGO-20250521-ABCD"
                   disabled={isSubmitting}
@@ -282,28 +283,26 @@ const AddJobs = () => {
               </div>
               <div className="form-group mb-4">
                 <label className="label block font-poppins text-sm font-medium uppercase text-gray-600 mb-2">
-                  Receiver Name
+                  Receiver Name (Optional)
                 </label>
                 <input
                   type="text"
                   name="receiver_name"
                   value={formData.receiver_name}
                   onChange={handleChange}
-                  required
                   className="w-full p-3 font-poppins text-base font-light border border-gray-300 rounded outline-none bg-gray-100 transition-colors"
                   disabled={isSubmitting}
                 />
               </div>
               <div className="form-group mb-4">
                 <label className="label block font-poppins text-sm font-medium uppercase text-gray-600 mb-2">
-                  Contact Number of Recipient
+                  Contact Number of Recipient (Optional)
                 </label>
                 <input
                   type="tel"
                   name="contact_number"
                   value={formData.contact_number}
                   onChange={handleChange}
-                  required
                   className="w-full p-3 font-poppins text-base font-light border border-gray-300 rounded outline-none bg-gray-100 transition-colors"
                   disabled={isSubmitting}
                 />
@@ -465,12 +464,12 @@ const AddJobs = () => {
               </div>
               <div className="form-group mb-4">
                 <label className="label block font-poppins text-sm font-medium uppercase text-gray-600 mb-2">
-                  Time of Departure
+                  Date of Departure
                 </label>
                 <input
-                  type="time"
-                  name="time_of_departure"
-                  value={formData.time_of_departure}
+                  type="date"
+                  name="date_of_departure"
+                  value={formData.date_of_departure}
                   onChange={handleChange}
                   required
                   className="w-full p-3 font-poppins text-base font-light border border-gray-300 rounded outline-none bg-gray-100 transition-colors"
@@ -479,12 +478,12 @@ const AddJobs = () => {
               </div>
               <div className="form-group mb-4">
                 <label className="label block font-poppins text-sm font-medium uppercase text-gray-600 mb-2">
-                  Time of Arrival
+                  Date of Arrival
                 </label>
                 <input
-                  type="time"
-                  name="time_of_arrival"
-                  value={formData.time_of_arrival}
+                  type="date"
+                  name="date_of_arrival"
+                  value={formData.date_of_arrival}
                   onChange={handleChange}
                   required
                   className="w-full p-3 font-poppins text-base font-light border border-gray-300 rounded outline-none bg-gray-100 transition-colors"

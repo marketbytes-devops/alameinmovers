@@ -178,7 +178,7 @@ const AddCustomerForm = () => {
           </div>
           <div className="form-group mb-4">
             <label className="label block font-poppins text-sm font-medium uppercase text-gray-600 mb-2">
-              in ID
+              Email ID
             </label>
             <input
               type="email"

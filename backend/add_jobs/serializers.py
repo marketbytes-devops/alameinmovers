@@ -35,6 +35,6 @@ class JobSerializer(serializers.ModelSerializer):
             'id', 'cargo_type', 'customer', 'customer_id', 'receiver_name', 'contact_number', 'email',
             'recipient_address', 'recipient_country', 'commodity', 'number_of_packages',
             'weight', 'volume', 'origin', 'destination', 'cargo_ref_number', 'tracking_id',
-            'collection_date', 'time_of_departure', 'time_of_arrival', 'created_at',
+            'collection_date', 'date_of_departure', 'date_of_arrival', 'created_at',
             'status_updates'
         ]
