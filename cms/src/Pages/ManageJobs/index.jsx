@@ -11,21 +11,18 @@ const ManageJobs = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [cargoTypeFilter, setCargoTypeFilter] = useState("all");
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(10); // Number of items per page
+  const [itemsPerPage] = useState(10);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true);
-
-        // Fetch jobs
         const jobResponse = await apiClient.get("jobs/jobs/");
         const sortedJobs = Array.isArray(jobResponse.data)
           ? jobResponse.data.sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
           : [];
         setJobs(sortedJobs);
         setFilteredJobs(sortedJobs);
-
         setLoading(false);
       } catch (err) {
         const errorMessage =
@@ -36,7 +33,6 @@ const ManageJobs = () => {
         setLoading(false);
       }
     };
-
     fetchData();
   }, []);
 
@@ -53,13 +49,13 @@ const ManageJobs = () => {
         (job) =>
           job.tracking_id.toLowerCase().includes(query) ||
           (job.customer?.name?.toLowerCase()?.includes(query) || false) ||
-          job.receiver_name.toLowerCase().includes(query) ||
-          job.cargo_ref_number.toLowerCase().includes(query)
+          (job.receiver_name?.toLowerCase()?.includes(query) || false) ||
+          (job.cargo_ref_number?.toLowerCase()?.includes(query) || false)
       );
     }
 
     setFilteredJobs(result);
-    setCurrentPage(1); // Reset to first page on new search or filter
+    setCurrentPage(1);
   }, [searchQuery, cargoTypeFilter, jobs]);
 
   const handleDelete = async (id) => {
@@ -100,7 +96,6 @@ const ManageJobs = () => {
     });
   };
 
-  // Pagination logic
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = filteredJobs.slice(indexOfFirstItem, indexOfLastItem);
@@ -176,9 +171,9 @@ const ManageJobs = () => {
                 <td className="px-6 py-4 text-sm text-gray-600 border-b">{indexOfFirstItem + index + 1}</td>
                 <td className="px-6 py-4 text-sm text-gray-600 border-b">{formatDate(job.collection_date)}</td>
                 <td className="px-6 py-4 text-sm text-gray-600 border-b">{job.tracking_id}</td>
-                <td className="px-6 py-4 text-sm text-gray-600 border-b">{job.cargo_ref_number}</td>
+                <td className="px-6 py-4 text-sm text-gray-600 border-b">{job.cargo_ref_number || "-"}</td>
                 <td className="px-6 py-4 text-sm text-gray-600 border-b">{job.customer?.name || "-"}</td>
-                <td className="px-6 py-4 text-sm text-gray-600 border-b">{job.receiver_name}</td>
+                <td className="px-6 py-4 text-sm text-gray-600 border-b">{job.receiver_name || "-"}</td>
                 <td className="px-6 py-4 text-sm text-gray-600 border-b">{job.contact_number || "-"}</td>
                 <td className="px-6 py-4 text-sm text-gray-600 border-b">{job.recipient_country}</td>
                 <td className="px-6 py-4 text-sm text-gray-600 border-b">
@@ -202,7 +197,6 @@ const ManageJobs = () => {
           </tbody>
         </table>
       </div>
-      {/* Pagination Controls */}
       <div className="flex justify-center mt-6">
         <button
           onClick={() => paginate(currentPage - 1)}
