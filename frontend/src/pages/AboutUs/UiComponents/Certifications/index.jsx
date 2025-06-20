@@ -190,7 +190,7 @@ const Certifications = () => {
             >
               <FontAwesomeIcon icon={faTimes} className="text-gray-800 text-lg sm:text-xl" />
             </button>
-            <div className="flex items-center justify-center h-[50vh]">
+            <div className="flex items-center justify-center h-[40vh] md:h-[50vh]">
               <img
                 src={certifications[modalImageIndex].src}
                 alt={certifications[modalImageIndex].alt}
