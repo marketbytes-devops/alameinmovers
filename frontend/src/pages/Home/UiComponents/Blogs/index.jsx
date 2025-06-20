@@ -3,6 +3,7 @@ import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import TitleDescription from "../../../../components/TitleDescription";
 import { useNavigate, Link } from "react-router-dom";
 import { data } from "../../../../assets/data/blogData";
+import Button from "../../../../components/Button";
 
 const BlogSection = () => {
   const navigate = useNavigate();
@@ -16,16 +17,12 @@ const BlogSection = () => {
             title="Latest News and Articles"
             titleClass="text-3xl text-black mb-2"
           />
-          <button
-            className="hidden lg:flex items-center text-black hover:text-primary transition-all duration-300 text-sm sm:text-base"
+          <Button
+            label="View all"
+            icon="ArrowUpRight"
+            className="mt-6 md:mt-0 bg-secondary text-black rounded-2xl px-4 py-2 text-base hover:bg-white hover:text-gray-900 transition-colors duration-300 ripple-button"
             onClick={() => navigate("/blog")}
-          >
-            View All
-            <FontAwesomeIcon
-              icon={faChevronRight}
-              className="ml-2 text-sm sm:text-base"
-            />
-          </button>
+          />
         </div>
 
         <div className="flex flex-col md:flex-row gap-8">
@@ -76,16 +73,12 @@ const BlogSection = () => {
         </div>
       </div>
       <div className="-mt-6 sm:-mt-6 md:mt-0 lg:mt-0 xl:mt-0 lg:hidden flex items-center justify-center">
-        <button
-          className="text-gray-800 hover:text-primary transition-all duration-300 text-sm sm:text-base font-medium mt-2 sm:mt-0"
-          onClick={() => navigate("/blog")}
-        >
-          View all
-          <FontAwesomeIcon
-            icon={faChevronRight}
-            className="ml-2 text-sm sm:text-base"
+          <Button
+            label="View all"
+            icon="ArrowUpRight"
+            className="mt-6 md:mt-0 bg-secondary text-black rounded-2xl px-4 py-2 text-base hover:bg-white hover:text-gray-900 transition-colors duration-300 ripple-button"
+            onClick={() => navigate("/blog")}
           />
-        </button>
       </div>
     </div>
   );

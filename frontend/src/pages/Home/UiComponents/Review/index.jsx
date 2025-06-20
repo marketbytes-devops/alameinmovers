@@ -11,6 +11,7 @@ import person2 from "../../../../assets/review/unnamed-2.png";
 import person3 from "../../../../assets/review/unnamed-3.png";
 import person4 from "../../../../assets/review/unnamed-4.png";
 import person5 from "../../../../assets/review/unnamed-5.png";
+import Button from "../../../../components/Button";
 
 
 const reviewCard = [
@@ -145,30 +146,25 @@ const Review = () => {
 
   return (
     <div className="slider-container pb-12 sm:pb-20">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col md:flex-row justify-between items-center sm:items-center md:items-start lg:items-start xl:items-start">
         <div>
-        <TitleDescription
-          title="Moving Stories"
-          titleClass="text-3xl text-black py-2"
-        />
-        <div className="flex flex-col sm:flex-row justify-between items-center mb-6 sm:mb-8">
-          <p className="text-gray-600 text-base sm:text-base text-center sm:text-left mt-5">
-            Delivering excellence to every move, ready to do the same for you!
-          </p>
-        </div>
+          <TitleDescription
+            title="Moving Stories"
+            titleClass="text-3xl text-black py-2"
+          />
+          <div className="flex flex-col sm:flex-row justify-between items-center mb-6 sm:mb-8">
+            <p className="text-gray-600 text-base sm:text-base text-center sm:text-left mt-5">
+              Delivering excellence to every move, ready to do the same for you!
+            </p>
+          </div>
         </div>
 
-        <div>
-          <a href="https://www.google.com/maps/place/Almas+Movers+International+%7C+Domestic+%26+International+Moving+Company/@25.2540967,51.5100692,17z/data=!3m1!4b1!4m18!1m9!3m8!1s0x3e45da80e7e1d1df:0x1bdbf7283ef3599e!2sAlmas+Movers+International+%7C+Domestic+%26+International+Moving+Company!8m2!3d25.2540967!4d51.5126441!9m1!1b1!16s%2Fg%2F11b6v4jk_5!3m7!1s0x3e45da80e7e1d1df:0x1bdbf7283ef3599e!8m2!3d25.2540967!4d51.5126441!9m1!1b1!16s%2Fg%2F11b6v4jk_5?entry=ttu&g_ep=EgoyMDI1MDYwNC4wIKXMDSoASAFQAw%3D%3D" target="_blank"
-            className="text-gray-800 hover:text-primary transition-all duration-300 text-sm sm:text-base font-medium mt-2 sm:mt-0 decoration-none"
-          >
-            View all
-            <FontAwesomeIcon
-              icon={faChevronRight}
-              className="ml-2 text-sm sm:text-base"
-            />
-          </a>
-        </div>
+        <Button
+          label="Read More Stories"
+          icon="ArrowUpRight"
+          className="mb-8 md:mb-0 bg-secondary text-black rounded-2xl px-4 py-2 text-base hover:bg-white hover:text-gray-900 transition-colors duration-300 ripple-button"
+          onClick={() => window.open("https://www.google.com/maps/place/Almas+Movers+International+%7C+Domestic+%26+International+Moving+Company/@25.2540967,51.5100692,17z/data=!3m1!4b1!4m18!1m9!3m8!1s0x3e45da80e7e1d1df:0x1bdbf7283ef3599e!2sAlmas+Movers+International+%7C+Domestic+%26+International+Moving+Company!8m2!3d25.2540967!4d51.5126441!9m1!1b1!16s%2Fg%2F11b6v4jk_5!3m7!1s0x3e45da80e7e1d1df:0x1bdbf7283ef3599e!8m2!3d25.2540967!4d51.5126441!9m1!1b1!16s%2Fg%2F11b6v4jk_5?entry=ttu&g_ep=EgoyMDI1MDYwNC4wIKXMDSoASAFQAw%3D%3D", "_blank")}
+        />
       </div>
 
       <div className="relative">
@@ -177,8 +173,8 @@ const Review = () => {
             <div key={review.id} className="card-container w-full px-0 sm:px-0 md:px-2 lg:px-2 py-0 sm:py-0 md:py-4">
               <div
                 className={`review-card relative w-full py-8 sm:py-12 pb-12 sm:pb-16 space-y-4 px-4 mb-16 sm:mb-16 md:mb-0 lg:mb-0 xl:mb-0 rounded-3xl shadow-lg overflow-hidden ${index === currentSlide % reviewCard.length
-                    ? "bg-gradient-to-br from-primary to-gray-700"
-                    : "bg-gradient-to-br from-[#c0c0c0] to-gray-50"
+                  ? "bg-gradient-to-br from-primary to-gray-700"
+                  : "bg-gradient-to-br from-[#c0c0c0] to-gray-50"
                   }`}
               >
                 <div className="flex items-center">
@@ -327,7 +323,7 @@ const Review = () => {
             .slick-center {
               transform: scale(1.02);
             }
-          }
+        }
         `}
       </style>
     </div>

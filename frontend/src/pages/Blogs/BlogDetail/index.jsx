@@ -267,7 +267,7 @@ const BlogDetail = () => {
                       {truncateDescription(post.detail.content[0].description)}
                     </p>
                   </div>
-                  <Link
+                  {/* <Link
                     to={`/blog/${post.id}`}
                     className="inline-block items-center text-sm md:text-base font-one text-primary-six hover:text-primary-three transition-colors duration-300"
                   >
@@ -275,7 +275,13 @@ const BlogDetail = () => {
                     <span className="text-xs ml-2 relative top-[1px]">
                       <FontAwesomeIcon icon={faAngleRight} />
                     </span>
-                  </Link>
+                  </Link> */}
+                  <Button
+                    label="Read More"
+                    icon="ArrowUpRight"
+                    className="mt-6 mb-8 md:mt-0 bg-secondary text-black rounded-2xl px-4 py-2 text-base hover:bg-white hover:text-gray-900 transition-colors duration-300 ripple-button"
+                    onClick={() => navigate(`/blog/${post.id}`)}
+                  />
                 </div>
               ))}
             </div>

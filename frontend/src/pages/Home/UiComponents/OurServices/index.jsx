@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import Button from "../../../../components/Button";
 
 const OurServices = ({ currentSlug }) => {
   const navigate = useNavigate();
@@ -172,7 +173,7 @@ const OurServices = ({ currentSlug }) => {
         `}
       </style>
       <div className="w-full">
-        <div className="flex flex-col md:flex-row justify-start items-center sm:items-center md:items-start lg:items-start xl:items-start mb-6">
+        <div className="flex flex-col md:flex-row justify-between items-center sm:items-center md:items-start lg:items-start xl:items-start mb-6">
           <div>
             <TitleDescription
               title={currentSlug ? "Other Services" : "Our Services"}
@@ -181,16 +182,12 @@ const OurServices = ({ currentSlug }) => {
               descriptionClass="mt-5 mb-1 px-4 xs:px-4 sm:px-4 md:px-0 lg:px-0 xl:px-0"
             />
           </div>
-          <button
+          <Button
+            label="View More"
+            icon="ArrowUpRight"
+            className="mt-6 md:mt-0 bg-secondary text-black rounded-2xl px-4 py-2 text-base hover:bg-white hover:text-gray-900 transition-colors duration-300 ripple-button"
             onClick={() => navigate("/service")}
-            className="flex items-center justify-center text-black hover:text-primary transition-all duration-300 mt-4 md:mt-0 md:ml-auto text-base sm:text-lg"
-          >
-            View More
-            <FontAwesomeIcon
-              icon={faChevronRight}
-              className="ml-2 text-sm sm:text-base"
-            />
-          </button>
+          />
         </div>
         <div className="flex flex-col items-start relative">
           <div ref={gridRef} className="relative w-full pt-2">

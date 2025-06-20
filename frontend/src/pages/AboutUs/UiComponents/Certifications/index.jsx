@@ -12,11 +12,27 @@ import cert7 from "../../../../assets/about/certification7.webp";
 import cert8 from "../../../../assets/about/certification8.webp";
 import cert9 from "../../../../assets/about/certification9.webp";
 import TitleDescription from "../../../../components/TitleDescription";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAngleLeft, faAngleRight, faTimes } from "@fortawesome/free-solid-svg-icons";
 
 const Certifications = () => {
   const sliderRef = useRef(null);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [slidesToShow, setSlidesToShow] = useState(5);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalImageIndex, setModalImageIndex] = useState(0);
+
+  const certifications = [
+    { src: cert1, alt: "Certification 1" },
+    { src: cert2, alt: "Certification 2" },
+    { src: cert3, alt: "Certification 3" },
+    { src: cert4, alt: "Certification 4" },
+    { src: cert5, alt: "Certification 5" },
+    { src: cert6, alt: "Certification 6" },
+    { src: cert7, alt: "Certification 7" },
+    { src: cert8, alt: "Certification 8" },
+    { src: cert9, alt: "Certification 9" },
+  ];
 
   useEffect(() => {
     const slider = sliderRef.current;
@@ -100,21 +116,26 @@ const Certifications = () => {
     ],
   };
 
-  const certifications = [
-    { src: cert1, alt: "Certification 1" },
-    { src: cert2, alt: "Certification 2" },
-    { src: cert3, alt: "Certification 3" },
-    { src: cert4, alt: "Certification 4" },
-    { src: cert5, alt: "Certification 5" },
-    { src: cert6, alt: "Certification 6" },
-    { src: cert7, alt: "Certification 7" },
-    { src: cert8, alt: "Certification 8" },
-    { src: cert9, alt: "Certification 9" },
-  ];
-
   const getCenteredSlideIndex = () => {
     const centerIndex = Math.floor(slidesToShow / 2);
     return (currentSlide + centerIndex) % certifications.length;
+  };
+
+  const openModal = (index) => {
+    setModalImageIndex(index);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleNext = () => {
+    setModalImageIndex((prev) => (prev + 1) % certifications.length);
+  };
+
+  const handlePrev = () => {
+    setModalImageIndex((prev) => (prev - 1 + certifications.length) % certifications.length);
   };
 
   return (
@@ -135,16 +156,17 @@ const Certifications = () => {
             >
               <div className="transition-all duration-300 ease-in-out flex justify-center">
                 <div
-                  className={`flex items-center justify-center bg-[#F3F7F8] shadow-[4px_4px_10px_rgba(0,0,0,0.3)] transition-transform duration-300 h-[120px] ${
+                  className={`flex items-center justify-center bg-[#F3F7F8] shadow-[4px_4px_10px_rgba(0,0,0,0.3)] transition-transform duration-300 h-[120px] cursor-pointer ${
                     isCentered
                       ? "transform scale-125 z-10 p-4 w-[150%]"
                       : "transform scale-100 opacity-90 p-4 w-full"
                   }`}
+                  onClick={() => openModal(index)}
                 >
                   <img
                     src={cert.src}
                     alt={cert.alt}
-                    className={`object-contain w-full h-full transition-transform duration-300 p-2`}
+                    className="object-contain w-full h-full transition-transform duration-300 p-2"
                   />
                 </div>
               </div>
@@ -152,6 +174,54 @@ const Certifications = () => {
           );
         })}
       </Slider>
+      {isModalOpen && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+          onClick={closeModal}
+        >
+          <div
+            className="relative bg-white rounded-lg p-4 max-w-2xl w-full mx-4"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              className="absolute top-3 right-1.5 nav-button mx-2 px-3 py-2 rounded-full bg-gray-200 hover:bg-gray-300 transition-colors"
+              onClick={closeModal}
+              aria-label="Close modal"
+            >
+              <FontAwesomeIcon icon={faTimes} className="text-gray-800 text-lg sm:text-xl" />
+            </button>
+            <div className="flex items-center justify-center h-[50vh]">
+              <img
+                src={certifications[modalImageIndex].src}
+                alt={certifications[modalImageIndex].alt}
+                className="object-fill max-w-full max-h-full"
+              />
+            </div>
+            <div className="flex justify-center space-x-2 mt-4">
+              <button
+                onClick={handlePrev}
+                className="nav-button mx-2 px-4 py-2.5 rounded-full bg-gray-200 hover:bg-gray-300 transition-colors"
+                aria-label="Previous slide"
+              >
+                <FontAwesomeIcon
+                  icon={faAngleLeft}
+                  className="text-gray-800 text-lg sm:text-xl"
+                />
+              </button>
+              <button
+                onClick={handleNext}
+                className="nav-button mx-2 px-4 py-2.5 rounded-full bg-gray-200 hover:bg-gray-300 transition-colors"
+                aria-label="Next slide"
+              >
+                <FontAwesomeIcon
+                  icon={faAngleRight}
+                  className="text-gray-800 text-lg sm:text-xl"
+                />
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
