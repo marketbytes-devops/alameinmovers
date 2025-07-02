@@ -26,7 +26,7 @@ const Login = ({ onLogin }) => {
         throw new Error("onLogin is not a function");
       }
       console.log("Calling onLogin with tokens and role:", { access, refresh, role });
-      onLogin(access, refresh, role);
+      onLogin(access, refresh, role); 
       const from = location.state?.from?.pathname || "/";
       console.log("Navigating to:", from);
       navigate(from, { replace: true });
