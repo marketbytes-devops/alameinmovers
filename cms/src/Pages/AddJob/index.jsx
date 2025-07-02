@@ -299,7 +299,7 @@ const AddJobs = () => {
                   Contact Number of Recipient (Optional)
                 </label>
                 <input
-                  type="tel"
+                  type="number"
                   name="contact_number"
                   value={formData.contact_number}
                   onChange={handleChange}

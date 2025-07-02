@@ -362,7 +362,7 @@ const UpdateJobs = () => {
                       Contact Number (Optional)
                     </label>
                     <input
-                      type="tel"
+                      type="number"
                       name="contact_number"
                       value={jobDetails.contact_number || ""}
                       onChange={handleInputChange}

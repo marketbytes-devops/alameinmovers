@@ -86,33 +86,13 @@ const UpdateCustomer = () => {
     console.log("Form data updated:", { ...formData, [name]: value });
   };
 
-  const validatePhoneNumber = (phone) => {
-    const regex = /^\+?\d{10,15}$/;
-    return regex.test(phone);
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    let phone_number = formData.phone_number;
-    if (formData.country === "India" && !phone_number.startsWith("+")) {
-      phone_number = `+91${phone_number}`;
-      setFormData((prev) => ({ ...prev, phone_number }));
-    }
-    if (!validatePhoneNumber(phone_number)) {
-      setSubmissionStatus({
-        type: "error",
-        message: "Invalid phone number format (e.g., +916385427433 or 6385427433 for India)",
-      });
-      return;
-    }
     setIsSubmitting(true);
     setSubmissionStatus(null);
     try {
-      console.log("Submitting update for customer ID:", id, "Data:", { ...formData, phone_number });
-      const response = await apiClient.put(`customers/add-customers/${id}/`, {
-        ...formData,
-        phone_number,
-      });
+      console.log("Submitting update for customer ID:", id, "Data:", formData);
+      const response = await apiClient.put(`customers/add-customers/${id}/`, formData);
       console.log("Customer updated:", response.data);
       setSubmissionStatus({ type: "success", message: "Customer updated successfully!" });
       setTimeout(() => navigate("/manage-customers"), 1000);
@@ -183,7 +163,7 @@ const UpdateCustomer = () => {
               Phone Number
             </label>
             <input
-              type="tel"
+              type="number"
               name="phone_number"
               value={formData.phone_number}
               onChange={handleChange}
@@ -191,7 +171,7 @@ const UpdateCustomer = () => {
               onBlur={() => handleBlur("phone_number")}
               required
               className={inputClasses("phone_number")}
-              placeholder={formData.country === "India" ? "6385427433" : "+1234567890"}
+              placeholder="+97412345678"
             />
           </div>
           <div className="form-group mb-4">

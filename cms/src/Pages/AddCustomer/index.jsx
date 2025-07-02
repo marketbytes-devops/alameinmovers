@@ -59,36 +59,13 @@ const AddCustomerForm = () => {
     setSubmissionStatus(null);
   };
 
-  const validatePhoneNumber = (phone) => {
-    const regex = /^\+?\d{10,15}$/;
-    return regex.test(phone);
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    let phone_number = formData.phone_number;
-
-    if (formData.country === "India" && !phone_number.startsWith("+")) {
-      phone_number = `+91${phone_number}`;
-      setFormData((prev) => ({ ...prev, phone_number }));
-    }
-
-    if (!validatePhoneNumber(phone_number)) {
-      setSubmissionStatus({
-        type: "error",
-        message: "Invalid phone number format (e.g., +916385427433 or 6385427433 for India)",
-      });
-      return;
-    }
-
     setIsSubmitting(true);
     setSubmissionStatus(null);
 
     try {
-      const response = await apiClient.post("customers/add-customers/", {
-        ...formData,
-        phone_number,
-      });
+      const response = await apiClient.post("customers/add-customers/", formData);
       console.log("Customer added:", response.data);
       setSubmissionStatus({ type: "success", message: "Customer added successfully!" });
       setTimeout(() => {
@@ -164,7 +141,7 @@ const AddCustomerForm = () => {
               Contact Number
             </label>
             <input
-              type="tel"
+              type="number"
               name="phone_number"
               value={formData.phone_number}
               onChange={handleChange}
@@ -172,7 +149,7 @@ const AddCustomerForm = () => {
               onBlur={() => handleBlur("phone_number")}
               required
               className={inputClasses("phone_number")}
-              placeholder={formData.country === "India" ? "6385427433" : "+1234567890"}
+              placeholder="+97412345678"
               disabled={isSubmitting}
             />
           </div>

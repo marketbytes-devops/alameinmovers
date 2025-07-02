@@ -7,4 +7,3 @@ class AddCustomerViewSet(viewsets.ModelViewSet):
     queryset = AddCustomer.objects.all()
     serializer_class = AddCustomerSerializer
     permission_classes = [AllowAny]
-

@@ -38,7 +38,6 @@ const handleLogout = () => {
     const refreshToken = localStorage.getItem('refresh_token') || sessionStorage.getItem('refresh_token');
     console.log("Initiating logout from Topbar, refresh token:", !!refreshToken);
 
-    // Clear tokens regardless of server response to ensure consistent logout
     const clearStorage = () => {
       localStorage.removeItem('access_token');
       localStorage.removeItem('refresh_token');
