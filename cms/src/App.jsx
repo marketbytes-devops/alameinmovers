@@ -66,34 +66,39 @@ function App() {
     console.log("Storing tokens and role:", { accessToken, refreshToken, role });
     localStorage.setItem("access_token", accessToken);
     localStorage.setItem("refresh_token", refreshToken);
-    localStorage.setItem("user_role", role); 
+    localStorage.setItem("user_role", role);
     setIsLoggedIn(true);
   };
 
   const handleLogout = () => {
+    const refreshToken = localStorage.getItem("refresh_token") || sessionStorage.getItem("refresh_token");
+    console.log("Initiating logout, refresh token:", !!refreshToken);
+    
+    const clearStorage = () => {
+      localStorage.removeItem("access_token");
+      localStorage.removeItem("refresh_token");
+      localStorage.removeItem("user_role");
+      sessionStorage.removeItem("access_token");
+      sessionStorage.removeItem("refresh_token");
+      setIsLoggedIn(false);
+      window.location.href = "/login";
+    };
+
+    if (!refreshToken) {
+      console.warn("No refresh token found, clearing storage and redirecting");
+      clearStorage();
+      return;
+    }
+
     apiClient
-      .post("/auth/logout/", {
-        refresh: localStorage.getItem("refresh_token") || sessionStorage.getItem("refresh_token"),
-      })
+      .post("/auth/logout/", { refresh: refreshToken })
       .then(() => {
         console.log("Logout successful");
-        localStorage.removeItem("access_token");
-        localStorage.removeItem("refresh_token");
-        localStorage.removeItem("user_role"); 
-        sessionStorage.removeItem("access_token");
-        sessionStorage.removeItem("refresh_token");
-        setIsLoggedIn(false);
-        window.location.href = "/login";
+        clearStorage();
       })
       .catch((error) => {
-        console.error("Logout error:", error);
-        localStorage.removeItem("access_token");
-        localStorage.removeItem("refresh_token");
-        localStorage.removeItem("user_role");
-        sessionStorage.removeItem("access_token");
-        sessionStorage.removeItem("refresh_token");
-        setIsLoggedIn(false);
-        window.location.href = "/login";
+        console.error("Logout error:", error.response?.data || error.message);
+        clearStorage();
       });
   };
 
