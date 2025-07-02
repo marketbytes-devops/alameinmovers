@@ -34,36 +34,43 @@ const Topbar = () => {
 
   const isActive = (path) => location.pathname === path;
 
-  const handleLogout = async () => {
-    const refreshToken = localStorage.getItem("refresh_token") || sessionStorage.getItem("refresh_token");
-    if (!refreshToken) {
-      console.warn("No refresh token found, proceeding with client-side logout");
-      clearStorageAndRedirect();
-      return;
-    }
-
-    try {
-      // Optional: Try refreshing the token to check validity
-      await apiClient.post("/auth/refresh/", { refresh: refreshToken });
-      // If refresh succeeds, proceed with logout
-      await apiClient.post("/auth/logout/", { refresh: refreshToken });
-      console.log("Logout successful");
-    } catch (error) {
-      console.error("Logout or refresh error:", error.response?.data || error.message);
-    } finally {
-      clearStorageAndRedirect();
-    }
-  };
-
-  const clearStorageAndRedirect = () => {
+const handleLogout = () => {
+  const refreshToken = localStorage.getItem("refresh_token") || sessionStorage.getItem("refresh_token");
+  if (!refreshToken) {
+    console.error("No refresh token found");
     localStorage.removeItem("access_token");
     localStorage.removeItem("refresh_token");
     localStorage.removeItem("user_role");
     sessionStorage.removeItem("access_token");
     sessionStorage.removeItem("refresh_token");
-    setIsLoggedIn(false);
-    navigate("/login");
-  };
+    setIsLoggedIn(false); 
+    window.location.href = "/login"; 
+    return;
+  }
+
+  apiClient
+    .post("/auth/logout/", { refresh: refreshToken })
+    .then(() => {
+      console.log("Logout successful");
+      localStorage.removeItem("access_token");
+      localStorage.removeItem("refresh_token");
+      localStorage.removeItem("user_role");
+      sessionStorage.removeItem("access_token");
+      sessionStorage.removeItem("refresh_token");
+      setIsLoggedIn(false); 
+      window.location.href = "/login"; 
+    })
+    .catch((error) => {
+      console.error("Logout error:", error.response?.data || error.message);
+      localStorage.removeItem("access_token");
+      localStorage.removeItem("refresh_token");
+      localStorage.removeItem("user_role");
+      sessionStorage.removeItem("access_token");
+      sessionStorage.removeItem("refresh_token");
+      setIsLoggedIn(false); 
+      window.location.href = "/login"; 
+    });
+};
 
   return (
     <nav className="fixed top-0 left-0 w-full z-50 bg-primary text-white">

@@ -9,12 +9,14 @@ const apiClient = axios.create({
 
 apiClient.interceptors.request.use(
   (config) => {
-    const token =
-      localStorage.getItem("access_token") ||
-      sessionStorage.getItem("access_token");
-    console.log("Adding token to request:", token);
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
+    if (config.url !== "/auth/logout/") {
+      const token =
+        localStorage.getItem("access_token") ||
+        sessionStorage.getItem("access_token");
+      console.log("Adding token to request:", token);
+      if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+      }
     }
     return config;
   },
