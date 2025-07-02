@@ -7,6 +7,7 @@ from django.core.mail import send_mail
 from django.conf import settings
 from .models import CustomUser
 from .serializers import LoginSerializer, ForgotPasswordSerializer, OTPVerificationSerializer, ResetPasswordSerializer
+from rest_framework_simplejwt.exceptions import TokenError
 
 class LoginView(APIView):
     permission_classes = [AllowAny]
@@ -33,8 +34,13 @@ class LogoutView(APIView):
     def post(self, request):
         try:
             refresh_token = request.data.get('refresh')
-            token = RefreshToken(refresh_token)
-            token.blacklist()
+            if refresh_token:
+                token = RefreshToken(refresh_token)
+                token.blacklist()
+            return Response({'message': 'Successfully logged out'}, status=status.HTTP_200_OK)
+        except TokenError as e:
+            # Log the error but proceed with logout
+            print(f"Token error during logout: {str(e)}")
             return Response({'message': 'Successfully logged out'}, status=status.HTTP_200_OK)
         except Exception as e:
             return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)

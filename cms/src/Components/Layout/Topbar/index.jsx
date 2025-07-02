@@ -34,29 +34,35 @@ const Topbar = () => {
 
   const isActive = (path) => location.pathname === path;
 
-  const handleLogout = () => {
-    apiClient
-      .post('/auth/logout/', {
-        refresh: localStorage.getItem('refresh_token') || sessionStorage.getItem('refresh_token'),
-      })
-      .then(() => {
-        console.log('Logout successful');
-        localStorage.removeItem('access_token');
-        localStorage.removeItem('refresh_token');
-        localStorage.removeItem('user_role');
-        sessionStorage.removeItem('access_token');
-        sessionStorage.removeItem('refresh_token');
-        navigate('/login');
-      })
-      .catch((error) => {
-        console.error('Logout error:', error);
-        localStorage.removeItem('access_token');
-        localStorage.removeItem('refresh_token');
-        localStorage.removeItem('user_role');
-        sessionStorage.removeItem('access_token');
-        sessionStorage.removeItem('refresh_token');
-        navigate('/login');
-      });
+  const handleLogout = async () => {
+    const refreshToken = localStorage.getItem("refresh_token") || sessionStorage.getItem("refresh_token");
+    if (!refreshToken) {
+      console.warn("No refresh token found, proceeding with client-side logout");
+      clearStorageAndRedirect();
+      return;
+    }
+
+    try {
+      // Optional: Try refreshing the token to check validity
+      await apiClient.post("/auth/refresh/", { refresh: refreshToken });
+      // If refresh succeeds, proceed with logout
+      await apiClient.post("/auth/logout/", { refresh: refreshToken });
+      console.log("Logout successful");
+    } catch (error) {
+      console.error("Logout or refresh error:", error.response?.data || error.message);
+    } finally {
+      clearStorageAndRedirect();
+    }
+  };
+
+  const clearStorageAndRedirect = () => {
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("refresh_token");
+    localStorage.removeItem("user_role");
+    sessionStorage.removeItem("access_token");
+    sessionStorage.removeItem("refresh_token");
+    setIsLoggedIn(false);
+    navigate("/login");
   };
 
   return (
