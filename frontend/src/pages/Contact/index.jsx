@@ -6,6 +6,13 @@ import GetInTouchSection from "../Home/UiComponents/GetinTouch";
 import Connectwithus from "./UiComponents/ConnectWithUs";
 
 const Contact = () => {
+  const connectRef = useRef(null);
+
+  useEffect(() => {
+    if (window.location.href === "https://www.almasintl.com/contact-us" && connectRef.current) {
+      connectRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, []);
   return (
     <>
       <Helmet>
@@ -33,7 +40,7 @@ const Contact = () => {
           <Connectwithus />
         </div>
       </section>
-      <section className="w-full bg-primary/10 mt-12 sm:mt-12 lg:mt-16">
+      <section className="w-full bg-primary/10 mt-12 sm:mt-12 lg:mt-16" ref={connectRef}>
         <div className="mx-auto w-full py-8 sm:py-12 md:py-16">
           <GetInTouchSection />
         </div>
