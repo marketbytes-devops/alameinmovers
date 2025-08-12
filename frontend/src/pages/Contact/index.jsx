@@ -9,10 +9,19 @@ const Contact = () => {
   const connectRef = useRef(null);
 
   useEffect(() => {
-    if (window.location.href === "https://www.almasintl.com/contact-us" && connectRef.current) {
-      connectRef.current.scrollIntoView({ behavior: "smooth" });
+    const targetUrl = "https://www.almasintl.com/contact-us";
+    const currentUrl = window.location.href.replace(/\/$/, "");
+    const isTargetUrl = currentUrl === targetUrl || currentUrl === targetUrl + "/";
+
+    if (isTargetUrl && connectRef.current) {
+      const scrollTimeout = setTimeout(() => {
+        connectRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 100); 
+
+      return () => clearTimeout(scrollTimeout);
     }
   }, []);
+
   return (
     <>
       <Helmet>
