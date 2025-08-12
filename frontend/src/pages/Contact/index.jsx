@@ -1,4 +1,4 @@
-import React from "react";
+import { useRef } from "react";
 import { Helmet } from "react-helmet";
 import bannerImage from "../../assets/contact/banner.webp";
 import Banner from "../../components/Banner";
