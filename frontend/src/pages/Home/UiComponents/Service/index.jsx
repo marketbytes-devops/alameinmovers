@@ -14,6 +14,7 @@ const service = () => {
         subRoute="SERVICE"
         subRoutePath="/service"
         smallText="Discover comprehensive moving and logistics services by Almas Movers International, covering local moves, international relocation, land freight, storage, and supply chain solutions across Qatar and beyond."
+        enquireButton={true}
       />
       <section className="container-secondary mt-10">
         <OtherServices serviceType="Movers" />

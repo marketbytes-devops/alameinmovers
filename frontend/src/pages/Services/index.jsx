@@ -1,10 +1,12 @@
-import React, { useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom"; 
+import React, { useEffect, useState } from "react"; 
+import { useParams, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import Banner from "../../components/Banner";
 import serviceData from "../../assets/data/serviceData";
 import OurServices from "../Home/UiComponents/OurServices";
 import TickIcon from "../../assets/moving/yellowtick.svg";
+import Button from "../../components/Button";
+import ModalForm from "../../components/ModalForm";
 
 const Services = () => {
   const { slug } = useParams();
@@ -12,6 +14,7 @@ const Services = () => {
   const service = serviceData.find(
     (item) => item.slug === `/services/${slug}`
   );
+  const [isModalOpen, setIsModalOpen] = useState(false); 
 
   useEffect(() => {
     if (!service) {
@@ -34,11 +37,12 @@ const Services = () => {
       <Banner
         bannerImage={service.bannerImage}
         titleFirst={service.title}
-        mainRoute="Home" 
+        mainRoute="Home"
         smallText={service.bannerDescription}
         subRoute={service.title}
         subRoutePath={`/services/${slug}`}
         onError={() => console.log(`Failed to load banner image: ${service.title}`)}
+        enquireButton={true}
       />
       <div className="container-secondary pl-4 sm:pl-8 md:pl-16 lg:pl-40 mt-8 lg:mt-16">
         <div className="mx-auto">
@@ -47,7 +51,7 @@ const Services = () => {
               <img
                 src={service.featureImage}
                 alt={service.featureTitle}
-                className="w-full h-full rounded-lg object-cover max-h-[500px]"
+                className="w-full h-full rounded-lg object-cover max-h-auto"
                 onError={() => console.log(`Failed to load feature image: ${service.featureTitle}`)}
               />
             </div>
@@ -61,15 +65,23 @@ const Services = () => {
               <ul className="space-y-3 text-lg text-gray-800">
                 {service.features.map((feature, index) => (
                   <li key={index} className="flex items-start">
-                    <img 
-                      src={TickIcon} 
-                      alt="Check mark" 
-                      className="mr-3 mt-1 w-5 h-5 flex-shrink-0" 
+                    <img
+                      src={TickIcon}
+                      alt="Check mark"
+                      className="mr-3 mt-1 w-5 h-5 flex-shrink-0"
                     />
                     <span>{feature}</span>
                   </li>
                 ))}
               </ul>
+              <div className="pt-0 md:pt-6 pb-0 sm:pb-0 md:pb-3 lg:pb-3 mb-4 sm:mb-4 lg:mb-2">
+                <Button
+                  label="Enquire Now"
+                  icon="ArrowUpRight"
+                  className="mt-6 md:mt-0 bg-secondary text-black rounded-2xl px-4 py-2 text-base hover:bg-white hover:text-gray-900 transition-colors duration-300 ripple-button"
+                  onClick={() => setIsModalOpen(true)} 
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -78,6 +90,8 @@ const Services = () => {
       <section className="container-secondary -mt-2 sm:-mt-2 lg:-mt-0 md:-mt-0 xl:-mt-0 mb-16 sm:mb-16 lg:-mb-0 overflow-hidden">
         <OurServices currentSlug={slug} />
       </section>
+
+      <ModalForm isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} /> 
     </div>
   );
 };

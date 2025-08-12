@@ -30,6 +30,7 @@ const Logistics = () => {
         subRoute="Logistics"
         subRoutePath="/logistics-services"
         smallText="Almas Movers International delivers end-to-end logistics solutions in Qatar, including freight forwarding, warehousing, and supply chain coordination, ensuring efficiency, reliability, and seamless cargo movement."
+        enquireButton={true}
       />
       <section className="container-secondary mt-10">
         <OtherServices serviceType="Logistics" />

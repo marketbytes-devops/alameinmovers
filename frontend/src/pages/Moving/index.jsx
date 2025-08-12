@@ -28,6 +28,7 @@ const Moving = () => {
         subRoute="MOVING"
         subRoutePath="/moving-services"
         smallText="Almas Movers International provides expert residential and commercial moving services across Qatar, ensuring safe packing, careful handling, timely transport, and stress-free relocation every time."
+        enquireButton={true}
       />
 
       <section className="w-full mt-10 sm:mt-10 lg:mt-16">

@@ -32,6 +32,7 @@ const AboutUs = () => {
         subRoute="About Us"
         subRoutePath="/about-us"
         smallText="Almas Movers International is a trusted Qatar-based logistics company offering professional moving, packing, and freight solutions with a commitment to reliability, safety, and customer satisfaction."
+        enquireButton={true}
       />
 
       <section className="w-full mt-10 sm:mt-10 lg:mt-16">
